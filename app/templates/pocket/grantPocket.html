@@ -1,0 +1,60 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 查看首页图片 -->
+    <div class="head_bt">
+        <h2>发放红包</h2>
+    </div>
+    <div>
+        <div class="recordQuer">
+            <div class="input-group" style="float: left;">
+                普通红包：
+                <select class="select_style1" ng-model="tradeRecords.id" id="siteConfigId" style="padding-left:15px;">
+                    <!--<option value="">请选择渠道</option>-->
+                    <option ng-repeat="x in roleOptions" value="{{x.id}}">{{(x.itemName+"("+x.itemValue/100)}}元)</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-group" style="float: left;">
+            发放对象：
+            <textarea cols="44" rows="8" id="textarea1" ng-model="tradeRecords.phones" name="textarea1" wrap="physical">
+            </textarea>
+        </div>
+        <div style="margin-left:180px;margin-top:200px;width:300px">
+            <button type="button" class="btn btn-primary yya" ng-click="updateUser()">发放</button>
+        </div>
+    </div>
+    <!--<div>-->
+    <!--<ul id="myTab" class="nav nav-tabs" style="border: 0px;">-->
+    <!--<li ng-class="{active: isActive}" ng-click="[isActive=true,setType('index')]" style="outline: none;">-->
+    <!--<a id="index" >普通发放</a>-->
+    <!--</li>-->
+    <!--&lt;!&ndash;<li ng-click="[isActive=false,setType('index_mobile')]" ng-class="{active: !isActive}" style="outline: none;">&ndash;&gt;-->
+    <!--&lt;!&ndash;<a id="indexMobile" class="tahh"  >模板发放</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+    <!--</ul>-->
+    <!--<div id="myTabContent" class="tab-content">-->
+    <!--<div id="indexC"  ng-show="isActive==true">-->
+    <!--<p>红包名称：-->
+    <!--<select>-->
+    <!--<option></option>-->
+    <!--</select>-->
+    <!--</p>-->
+    <!--</div>-->
+    <!--<div id="indexMobileC"  ng-show="isActive==false">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
+<script>
+document.getElementsByTagName('textarea')[0].onkeypress = function() {
+    var value = this.value,
+        allLine = value.split('\n'),
+        lastLine = allLine.pop();
+    if (lastLine.length >= 11) {
+        lastLine = lastLine.substr(0, 11) + '\n' + lastLine.substr(11);
+        allLine.push(lastLine)
+        this.value = allLine.join('\n');
+
+    }
+};
+</script>

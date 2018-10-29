@@ -1,0 +1,17 @@
+{
+  "name": "xuexd-admin",
+  "description": "学信贷ADMIN for AngularJS",
+  "version": "0.1.0",
+  "homepage": "https://git.oschina.net/xuexinrong/xuexd-web.git",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "angular-loader": "~1.5.0",
+    "angular-mocks": "~1.5.0",
+    "angular-bootstrap": "~1.1.2",
+    "angular-material": "~1.0.6",
+    "bootstrap": "^3.3.6"
+  }
+}

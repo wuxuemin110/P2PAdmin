@@ -1,0 +1,39 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <div class="head_bt">
+        <h2>查看自动投资人</h2>
+    </div>
+    <div >
+        <div >
+            <table class="table table-bordered ta-bo back-wi">
+                <thead class="thead_table">
+                <tr class="thead_tr ">
+                    <th class="thead_th min-10 max-15">投资人用户名</th>
+                    <th class="thead_th  min-7">计划名称</th>
+                    <th class="thead_th">自动投资金额</th>
+                    <th class="thead_th min-7">自动投资状态</th>
+                    <th class="thead_th min-15">添加人</th>
+                    <th class="thead_th min-15">删除操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="automatic in automaticList">
+                    <td>{{automatic.investmentAccount}}</td>
+                    <td>{{planName}}</td>
+                    <td>{{automatic.money/100}}￥</td>
+                    <td>
+                    <span ng-show="automatic.state==0">计划正在进行</span>
+                    <span ng-show="automatic.state==1">已自动投资</span>
+                     <span ng-show="automatic.state==2">账户余额不足</span>
+                        <span ng-show="automatic.state==3">计划可投余额不足</span>
+                    </td>
+                    <td >{{automatic.addpeople}}</td>
+                    <td class="ta-bo1" >
+                        <input type="button" value="删除"  ng-click="delectY(automatic.id,automatic.planId)"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <div class="search_table">
+        <table class="search_in" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <td>用户名称</td>
+                <td>用户余额</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="news1 in itemList">
+                <td>{{news1.name}}</td>
+                <td>{{news1.money}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+            <nav>
+                <ul id="pagination" class="pagination pagination-sm" style="">
+                    <li id="firstPage"><span ng-click="selectPage(1)"
+                                             aria-hidden="true">首页</span></li>
+                    <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                            aria-hidden="true">«</span></li>
+                    <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                        <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                    <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                    <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                            aria-hidden="true">»</span></a></li>
+                    <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                            aria-hidden="true">尾页&nbsp;</span></a></li>
+                    <li><a><span aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                </ul>
+            </nav>
+        </div>
+        <table class="search_in" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <td>收益中标的总额</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{news1[0].money}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <span class="btn_search" ng-click="getSum()">开始查询</span><span class="btn_search no_back">查询118866邀请码数据情况</span>
+        <table class="search_in" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <td>注册时间</td>
+                <td>投资金额</td>
+                <td>用户名</td>
+                <td>投资时间</td>
+                <td>投资时长（15为15天，其余为月）</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="sum in sum">
+                <td  ng-hide="sum.money==0||sum.money==null">{{sum.data}}</td>
+                <td  ng-hide="sum.money==0||sum.money==null">{{sum.money}}</td>
+                <td  ng-hide="sum.money==0||sum.money==null">{{sum.name}}</td>
+                <td  ng-hide="sum.money==0||sum.money==null">{{sum.InvestmentData}}</td>
+                <td  ng-hide="sum.money==0||sum.money==null">{{sum.staging}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,206 @@
+<div ng-cloak>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <style>
+        .yl ul {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .wid-15 {
+            width: 40%;
+        }
+
+        .tz-ul {
+            padding: 0;
+        }
+
+        .sjgs {
+            left: -156px;
+            top: -12px;
+        }
+
+        .file {
+            position: absolute;
+            top: 5px;
+            right: 7px;
+            cursor: pointer;
+            height: 30px;
+            filter: alpha(opacity:0);
+            font-size: 0;
+            opacity: 0;
+            width: 65px;
+        }
+        </style>
+        <!-- 添加首页图片 -->
+        <div class="head_bt">
+            <h2>发放券到用户账户</h2>
+        </div>
+        <!--封面路径-->
+        <!--<div class="input-group grous">-->
+        <!--<div class="input-group-addon" style="width: 150px;">首页图片链接路径：</div>-->
+        <!--<input type="text" class="form-control" ng-model="imgnews.imageurl"/>-->
+        <!--</div>-->
+        <!--表格-->
+        <!--<div>-->
+        <!--<ul id="myTab" class="nav nav-tabs" style="border: 0px;">-->
+        <!--<li ng-class="{active: isActive}" ng-click="[isActive=true,setType('index')]" style="outline: none;">-->
+        <!--<a id="index" >网页端</a>-->
+        <!--</li>-->
+        <!--<li ng-click="[isActive=false,setType('index_mobile')]" ng-class="{active: !isActive}" style="outline: none;">-->
+        <!--<a id="indexMobile" class="tahh" >手机端</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--<div id="myTabContent" class="tab-content">-->
+        <!--&lt;!&ndash;pc端&ndash;&gt;-->
+        <!--<div id="indexC" ng-show="isActive==true">-->
+        <!--<div class="table" >-->
+        <!--<table class="table table-bordered back-wi" >-->
+        <!--<tr>-->
+        <!--<td >-->
+        <!--&lt;!&ndash;浏览&ndash;&gt;-->
+        <!--<div class="yl" style="width:100%;height:460px;margin:0 auto;margin-left:300px;margin-top:50px;">-->
+        <!--<ul style="width: 55%;">-->
+        <!--<li>-->
+        <div class="touz-main" style=" overflow: hidden; min-height: 750px;">
+            <div class="touz-ma" style="width: 750px">
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="input-group grous" style="height:50px;">
+                        <div class="input-group-addon" style="width: 150px;">手机号码：</div>
+                        <!--<input type="text" class="form-control" ng-model="imgnews.phone"/>-->
+                        <textarea cols="83" rows="3" id="textarea1" ng-model="imgnews.phones" name="textarea1" wrap="physical">
+                        </textarea>
+                    </div>
+                    <!--</li>   -->
+                    <!--</ul>-->
+                    <!--<ul style="width: 55%;">-->
+                    <!--<li>-->
+                    <div class="input-group grous">
+                        <div class="input-group-addon" style="width: 150px;">券类型：</div>
+                        <select class="form-control" ng-model="imgnews.type" style="height:40px;">
+                            <option value="">请选择券类型</option>
+                            <option value="0">红包券</option>
+                            <!--<option value="1">体验金券</option>-->
+                            <option value="2">加息券</option>
+                        </select>
+                    </div>
+                    <div class="input-group grous">
+                        <div class="input-group-addon" style="width: 150px;">红包类型：</div>
+                        <select class="form-control" ng-model="imgnews.itemType" style="height:40px;">
+                            <option value="">请选择红包类型</option>
+                            <option value="10">新手红包</option>
+                            <option value="11">邀请红包</option>
+                            <option value="12">返现红包</option>
+                            <option value="13">累投红包</option>
+                            <option value="14">加息红包</option>
+                        </select>
+                    </div>
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul style="width: 55%;">-->
+                    <!--<li>-->
+                    <div class="input-group grous">
+                        <div class="input-group-addon" style="width: 150px;">券值：</div>
+                        <input type="text" class="form-control" ng-model="imgnews.value" />
+                    </div>
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul style="width: 55%;">-->
+                    <!--<li>-->
+                    <div class="input-group grous">
+                        <div class="input-group-addon" style="width: 150px;">使用条件(天)：</div>
+                        <input type="text" class="form-control" ng-model="imgnews.restricta" />
+                    </div>
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul style="width: 55%;">-->
+                    <!--<li>-->
+                    <div class="input-group grous">
+                        <div class="input-group-addon" style="width: 150px;">券名称：</div>
+                        <input type="text" class="form-control" ng-model="imgnews.name" />
+                    </div>
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul style="width: 55%;">-->
+                    <!--<li>-->
+                    <div class="input-group grous">
+                        <div class="input-group-addon" style="width: 150px;">使用条件(金额)：</div>
+                        <input type="text" class="form-control" ng-model="imgnews.condition" />
+                    </div>
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul style="width: 55%;">-->
+                    <!--<li>-->
+                    <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon" style="width: 150px;">生效时间</div>-->
+                    <!--<input type="text"  class="form-control"  placeholder="年/月/日 时：分：秒" value=""  id="myTime" ng-model="imgnews.beginTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/>-->
+                    <!--</div>-->
+                    <div class="input-group grous">
+                        <div class="input-group-addon" style="width: 150px;">生效时间</div>
+                        <input style="width:598px;height:32px;padding-left:10px;border-radius:3px;" id="myTime" ng-model="imgnews.beginTime" placeholder="年/月/日 时：分：秒" class="laydate-icon" onClick="laydate({elem:'#myTime',istime: true, format: 'YYYY/MM/DD hh:mm:ss'})">
+                    </div>
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<ul style="width: 55%;">-->
+                    <!--<li>-->
+                    <div class="input-group grous">
+                        <div class="input-group-addon" style="width: 150px;">失效时间</div>
+                        <input style="width:598px;height:32px;padding-left:10px;border-radius:3px;" id="myTime1" ng-model="imgnews.endTime" placeholder="年/月/日 时：分：秒" class="laydate-icon" onClick="laydate({elem:'#myTime1',istime: true, format: 'YYYY/MM/DD hh:mm:ss'})">
+                    </div>
+                    <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon" style="width: 150px;">失效时间</div>-->
+                    <!--<input type="text"  class="form-control"  placeholder="年/月/日 时：分：秒" value="" id="myTime1" ng-model="imgnews.endTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--</div>-->
+                    <!--</td>-->
+                    <!--</tr>    -->
+                    <!--</table>-->
+                    <!--</div>-->
+                    <div style="clear:both;"></div>
+                    <!--<div class="button-bc">-->
+                    <!--<input name="" type="button" ng-click="saveImgnews()" value="保存" class="new-button">-->
+                    <!--</div>-->
+                    <div class="input-group quer" style="width:120px;float: left;margin-top:30px;margin-left:300px;">
+                        <button class="btn btn-primary btn-lg" type="button" ng-click="saveImgnews()">
+                            <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-saved"></i> 发放
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resource/js/time.js"></script>
+    <!-- 上传图片特效js -->
+    <script type="text/javascript">
+    function previewImage(file) {
+        var div = document.getElementsByClassName('preview');
+        div.innerHTML = '<img id=imghead>';
+        var img = $(file).closest("td").find("img")[0];
+        var reader = new FileReader();
+        reader.onload = function(evt) { img.src = evt.target.result; }
+        reader.readAsDataURL(file.files[0]);
+    }
+
+
+
+    document.getElementsByTagName('textarea')[0].onkeypress = function() {
+        var value = this.value,
+            allLine = value.split('\n'),
+            lastLine = allLine.pop();
+        if (lastLine.length >= 11) {
+            lastLine = lastLine.substr(0, 11) + '\n' + lastLine.substr(11);
+            allLine.push(lastLine)
+            this.value = allLine.join('\n');
+
+        }
+    };
+
+    //时间下拉框的颜色
+    ! function() {
+        laydate.skin('molv'); //切换皮肤，请查看skins下面皮肤库
+        laydate({ elem: '#demo' }); //绑定元素
+    }();
+    </script>
+</div>

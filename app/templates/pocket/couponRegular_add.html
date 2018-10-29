@@ -1,0 +1,88 @@
+<div ng-include="'templates/layout/layout.html'">
+</div>
+<div class="main-content main-he">
+    <div class="head_bt">
+        <h2>新增券规则</h2>
+    </div>
+    <div class="touz-main" style="height: 1700px">
+        <div class="touz-ma" style="width: 640px">
+            <form class="bs-example bs-example-form" role="form">
+                <div class="input-group grous">
+                    <div class="input-group-addon">红包类型</div>
+                    <select ng-model="newPlan.type" class="form-control">
+                        <option value="0">红包券</option>
+                        <!--<option value="1">体验金券</option>-->
+                        <option value="2">加息券</option>
+                    </select>
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">状态</div>
+                    <select ng-model="newPlan.status" class="form-control">
+                        <option value="0">启动</option>
+                        <option value="1">禁用</option>
+                    </select>
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">券规则名称</div>
+                    <input type="text" class="form-control" ng-model="newPlan.itemName" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">券值</div>
+                    <input type="number" class="form-control" ng-model="newPlan.itemValue" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">使用条件</div>
+                    <input type="number" class="form-control" ng-model="newPlan.itemCondition" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">发放数量</div>
+                    <input type="text" class="form-control" ng-model="newPlan.itemAmount" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">限制天数</div>
+                    <input type="text" class="form-control" ng-model="newPlan.itemRestricta" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">券类型</div>
+                    <select ng-model="newPlan.itemType" class="form-control">
+                        <option value="10">新手红包</option>
+                        <option value="11">邀请红包</option>
+                        <option value="12">返现红包</option>
+                        <option value="13">累投红包</option>
+                    </select>
+                </div>
+                <!--<div class="input-group grous">-->
+                <!--<div class="input-group-addon">券有效期</div>-->
+                <!--<input type="text"  class="form-control" ng-model="newPlan.length"/>-->
+                <!--</div>-->
+                <div class="input-group grous">
+                    <div class="input-group-addon" style="width: 170px;height:30px">开始时间</div>
+                    <input style="width:470px;height:32px;padding-left:10px;border-radius:3px;" id="myTimes" ng-model="cashData.beginTime" placeholder="年/月/日 时：分：秒" class="laydate-icon" onClick="laydate({elem:'#myTimes',istime: true, format: 'YYYY/MM/DD hh:mm:ss'})">
+                </div>
+                <!--<div class="input-group grous">-->
+                <!--<div class="input-group-addon">开始时间</div>-->
+                <!--<input type="text"  class="form-control"  placeholder="年/月/日 时：分：秒" value="" id="myTimes" ng-model="cashData.beginTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/>-->
+                <!--</div>-->
+                <div class="input-group grous">
+                    <div class="input-group-addon" style="width: 170px;height:30px">结束时间</div>
+                    <input style="width:470px;height:32px;padding-left:10px;border-radius:3px;" id="myTimes1" ng-model="cashData.endTime" placeholder="年/月/日 时：分：秒" class="laydate-icon" onClick="laydate({elem:'#myTimes1',istime: true, format: 'YYYY/MM/DD hh:mm:ss'})">
+                </div>
+                <!--<div class="input-group grous">-->
+                <!--<div class="input-group-addon">结束时间</div>-->
+                <!--<input type="text"  class="form-control"  placeholder="年/月/日 时：分：秒" value="" id="myTimes1" ng-model="cashData.endTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/>-->
+                <!--</div>-->
+                <div class="div-but" style="width: 200px;padding: 0;margin-top: 20px;">
+                    <button style="width: 200px" type="button" class="btn btn-primary yya" ng-click="saveRegular()">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="resource/js/time.js"></script>
+    <script>
+    //时间下拉框的颜色
+    ! function() {
+        laydate.skin('molv'); //切换皮肤，请查看skins下面皮肤库
+        laydate({ elem: '#demo' }); //绑定元素
+    }();
+    </script>
+</div>

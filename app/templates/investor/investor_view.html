@@ -1,0 +1,531 @@
+
+<div ng-include="'templates/layout/layout.html'"></div>
+<div ng-cloak>
+<div class="main-content main-he">
+    <!-- 查看投资人 -->
+    <div class="head_bt">
+        <h2>查看投资人</h2>
+    </div>
+    <div>
+        <table class="table table-bordered ta-bo">
+            <thead class="thead_table">
+            <tr class="thead_tr">
+                <th class="thead_th">真实姓名</th>
+                <th class="thead_th">身份证号</th>
+                <th class="thead_th">推荐码</th>
+                <th class="thead_th">推荐人</th>
+                <!--<th class="thead_th">联系方式</th>-->
+                <th class="thead_th">联系方式</th>
+                <th class="thead_th">注册时间</th>
+                <th class="thead_th">当前账户余额(元)</th>
+                <th class="thead_th">已投资(元)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{investor.realName}}</td>
+                <td>{{investor.idCard}}</td>
+                <!--<td>-->
+                <td>{{investor.recommendCode}}</td>
+                <td>{{investor.recommendUser}}</td>
+                    <!--<span ng-show="recommendUser!='undefined'">{{investor.recommendUser}}</span>-->
+                    <!--<span ng-show="recommendUser=='undefined'"></span>-->
+                <!--</td>-->
+                <!--<td>{{investor.userId}}</td>-->
+                <td>{{investor.phone}}</td>
+                <td>{{investor.createdTime|jsonDate}}</td>
+                <td>{{investor.money | PointToYuan|currency:"" :2}}</td>
+                <td class="ta-bo1">{{investor.investedMoney | PointToYuan|currency:"":2}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- tab标签 -->
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="javascript:;" id="homew" ng-click="clickTab()">投资记录</a></li>
+        <li><a href="javascript:;" id="iosw" class="tahh" ng-click="clickTab1()"><span >流水记录</span></a></li>
+        <li><a href="javascript:;" id="huankuan" class="tahh" ng-click="clickTab2()"><span >还款记录</span></a></li>
+        <li><a href="javascript:;" id="chongzhi" class="tahh" ng-click="clickTab3()"><span >充值记录</span></a></li>
+        <li><a href="javascript:;" id="tixian" class="tahh" ng-click="clickTab4()"><span >提现记录</span></a></li>
+        <li><a href="javascript:;" id="yinhangka" class="tahh" ng-click="clickTab5()"><span >银行卡</span></a></li>
+
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <!-- ==============================================投资记录===================================================================== -->
+        <div class="tab-pane fade in active" id="home">
+            <table class="table table-bordered ta-bo">
+                <thead class="thead_table">
+                <tr class="thead_tr">
+                    <th class="thead_th">姓名</th>
+                    <th class="thead_th">金额(元)</th>
+                    <th class="thead_th">电话号码</th>
+                    <th class="thead_th">标的名称</th>
+                    <th class="thead_th">红包金额(元)</th>
+                    <th class="thead_th">投资时间</th>
+                    <th class="thead_th">状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in itemList">
+                    <!--<span ng-show="$root.userName=='adminuser'">-->
+                    <td>{{x.realName}}</td>
+                    <td>{{x.money | PointToYuan|currency:"":2}}</td>
+                    <td>{{x.phone}}</td>
+                    <td>{{x.name}}</td>
+                    <td>{{x.pocketMoney | PointToYuan|currency:"":2}}</td>
+                    <td>{{x.createdTime |jsonDate}}</td>
+                    <td>
+                        <span ng-show="x.status==1">还款中</span>
+                        <span ng-show="x.status==2">已还款</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a
+                                    ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                        <li id="sumCount"><span
+                                aria-hidden="true">共{{sumCount}}条</span></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- =========================流水记录================================================================================= -->
+
+        <div class="tab-pane fade" id="ios">
+            <table class="table table-bordered ta-bo">
+                <thead class="thead_table">
+                <tr class="thead_tr">
+                    <th class="thead_th">序号</th>
+                    <th class="thead_th">姓名</th>
+                    <th class="thead_th">金额(元)</th>
+                    <th class="thead_th">余额(元)</th>
+                    <th class="thead_th">冻结金额(元)</th>
+                    <th class="thead_th">时间</th>
+                    <th class="thead_th">类型</th>
+                    <th class="thead_th">状态</th>
+                    <th class="thead_th">备注</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in itemList1">
+                    <td >{{x.seqNum}}</td>
+                    <td>{{x.realName}}</td>
+                    <td>{{x.money| PointToYuan|currency:"":2}}</td>
+                    <td>{{x.balance | PointToYuan|currency:"":2}} </td>
+                    <td >{{x.frozenMoney| PointToYuan|currency:"":2}}</td>
+                    <td >{{x.createdTime|jsonDate}}</td>
+                    <td >
+                    <span ng-show="x.type==0">冻结</span>
+                             <span ng-show="x.type==1">解冻</span>
+                         <span ng-show="x.type==2">余额转出</span>
+                         <span ng-show="x.type==3">转入余额</span>
+                         <span ng-show="x.type==4">冻结转出</span>
+                    </td>
+                    <td >
+                    <span ng-show="x.state==0">投资成功</span>
+                             <span ng-show="x.state==1">充值成功</span>
+                         <span ng-show="x.state==2">申请提现</span>
+                         <span ng-show="x.state==3">提现成功</span>
+                         <span ng-show="x.state==4">提现失败</span>
+                        <span ng-show="x.state==5">正常还款</span>
+                        <span ng-show="x.state==6">平台奖励</span>
+
+                    </td>
+                    <td >{{x.remark}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages1>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage1(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage1(nowPage1-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages1" ng-class="{true:'active'}[page.showNumber==nowPage1]">
+                            <a
+                                    ng-click="selectPage1(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage1(nowPage1+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage1(nowPage1+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage1(totalPages1)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                         <li id="sumCount"><span
+                                 aria-hidden="true">共{{sumCount1}}条</span></li>
+                    <li><a><span
+                            aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+   <!--//====================还款记录========================================-->
+        <div class="tab-pane " id="huankuan1">
+            <table class="table table-bordered ta-bo">
+                <thead class="thead_table">
+                <tr class="thead_tr">
+                    <th class="thead_th ">计划名称</th>
+                    <th class="thead_th ">利率</th>
+                    <th class="thead_th" >加息利率</th>
+                    <th class="thead_th ">本期/期总</th>
+                    <th class="thead_th" >用户名</th>
+                    <th class="thead_th ">真实姓名</th>
+                    <th class="thead_th" >本金（元）</th>
+                    <th class="thead_th ">利息(元)</th>
+                    <th class="thead_th ">加息（元）</th>
+                    <th class="thead_th ">总额（元）</th>
+                    <th class="thead_th ">投资天数</th>
+                    <th class="thead_th ">投资日期</th>
+                    <th class="thead_th ">回款日期</th>
+                    <th class="thead_th">实回日期</th>
+                    <th class="thead_th ">渠道</th>
+                    <th class="thead_th ">状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in itemList2">
+                    <td>{{x.name}}</td>
+                    <td>{{x.rate/10+"%"}}</td>
+                    <td>{{x.rasingRate/10+"%"}}</td><!--加息利率-->
+                    <td>{{x.period+"/"+x.length}}</td>
+                    <td>{{x.userName}}</td>
+                    <td>{{x.realName}}</td>
+                    <td>{{x.corpus| PointToYuan| currency:"":2}}</td><!--| PointToYuan-->
+                    <td >{{x.interest| PointToYuan| currency:"":2}}</td>
+                    <td >{{x.raisingInterest| PointToYuan| currency:"":2}}</td>
+                    <td >{{x.corpus+x.interest+x.raisingInterest| PointToYuan| currency:"":2}}</td>
+                    <td>{{x.days}}</td><!--投资天数-->
+                    <td >{{x.beginTime|jsonDate}}</td>
+                    <td >{{x.repayDay|jsonDate}}</td>
+                    <td >{{x.time|jsonDate}}</td>
+                    <td >{{x.channel}}</td>
+                    <td >
+                        <span ng-show="x.status==1">还款中</span>
+                        <span ng-show="x.status==2">已还款</span>
+                    </td>
+                    <!--<td ng-show="x.status=='wait_verify'">待审核</td>-->
+                    <!--<td ng-show="x.status=='success'">提现成功</td>-->
+                    <!--<td ng-show="x.status=='verify_fail'">提现失败</td>-->
+                    <!--<td><a href="javascript:;" ng-click="repayExamine(x)">审核</a></td>-->
+                </tr>
+                </tbody>
+            </table>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages2>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage2(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage2(nowPage2-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage2]">
+                            <a
+                                    ng-click="selectPage2(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage2(nowPage2+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage2(nowPage2+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage2(totalPages2)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                        <li id="sumCount"><span
+                                aria-hidden="true">共{{sumCount2}}条</span></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!--//===========================充值记录=============================-->
+        <div class="tab-pane " id="chongzhi1">
+            <table class="table table-bordered ta-bo">
+                <thead class="thead_table">
+                <tr class="thead_tr">
+                    <th class="thead_th">姓名</th>
+                    <th class="thead_th">充值金额(元)</th>
+                    <th class="thead_th">手续费(元)</th>
+                    <th class="thead_th">充值方式</th>
+                    <th class="thead_th">充值状态</th>
+                    <th class="thead_th">充值时间</th>
+                    <th class="thead_th">成功时间</th>
+                    <th class="thead_th">充值卡号</th>
+                    <th class="thead_th">订单号</th>
+                    <th class="thead_th">备注</th>
+                    <th class="thead_th">手机</th>
+                    <th class="thead_th">渠道</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="m in itemList3">
+                    <td>{{m.realName}}</td>
+                    <td>{{m.money|PointToYuan| currency:"":2}}</td>
+                    <td>{{m.fee|PointToYuan| currency:"":2}}</td>
+                    <td>
+                        <!--{{m.rechargeWay}}-->
+                        <span ng-show="m.rechargeWay=='union'">银联</span>
+                        <span ng-show="m.rechargeWay=='dir'">快捷</span>
+                        <span ng-show="m.rechargeWay=='app'">手机</span>
+                        <span ng-show="m.rechargeWay=='offline'">线下</span>
+                    </td>
+                    <td>
+                        <span ng-show="m.status=='success'">成功</span>
+                        <span ng-show="m.status=='fail'">失败</span>
+                        <span ng-show="m.status=='wait_pay'">待支付</span>
+                        <span ng-show="m.status=='overdue'">失效</span>
+                    </td>
+                    <td>{{m.time|jsonDate}}</td>
+                    <td>{{m.successTime|jsonDate}}</td>
+                    <td>{{m.bankCardNo}}</td>
+                    <td>{{m.orderNum}}</td>
+                    <td>{{m.remark}}</td>
+                    <td>{{m.phone}}</td>
+                    <td>{{m.channel}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages3>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage3(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage3(nowPage3-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage3]">
+                            <a
+                                    ng-click="selectPage3(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage3(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage3(nowPage3+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage3(totalPages3)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                        <li id="sumCount"><span
+                                aria-hidden="true">共{{sumCount3}}条</span></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage3(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!--//======================提现记录=================================-->
+        <div class="tab-pane " id="tixian1">
+            <table class="table table-bordered ta-bo">
+                <thead class="thead_table">
+                <tr class="thead_tr">
+                    <th class="thead_th">真实姓名</th>
+                    <th class="thead_th">手机号码</th>
+                    <th class="thead_th">金额(元)</th>
+                    <th class="thead_th">手续费(元)</th>
+                    <th class="thead_th">省</th>
+                    <th class="thead_th">市</th>
+                    <th class="thead_th">区/县</th>
+                    <!--<th class="thead_th">银行名称</th>-->
+                    <th class="thead_th">提现银行</th>
+                    <th class="thead_th">银行卡号</th>
+                    <th class="thead_th">订单号</th>
+                    <th class="thead_th">支行</th>
+                    <th class="thead_th">申请时间</th>
+                    <th class="thead_th">状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in itemList4">
+                    <!--<span ng-show="$root.userName=='adminuser'">-->
+                    <td>{{item.realName}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.money | PointToYuan | currency:"":2}}</td>
+                    <td>{{item.fee |PointToYuan | currency:"":2}}</td>
+                    <td>{{item.province}}</td>
+                    <td>{{item.city}}</td>
+                    <td>{{item.district}}</td>
+                    <!--<td>{{item.bankName}}</td>-->
+                    <td>{{item.newBankName}}</td>
+                    <td>{{item.cardNumber}}</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.subbranch}}</td>
+                    <td>{{item.time | jsonDate}}</td>
+                    <td ng-show="item.status=='wait_verify'">待审核</td>
+                    <td ng-show="item.status=='success'">提现成功</td>
+                    <td ng-show="item.status=='verify_fail'">提现失败</td>
+                    <td><a href="javascript:;" ng-click="withdrawalExamine(item)">审核</a></td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages4>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage4(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage4(nowPage4-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage4]">
+                            <a
+                                    ng-click="selectPage4(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage4(nowPage4+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage4(nowPage4+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage4(totalPages4)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                        <li id="sumCount"><span
+                                aria-hidden="true">共{{sumCount4}}条</span></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage4(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!--//===============================银行卡========================================-->
+        <div class="tab-pane " id="yinhangka1">
+            <table class="table table-bordered ta-bo">
+                <thead class="thead_table">
+                <tr class="thead_tr">
+                    <th class="thead_th min-7 max-10">姓名</th>
+                    <th class="thead_th min-7 max-10">手机号</th>
+                    <th class="thead_th  min-7 max-10">银行代码</th>
+                    <th class="thead_th min-7 max-20">卡号</th>
+                    <th class="thead_th min-7">银行</th>
+                    <th class="thead_th min-7 max-10">省</th>
+                    <th class="thead_th min-7 max-10">市</th>
+                    <th class="thead_th min-7 max-10">区/县</th>
+                    <th class="thead_th min-7 max-10">支行</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="plan in itemList5">
+                    <td>{{plan.realName}}</td>
+                    <td>{{plan.phone}}</td>
+                    <td>{{plan.bankCode}}</td>
+                    <td>{{plan.cardNumber}}</td>
+                    <td>{{plan.bankName}}</td>
+                    <td>{{plan.province}}</td>
+                    <td>{{plan.city}}</td>
+                    <td>{{plan.district}}</td>
+                    <td>{{plan.subbranch}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages5>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage5(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage5(nowPage5-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage5]">
+                            <a
+                                    ng-click="selectPage5(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage5(nowPage5+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage5(nowPage5+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage5(totalPages5)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                        <li id="sumCount"><span
+                                aria-hidden="true">共{{sumCount5}}条</span></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage5(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#iosw").click(function () {
+        $("#home").removeClass("in active");
+        $("#huankuan1").removeClass("in active");
+        $("#chongzhi1").removeClass("in active");
+        $("#tixian1").removeClass("in active");
+        $("#yinhangka1").removeClass("in active");
+
+        $("#ios").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#homew").parent().removeClass("active");
+        $("#huankuan").parent().removeClass("active");
+        $("#chongzhi").parent().removeClass("active");
+        $("#tixian").parent().removeClass("active");
+        $("#yinhangka").parent().removeClass("active");
+    });
+    $("#homew").click(function () {
+        $("#ios").removeClass("in active");
+        $("#huankuan1").removeClass("in active");
+        $("#chongzhi1").removeClass("in active");
+        $("#tixian1").removeClass("in active");
+        $("#yinhangka1").removeClass("in active");
+        $("#home").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#iosw").parent().removeClass("active");
+        $("#huankuan").parent().removeClass("active");
+        $("#chongzhi").parent().removeClass("active");
+        $("#tixian").parent().removeClass("active");
+        $("#yinhangka").parent().removeClass("active");
+    });
+    $("#huankuan").click(function () {
+        $("#ios").removeClass("in active");
+        $("#home").removeClass("in active");
+        $("#chongzhi1").removeClass("in active");
+        $("#tixian1").removeClass("in active");
+        $("#yinhangka1").removeClass("in active");
+        $("#huankuan1").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#iosw").parent().removeClass("active");
+        $("#homew").parent().removeClass("active");
+        $("#chongzhi").parent().removeClass("active");
+        $("#tixian").parent().removeClass("active");
+        $("#yinhangka").parent().removeClass("active");
+    });
+    $("#chongzhi").click(function () {
+        $("#ios").removeClass("in active");
+        $("#home").removeClass("in active");
+        $("#huankuan1").removeClass("in active");
+        $("#tixian1").removeClass("in active");
+        $("#yinhangka1").removeClass("in active");
+        $("#chongzhi1").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#iosw").parent().removeClass("active");
+        $("#homew").parent().removeClass("active");
+        $("#huankuan").parent().removeClass("active");
+        $("#tixian").parent().removeClass("active");
+        $("#yinhangka").parent().removeClass("active");
+    });
+    $("#tixian").click(function () {
+        $("#ios").removeClass("in active");
+        $("#home").removeClass("in active");
+        $("#chongzhi1").removeClass("in active");
+        $("#huankuan1").removeClass("in active");
+        $("#yinhangka1").removeClass("in active");
+        $("#tixian1").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#iosw").parent().removeClass("active");
+        $("#homew").parent().removeClass("active");
+        $("#chongzhi").parent().removeClass("active");
+        $("#huankuan").parent().removeClass("active");
+        $("#yinhangka").parent().removeClass("active");
+    });
+    $("#yinhangka").click(function () {
+        $("#ios").removeClass("in active");
+        $("#home").removeClass("in active");
+        $("#chongzhi1").removeClass("in active");
+        $("#tixian1").removeClass("in active");
+        $("#huankuan1").removeClass("in active");
+        $("#yinhangka1").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#iosw").parent().removeClass("active");
+        $("#homew").parent().removeClass("active");
+        $("#chongzhi").parent().removeClass("active");
+        $("#tixian").parent().removeClass("active");
+        $("#huankuan").parent().removeClass("active");
+    });
+</script>
+</div>

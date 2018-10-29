@@ -1,0 +1,116 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+<!-- 信息审核-列表页 -->
+<nav class="navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">还款计划-列表</a>
+        </div>
+        <p class="navbar-text">---支持排序，支持条件过滤，输入框支持 用户ID、真实姓名、电话和账号搜索(支持模糊查询)</p>
+    </div>
+</nav>
+<!-- 搜索框 -->
+<ul class="new-add ng-scope">
+    <li>
+        <select ng-model="riskData['filters']['state']" class="form-control">
+            <option value="">查询全部</option>
+            <option value="100">待还</option>
+            <option value="300">已还</option>
+            <option value="200">逾期</option>
+            <option value="210">严重逾期</option>
+            <option value="400">一次性还款</option>
+        </select>
+    </li>
+    <li>
+        <select ng-model="riskData.hadRepay" class="form-control">
+            <option value="">全部</option>
+            <option value="hadRepay">已还清</option>
+            <option value="Repaying">还款中</option>
+        </select>
+    </li>
+    <li>
+        <select ng-model="riskData.group" class="form-control">
+            <option value="loanId">按借款ID分组</option>
+            <option value="userId">按用户ID分组</option>
+        </select>
+    </li>
+    <li>
+        <select ng-model="riskData['repayment.created_time']" class="form-control">
+            <option value="asc">放款时间正序</option>
+            <option value="desc">放款时间倒序</option>
+        </select>
+    </li>
+    <!-- 搜索框 -->
+    <li>
+        <div class="input-group quer" style="width: 380px">
+            <input type="text" ng-model="riskData.keyword" class="form-control quer-ico"
+                   placeholder="支持用户ID、真实姓名、电话和账号搜索(支持模糊查询)"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="selectPage(1)">
+                 搜索用户
+                </button>
+            </span>
+        </div>
+    </li>
+</ul>
+<div>
+    <table class="table table-bordered ta-bo">
+        <thead class="thead_table">
+        <tr class="thead_tr">
+            <th class="thead_th">借款ID</th>
+            <th class="thead_th">账号</th>
+            <th class="thead_th">真实姓名</th>
+            <th class="thead_th">总分期数</th>
+            <th class="thead_th">总应还款</th>
+            <th class="thead_th">总滞纳金</th>
+            <th class="thead_th">总已还款</th>
+            <th class="thead_th">是否已还清</th>
+            <th class="thead_th">是否逾期</th>
+            <!--<th class="thead_th">还款状态</th>-->
+            <!--<th class="thead_th">状态</th>-->
+            <th class="thead_th">放款时间</th>
+            <th class="thead_th">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in itemList">
+            <td>{{item.loanId}}</td>
+            <td>{{item.userName}}</td>
+            <td>{{item.userRealName}}</td>
+            <td>{{item.total}}</td>
+            <td>{{item.amount | PointToYuan}}</td>
+            <td>{{item.penalty | PointToYuan}}</td>
+            <td>{{item.repaymentAmount | PointToYuan}}</td>
+            <td>{{item.loanState | LoanState}}</td>
+            <!--逾期-->
+            <td ng-if="item.overdue == 0">当期未逾期</td>
+            <td ng-if="item.overdue == 1" style="color: #39aa1a">当期逾期</td>
+            <td ng-if="item.overdue == 2" style="color: red">当期严重逾期</td>
+            <!--<td>{{item.state}}</td>-->
+            <!--<td>{{item.status}}</td>-->
+            <td>{{item.createdTime | date:'yyyy-MM-dd'}}</td>
+            <td class="ta-botd">
+                <a type="button" class="btn btn-default qw" ng-click="showInfoDialog(item.loanId, item.userRealName)">查看详情</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+    <nav>
+        <ul id="pagination" class="pagination pagination-sm" style="">
+            <li id="firstPage"><span ng-click="selectPage(1)"
+                                     aria-hidden="true">首页</span></li>
+            <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                    aria-hidden="true">«</span></li>
+            <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+            <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+            <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                    aria-hidden="true">»</span></a></li>
+            <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                    aria-hidden="true">尾页</span></a></li>
+        </ul>
+    </nav>
+</div>
+</div>

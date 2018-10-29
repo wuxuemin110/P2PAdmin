@@ -1,0 +1,140 @@
+<div ng-cloak>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <div class="head_bt" style="margin-bottom:30px;">
+            <h2>投资人交易流水</h2>
+        </div>
+        <div style="margin-bottom:55px;">
+            <!--<div class="input-group " style="float: left;">-->
+            <!--<span class="timeTip1">开始时间：<input type="text" class="timeTip1" placeholder="年/月/日 时：分：秒" value="" id="myTime" ng-model="cashData.startDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+            <!--&lt;!&ndash;<span class="timeTip">开始时间：</span><input type="date" placeholder="yyyy-MM-dd "  class="serch_new"  ng-model="cashData.startDate" /><input type="time"  class="serch_new1" ng-model="cashData.startDate" />&ndash;&gt;-->
+            <!--</div>-->
+            <!--<div class="input-group " style="float: left;margin-left:30px;">-->
+            <!--<span class="timeTip1">结束时间：<input type="text" class="timeTip1" placeholder="年/月/日 时：分：秒" value="" id="myTime1" ng-model="cashData.endDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+            <!--&lt;!&ndash;<span class="timeTip">结束时间：</span> <input type="date" placeholder="yyyy-MM-dd " class="serch_new"  ng-model="cashData.endDate" /><input type="time"  class="serch_new1" ng-model="cashData.endDate" />&ndash;&gt;-->
+            <!--</div>-->
+            <div class="input-group" style="float: left;">
+                <span class="timeTip1">注册时间：</span>
+                <input type="date" placeholder="yyyy-MM-dd " class="timeTip1" ng-model="cashData.startDate" />
+            </div>
+            <div class="input-group" style="float: left;">
+                <span class="timeTip1">&nbsp;-&nbsp;&nbsp;&nbsp;</span>
+                <input type="date" placeholder="yyyy-MM-dd " class="timeTip1" ng-model="cashData.endDate" />
+            </div>
+            <div class="input-group" style="width:250px;float: left;margin-left:40px;">
+                <input style="width:250px;" type="text" ng-model="keyword" id="keyword" class="timeTip1" placeholder="请输入真实姓名、账号或联系方式" />
+            </div>
+            <div class="input-group" style="float: left;margin:0 0 10px 30px;">
+                <span class="timeTip1">类型：</span>
+                <select class="timeTip1" ng-model="cashData.type" id="type" style="padding-left:15px;">
+                    <option value="">请选择类型</option>
+                    <option value="0">冻结</option>
+                    <option value="1">解冻</option>
+                    <option value="2">余额转出</option>
+                    <option value="3">转入余额</option>
+                    <option value="4">冻结转出</option>
+                    <option value="5">账户没有变动</option>
+                </select>
+            </div>
+            <div class="input-group" style="float: left;margin:0 0 10px 30px;">
+                <span class="timeTip1">状态：</span>
+                <select class="timeTip1" ng-model="cashData.state" id="state" style="padding-left:15px;">
+                    <option value="">请选择状态</option>
+                    <option value="0">投资成功</option>
+                    <option value="1">充值成功</option>
+                    <option value="2">申请提现</option>
+                    <option value="3">提现成功</option>
+                    <option value="4">提现失败</option>
+                    <option value="5">正常还款</option>
+                    <option value="6">平台奖励</option>
+                </select>
+            </div>
+            <div class="input-group " style="float: left;margin-left:40px;">
+                <button class="search_buttun" type="button" ng-click="searchRecharge()">
+                    <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-search"></i> 查询
+                </button>
+            </div>
+            <div class="input-group" style="float: left;margin-left:30px;">
+                <a class="search_buttun1 " target="_blank" ng-click="gotoExport(cashData.state)">
+                    <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-share-alt"></i>导出列表
+                </a>
+            </div>
+        </div>
+        <!--<div style="margin-top:50px;" class="search_table">-->
+        <!--<span ng-show="$root.userName!='adminuser'">-->
+        <!--<span class="tab-pane fade" id="ios">-->
+        <!--<table class="table table-bordered ta-bo">-->
+        <!--表格-->
+        <div>
+            <div>
+                <table class="table table-bordered ta-bo back-wi">
+                    <thead class="thead_table">
+                        <tr class="thead_tr ">
+                            <th class="thead_th min-5 max-10">序号</th>
+                            <th class="thead_th min-5 max-10">姓名</th>
+                            <th class="thead_th min-5 max-10">联系方式</th>
+                            <th class="thead_th min-5 max-10">金额(元)</th>
+                            <th class="thead_th min-5 max-10">余额(元)</th>
+                            <th class="thead_th min-10 max-10 ">冻结金额(元)</th>
+                            <th class="thead_th min-5 max-11">类型</th>
+                            <th class="thead_th min-7 max-15">状态</th>
+                            <th class="thead_th min-17 max-80">备注</th>
+                            <th class="thead_th min-17 max-20">时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in itemList">
+                            <td>{{x.seqNum}}</td>
+                            <td>{{x.realName}}</td>
+                            <td>{{x.phone}}</td>
+                            <td>{{x.money| PointToYuan| currency:"":2}}</td>
+                            <!--<td ng-show="x.type==700">{{x.order_number}}</td>-->
+                            <!--<td ng-show="x.type!=700">无订单编号</td>-->
+                            <td>{{x.balance | PointToYuan| currency:"":2}} </td>
+                            <td>{{x.frozenMoney| PointToYuan| currency:"":2}}</td>
+                            <td>
+                                <!--{{x.type}}-->
+                                <span ng-show="x.type==0">冻结</span>
+                                <span ng-show="x.type==1">解冻</span>
+                                <span ng-show="x.type==2">余额转出</span>
+                                <span ng-show="x.type==3">转入余额</span>
+                                <span ng-show="x.type==4">冻结转出</span>
+                            </td>
+                            <td>
+                                <!--{{x.state}}-->
+                                <span ng-show="x.state==0">投资成功</span>
+                                <span ng-show="x.state==1">充值成功</span>
+                                <span ng-show="x.state==2">申请提现</span>
+                                <span ng-show="x.state==3">提现成功</span>
+                                <span ng-show="x.state==4">提现失败</span>
+                                <span ng-show="x.state==5">正常还款</span>
+                                <span ng-show="x.state==6">平台奖励</span>
+                            </td>
+                            <td>{{x.remark}}</td>
+                            <td>{{x.createdTime|jsonDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                            aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                            aria-hidden="true">尾页&nbsp;</span></a></li>
+                        <li id="sumCount"><span aria-hidden="true">共{{sumCount}}条</span></li>
+                        <li><a><span
+                            aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resource/js/time.js"></script>
+</div>

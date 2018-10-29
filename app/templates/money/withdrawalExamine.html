@@ -1,0 +1,83 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <style>
+        .my-md-group {
+        }
+
+        .my-md-group md-radio-button {
+            float: left;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            margin-right: 20px;
+        }
+    </style>
+    <!-- 提现审核 -->
+    <div class="head_bt">
+        <h2>提现审核</h2>
+    </div>
+
+    <div class="touz-main" style=" overflow: hidden; min-height: 750px;">
+        <div class="touz-ma" style="width: 650px">
+            <form class="bs-example bs-example-form" role="form">
+            	
+            	<div class="input-group grous">
+                    <div class="input-group-addon">真实姓名</div>
+                    <input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="withdrawData['realName']">
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">手机号码</div>
+                    <input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="withdrawData['phone']">
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">金额</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{withdrawData['money'] | PointToYuan | currency:"":2}}</div>  
+                </div>
+                  <div class="input-group grous">
+                    <div class="input-group-addon">手续费</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{withdrawData['fee']  | PointToYuan | currency:"":2}}</div> 
+                </div>
+                  <div class="input-group grous">
+                    <div class="input-group-addon">省</div>
+                    <input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="withdrawData['province']">  
+                </div>
+                  <div class="input-group grous">
+                    <div class="input-group-addon">市</div>
+                    <input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="withdrawData['city']">  
+                </div>
+                 <div class="input-group grous">
+                    <div class="input-group-addon">区/县</div>
+                    <input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="withdrawData['district']">  
+                </div>
+                 <div class="input-group grous">
+                    <div class="input-group-addon">银行卡号</div>
+                    <input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="withdrawData['cardNumber']">  
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">提现银行</div>
+                    <input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="withdrawData['newBankName']">
+                </div>
+                 <div class="input-group grous">
+                    <div class="input-group-addon">支行</div>
+                    <input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="withdrawData['subbranch']">  
+                </div>
+                 <div class="input-group grous">
+                    <div class="input-group-addon">提现时间</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{withdrawData['time'] | jsonDate}}</div>
+                </div>
+                 <div class="input-group grous">
+                    <div class="input-group-addon">状态</div>   
+                    <div  class="form-control" ng-show="withdrawData.status=='wait_verify'" style="background: #eee;">待审核</div> 
+                </div>
+                 <div class="input-group grous">
+                    <div class="input-group-addon">审核意见</div>   
+                    <input type="text" class="form-control"  placeholder="请输入审核意见"  ng-model="withdrawData['remark']">  
+                </div>
+                <!-- 操作按钮-->
+                <div class="input-group grous" style="margin-top: 20px;">
+                    <button type="button" class="btn btn-primary yya" ng-click="examineSuccess()" style="width: 30%;">审核成功</button>
+                    <button type="button" class="btn btn-primary yya" ng-click="examineFail()" style="width: 30%;">审核失败</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

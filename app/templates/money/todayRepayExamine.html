@@ -1,0 +1,119 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <style>
+        .my-md-group {
+        }
+
+        .my-md-group md-radio-button {
+            float: left;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            margin-right: 20px;
+        }
+    </style>
+    <!-- 提现审核 -->
+    <div class="head_bt">
+        <h2>今日还款审核</h2>
+    </div>
+
+    <div class="touz-main" style=" overflow: hidden; min-height: 750px;">
+        <div class="touz-ma" style="width: 650px">
+            <form class="bs-example bs-example-form" role="form">
+            	
+            	<!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon">计划名称</div>-->
+                    <!--<input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="repayData['name']">-->
+                <!--</div>-->
+                <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon">用户名</div>-->
+                    <!--<input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="repayData['userName']">-->
+                <!--</div>-->
+                <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon">真实姓名</div>-->
+                    <!--<div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['realName'] }}</div>-->
+                <!--</div>-->
+                <div class="input-group grous">
+                    <div class="input-group-addon">计划名称</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['name']}}</div>
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">计划类型</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['typeName']}}</div>
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">期限</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['staging']}}
+                        <!--<span ng-show="x.staging_unit=='day'">天</span>-->
+                        <!--<span ng-show="x.staging_unit=='month'">月</span>-->
+                    </div>
+                    <!--<input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="repayData['raisingInterest']">-->
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">年化收益</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['rate']/10}}%</div>
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">加息</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['rasingRate']  | PointToYuan | currency:"":2}}</div>
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">计划金额(元)</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['amount']  | PointToYuan | currency:"":2}}</div>
+                </div>
+                  <div class="input-group grous">
+                    <div class="input-group-addon">还款金额(元)</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['reapyingMoney']  | PointToYuan | currency:"":2}}</div>
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">还款笔数</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['countNum']}}</div>
+                </div>
+                  <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon">利息(元)</div>-->
+                      <!--<div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['interest']  | PointToYuan | currency:"":2}}</div>-->
+                    <!--&lt;!&ndash;<input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="repayData['interest']">&ndash;&gt;-->
+                <!--</div>-->
+                  <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon">加息（元）</div>-->
+                      <!--<div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['raisingInterest']  | PointToYuan | currency:"":2}}</div>-->
+                    <!--&lt;!&ndash;<input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="repayData['raisingInterest']">&ndash;&gt;-->
+                <!--</div>-->
+                 <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon">利息（元）</div>-->
+                     <!--<div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['total']  | PointToYuan | currency:"":2}}</div>-->
+                <!--</div>-->
+                <div class="input-group grous">
+                    <div class="input-group-addon">认购时间</div>
+                    <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['purchaseTime']  | jsonDate}}</div>
+                </div>
+                 <div class="input-group grous">
+                    <div class="input-group-addon">结束时间</div>
+                     <div  class="form-control"  placeholder=""  style="background: #eee;">{{repayData['endTime']  | jsonDate}}</div>
+                </div>
+                 <div class="input-group grous">
+                    <div class="input-group-addon">状态</div>
+                    <!--<input type="text" class="form-control" disabled="disabled" placeholder="" aria-describedby="basic-addon1" ng-value="repayData['status']">-->
+                     <div  class="form-control"  placeholder=""  style="background: #eee;"><span ng-show="repayData.status==1">还款中</span>
+                         <span ng-show="repayData.status==2">已还款</span></div>
+                </div>
+                 <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon">提现时间</div>-->
+                    <!--<div  class="form-control"  placeholder=""  style="background: #eee;">{{withdrawData['time'] | date:'yyyy-MM-dd HH:mm:ss'}}</div> -->
+                <!--</div>-->
+                 <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon">状态</div>   -->
+                    <!--<div  class="form-control" ng-show="withdrawData.status=='wait_verify'" style="background: #eee;">待审核</div> -->
+                <!--</div>-->
+                 <!--<div class="input-group grous">-->
+                    <!--<div class="input-group-addon">审核意见</div>   -->
+                    <!--<input type="text" class="form-control"  placeholder="请输入审核意见"  ng-model="withdrawData['remark']">  -->
+                <!--</div>-->
+                <!-- 操作按钮-->
+                <div class="input-group grous" style="margin-top: 20px;margin-left:250px">
+                    <button type="button" class="btn btn-primary yya" ng-click="examineSuccess()" style="width: 30%;">还款</button>
+                    <!--<button type="button" class="btn btn-primary yya" ng-click="examineFail()" style="width: 30%;">审核失败</button>-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

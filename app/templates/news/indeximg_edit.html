@@ -1,0 +1,60 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+<style>
+  .tz-ul{padding: 0;}
+  .file{position:relative; top:0; right:-10px; cursor: pointer; height:24px; filter:alpha(opacity:1);opacity: 1;width:0px;}
+</style>
+<!-- 修改首页图片 -->   
+      <div class="head_bt">
+        <h2>修改首页图片</h2>
+      </div>
+      <div >
+        <div >
+          <table class="table table-bordered ta-bo back-wi">
+            <thead class="thead_table">
+                 <tr class="thead_tr ">
+                <th class="thead_th" style="width: 35%;">链接:</th>
+                <th class="thead_th">上传图片:</th>
+                <th class="thead_th min-5">顺序:</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td class="tz-td"><input style="width: 100%;height: 25px;" type="text" ng-model="tradeRecord.imageurl" value="{{tradeRecord.imageurl}}"/></td>      
+                <td>
+                <ul class="tz-ul">
+                <li class="preview"><img id="imghead" src="{{tradeRecord.showUrl}}" class="img"></li>
+                 <li>
+				 <div ng-controller = "indeximg_editCtrl">
+                  <input file-model="myFile" type="file" onchange="previewImage(this)" class="file"><!-- 选择图片按钮 -->
+                  <input name="" type="button" class="button-tz" value="选择文件">  
+                  <input ng-click="uploadFile()" name="" type="button" class="button-tz" value="上传">
+				  <input type="hidden" id="imageName"  ng-model="tradeRecord.imagename" value="{{tradeRecord.imagename}}" miaosu="用于保存图片名称">
+				  </div>
+                 </li>
+                </ul>
+                </td>
+                 <td class="tz-td">
+                <input style="width:20%;height:25px;" type="text" ng-model="tradeRecord.level" value="{{tradeRecord.level}}"/>
+                </td>              
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      <div>
+      <input name="" type="button" value="保存" ng-click="edit()" class="button-tj button-img">
+      <input name="" type="button" value="取消" class="button-qx button-img" onclick="window.location.href='/manageSystem/#/news/indeximg_view'">
+      </div>
+      </div>
+</div>
+ <!-- 上传图片特效js -->
+<script type="text/javascript">
+function previewImage(file){
+  var div = document.getElementsByClassName('preview');
+  div.innerHTML = '<img id=imghead>';
+  var img = $(file).closest("td").find("img")[0];
+  var reader = new FileReader();
+  reader.onload = function(evt){img.src = evt.target.result;}
+  reader.readAsDataURL(file.files[0]);
+}
+</script>     

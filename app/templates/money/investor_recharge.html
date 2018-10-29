@@ -1,0 +1,137 @@
+<style>
+   .thead_th{
+       margin: auto;
+   }
+</style>
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 信息审核-列表页 -->
+    <nav class="navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">查看投资人充值-列表</a>
+            </div>
+            <p class="navbar-text">---支持排序，支持条件过滤，输入框支持 用户ID、真实姓名、电话和账号搜索(支持模糊查询)</p>
+            <p class="navbar-text ">---充值券时，红包券只有10元和100元，体验金券只有1000元和100元，加息券1%，请输入使用条件，体验金券使用条件请输入0</p>
+        </div>
+    </nav>
+    <ul class="new-add ng-scope">
+        <li style="margin-right: 10px">
+            <select ng-model="rechargeData.name" class="form-control">
+                <option value="asc">用户账号正序</option>
+                <option value="desc">用户账号倒序</option>
+            </select>
+        </li>
+        <li style="margin-right: 10px">
+            <select ng-model="rechargeData.account" class="form-control">
+                <option value="asc">帐户余额正序</option>
+                <option value="desc">帐户余额倒序</option>
+            </select>
+        </li>
+        <li style="margin-right: 10px">
+            <select ng-model="rechargeData.pocketMoneyNum" class="form-control">
+                <option value="asc">红包券数目正序</option>
+                <option value="desc">红包券数目倒序</option>
+            </select>
+        </li>
+        <li style="margin-right: 10px">
+            <select ng-model="rechargeData.expMoneyNum" class="form-control">
+                <option value="asc">体验券数目正序</option>
+                <option value="desc">体验券数目倒序</option>
+            </select>
+        </li>
+        <li style="margin-right: 10px">
+            <select ng-model="rechargeData.raisingRatesNum" class="form-control">
+                <option value="asc">加息券数目正序</option>
+                <option value="desc">加息券数目倒序</option>
+            </select>
+        </li>
+        <!-- 搜索框 -->
+        <li style="margin-right: 10px;float: right">
+            <div class="input-group quer" style="width: 345px">
+                <input type="text" ng-model="rechargeData.keyword" class="form-control quer-ico"
+                       placeholder="输入用户ID、真实姓名、电话和账号"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="selectPage(1)">
+                 搜索用户
+                </button>
+            </span>
+            </div>
+        </li>
+    </ul>
+    <!-- 搜索框 -->
+    <div class="input-group quer"></div>
+    <div style="min-width: 1200px">
+        <table class="table table-bordered ta-bo">
+            <thead class="thead_table">
+            <tr class="thead_tr">
+                <th class="thead_th" >序号</th>
+                <th class="thead_th" >投资人用户名</th>
+                <th class="thead_th">现金</th>
+                <th class="thead_th">体验劵</th>
+                <th class="thead_th">红包劵</th>
+                <th class="thead_th">加息劵</th>
+                <th class="thead_th">充值类型</th>
+                <th class="thead_th" style="width: 110px">金额 | 加息率(%)</th>
+                <th class="thead_th">使用条件</th>
+                <th class="thead_th">开始时间</th>
+                <th class="thead_th">结束时间</th>
+                <th class="thead_th">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in itemList">
+                <td  style="vertical-align:middle; ">{{startIndex+$index}}</td>
+                <td  style="vertical-align:middle; ">{{x.name}}</td>
+                <td  style="vertical-align:middle; ">{{x.account | PointToYuan}}</td>
+                <td  style="vertical-align:middle; ">{{x.expMoneyNum}}</td>
+                <td  style="vertical-align:middle; ">{{x.pocketMoneyNum}}</td>
+                <td  style="vertical-align:middle; ">{{x.raisingRatesNum}}</td>
+                <td  style="vertical-align:middle; ">
+                    <select id="sel_{{startIndex+$index}}" ng-model="type"
+                            ng-change="changeType(type,startIndex+$index)">
+                        <option value="">请选择充值类型</option>
+                        <option value="1">充值现金</option>
+                        <option value="2">充值体验金</option>
+                        <option value="3">充值现金红包</option>
+                        <option value="4">充值加息</option>
+                    </select>
+                </td>
+                <td style="vertical-align:middle; "><input style="width: 90%" type="number" class="srk1" ng-model="money" title=""/></td>
+                <td  style="vertical-align:middle; ">
+                    <select  ng-model="restricta" ng-init="restricta='0'" ng-show="type!='1'" style="width: 80%;height: 22px">
+                        <option value="0">无限制</option>
+                        <option value="1">限1月标</option>
+                        <option value="3">限3月标</option>
+                    </select>
+                    <input style="height: 22px" type="number" class="srk" ng-model="voucherCondition" placeholder="满X元可用"/>
+                </td>
+                <td style="vertical-align:middle; "><input style="width: 90%" type="date" ng-model="beginTime" placeholder="yyyy-MM-dd"
+                           class="form-control srk"/></td>
+                <td style="vertical-align:middle; "><input style="width: 90%"  type="date" ng-model="expiredTime" placeholder="yyyy-MM-dd"
+                           class="form-control srk"/></td>
+                <td style="vertical-align:middle; " class="ta-botd"><a type="button" ng-click="recharge(money, type, x.id, voucherCondition, beginTime, expiredTime,restricta)">充值</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+        <nav>
+            <ul id="pagination" class="pagination pagination-sm" style="">
+                <li id="firstPage"><span ng-click="selectPage(1)"
+                                         aria-hidden="true">首页</span></li>
+                <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                        aria-hidden="true">«</span></li>
+                <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                    <a
+                            ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                        aria-hidden="true">»</span></a></li>
+                <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                        aria-hidden="true">尾页</span></a></li>
+            </ul>
+        </nav>
+    </div>
+</div> 

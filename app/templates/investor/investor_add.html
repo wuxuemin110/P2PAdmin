@@ -1,0 +1,26 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 添加用户 -->   
+      <div class="head_bt">
+        <h2>添加用户</h2>
+      </div>
+     
+      <div class="touz-main">
+         <form class="bs-example bs-example-form" role="form">
+              <div class="up-addon">投资人姓名</div>
+              <input type="text" class="form-control inp-add" ng-model="intentionCustomer.customerName"/>
+          
+              <div class="up-addon">电话</div>
+              <input type="text" class="form-control inp-add" ng-model="intentionCustomer.customerTel"/>
+          
+              <div class="up-addon">QQ</div>
+              <input type="text" class="form-control inp-add" ng-model="intentionCustomer.customerQq"/>
+
+        <!-- 操作按钮-->
+        <div class="div-but1">
+        <button type="button" class="btn btn-default yya1" ng-click="cancel()">取消</button>
+        <button type="button" class="btn btn-primary yya1" ng-click="addIntentionCustomer()">提交</button>
+        </div>
+         </form>  
+      </div>
+ </div>

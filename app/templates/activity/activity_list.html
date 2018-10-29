@@ -1,0 +1,225 @@
+<div ng-cloak>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <!-- 查看首页图片 -->
+        <div class="head_bt">
+            <h2>活动管理</h2>
+        </div>
+        <div>
+            <ul id="myTab" class="nav nav-tabs" style="border: 0px;">
+                <li ng-class="{active: isActive}" ng-click="[isActive=true,setType('index')]" style="outline: none;">
+                    <a id="index">网页端</a>
+                </li>
+                <li ng-click="[isActive=false,setType('index_mobile')]" ng-class="{active: !isActive}" style="outline: none;">
+                    <a id="indexMobile" class="tahh">手机端</a>
+                </li>
+            </ul>
+            <div style="width:500px;height:50px;margin-left:700px;margin-top:-60px;">
+                <div class="input-group" style="float: left;">
+                    <span class="timeTip1">活动范围：</span>
+                    <input type="date" placeholder="yyyy-MM-dd " class="timeTip1" ng-model="bannerData.startDate" />
+                </div>
+                <div class="input-group" style="float: left;">
+                    <span class="timeTip1">&nbsp;-&nbsp;&nbsp;&nbsp;</span>
+                    <input type="date" placeholder="yyyy-MM-dd " class="timeTip1" ng-model="bannerData.endDate" />
+                </div>
+                <div class="input-group " style="float: left;margin-left:454px;margin-top:-30px;">
+                    <button class="search_buttun" type="button" ng-click="selectPage(1)">
+                        <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-search"></i> 查询
+                    </button>
+                </div>
+            </div>
+            <div id="myTabContent" class="tab-content">
+                <div id="indexC" ng-show="isActive==true">
+                    <table class="table table-bordered back-wi">
+                        <thead class="thead_table">
+                            <tr class="thead_tr ">
+                                <th class="thead_th ">排序</th>
+                                <th class="thead_th ">链接</th>
+                                <th class="thead_th">上传图片</th>
+                                <th class="thead_th">标题</th>
+                                <th class="thead_th">类型</th>
+                                <th class="thead_th">开始时间</th>
+                                <th class="thead_th">结束时间</th>
+                                <th class="thead_th">是否打开新页面</th>
+                                <th class="thead_th">状态</th>
+                                <th class="thead_th min-7">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id={{plan.id}}_tr ng-repeat="plan in itemList">
+                                <td class="tz-td">
+                                    {{plan.seqNum}}
+                                </td>
+                                <td class="tz-td">
+                                    <a href="javascript:;" class="a-black">{{plan.url}}</a>
+                                </td>
+                                <td>
+                                    <ul class="tz-ul">
+                                        <li><img ng-src="{{plan.picture}}" class="img"> </li>
+                                    </ul>
+                                </td>
+                                <td class="tz-td">
+                                    {{plan.title}}
+                                </td>
+                                <td class="tz-td">
+                                    网页端
+                                </td>
+                                <td class="tz-td">
+                                    {{plan.startTime | jsonDate}}
+                                </td>
+                                <td class="tz-td">
+                                    {{plan.endTime | jsonDate}}
+                                </td>
+                                <td class="tz-td" ng-show="plan.outSite==true">
+                                    是
+                                </td>
+                                <td class="tz-td" ng-show="plan.outSite==false">
+                                    否
+                                </td>
+                                <td class="tz-td" ng-show="plan.status==0">
+                                    正常
+                                </td>
+                                <td class="tz-td" ng-show="plan.status==1">
+                                    下线
+                                </td>
+                                <td class="tz-td">
+                                    <button type="button" class="btn btn-default qw" ng-click="gotoEdit(plan.id,'activity')">修改</button>
+                                    <button type="button" class="btn btn-default qw" ng-click="showConfirm(plan.id)">删除</button>
+                                    <!--<a ng-click="showConfirm(plan.id)" href="javascript:;" class="a-hei">删除</a>-->
+                                    <!--<a href="javascript:;" class="a-hei" ng-click="gotoEdit(plan.id,'index')">修改</a>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                        <nav>
+                            <ul id="pagination" class="pagination pagination-sm" style="">
+                                <li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+                                <li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+                                <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                                    <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a>
+                                </li>
+                                <li ng-show="isShowDot">
+                                    <a ng-click="selectPage(nowPage+6)">……</a>
+                                </li>
+                                <li id="Next">
+                                    <a ng-click="selectPage(nowPage+1)" aria-label="Next"><span aria-hidden="true">»</span></a>
+                                </li>
+                                <li id="lastPage">
+                                    <a ng-click="selectPage(totalPages)"><span aria-hidden="true">尾页</span></a>
+                                </li>
+                                <li id="sumCount"><span aria-hidden="true">共{{sumCount}}条</span></li>
+                                <li><a><span
+									aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div id="indexMobileC" ng-show="isActive==false">
+                    <table class="table table-bordered back-wi">
+                        <thead class="thead_table">
+                            <tr class="thead_tr ">
+                                <th class="thead_th ">排序</th>
+                                <th class="thead_th ">链接</th>
+                                <th class="thead_th">上传图片</th>
+                                <th class="thead_th">标题</th>
+                                <th class="thead_th">类型</th>
+                                <th class="thead_th">开始时间</th>
+                                <th class="thead_th">结束时间</th>
+                                <th class="thead_th">是否打开新页面</th>
+                                <th class="thead_th">状态</th>
+                                <th class="thead_th min-7">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id={{plan.id}}_tr ng-repeat="plan in itemList1">
+                                <td class="tz-td">
+                                    {{plan.seqNum}}
+                                </td>
+                                <td class="tz-td">
+                                    <a href="javascript:;" class="a-black">{{plan.url}}</a>
+                                </td>
+                                <td>
+                                    <ul class="tz-ul">
+                                        <li><img ng-src="{{plan.picture}}" class="img"> </li>
+                                    </ul>
+                                </td>
+                                <td class="tz-td">
+                                    {{plan.title}}
+                                </td>
+                                <td class="tz-td">
+                                    手机端
+                                </td>
+                                <td class="tz-td">
+                                    {{plan.startTime | jsonDate}}
+                                </td>
+                                <td class="tz-td">
+                                    {{plan.endTime | jsonDate}}
+                                </td>
+                                <td class="tz-td" ng-show="plan.outSite==true">
+                                    是
+                                </td>
+                                <td class="tz-td" ng-show="plan.outSite==false">
+                                    否
+                                </td>
+                                <td class="tz-td" ng-show="plan.status==0">
+                                    正常
+                                </td>
+                                <td class="tz-td" ng-show="plan.status==1">
+                                    下线
+                                </td>
+                                <td class="tz-td">
+                                    <button type="button" class="btn btn-default qw" ng-click="gotoEdit(plan.id,'activityMobile')">修改</button>
+                                    <button type="button" class="btn btn-default qw" ng-click="showConfirm(plan.id)">删除</button>
+                                    <!--<a ng-click="delNews(plan.id)" href="javascript:;" class="a-hei">删除</a>-->
+                                    <!--<a href="javascript:;" class="a-hei" ng-click="gotoEdit(plan.id,'indexMobile')">修改</a>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                        <nav>
+                            <ul id="pagination" class="pagination pagination-sm" style="">
+                                <li id="firstPage"><span ng-click="selectPage1(1)" aria-hidden="true">首页</span></li>
+                                <li id="Previous"><span ng-click="selectPage1(nowPage1-1)" aria-hidden="true">«</span></li>
+                                <li ng-repeat="page in pages1" ng-class="{true:'active'}[page.showNumber==nowPage1]">
+                                    <a ng-click="selectPage1(page.showNumber)">{{page.showNumber}}</a>
+                                </li>
+                                <li ng-show="isShowDot1">
+                                    <a ng-click="selectPage1(nowPage1+6)">……</a>
+                                </li>
+                                <li id="Next">
+                                    <a ng-click="selectPage1(nowPage1+1)" aria-label="Next"><span aria-hidden="true">»</span></a>
+                                </li>
+                                <li id="lastPage">
+                                    <a ng-click="selectPage1(totalPages1)"><span aria-hidden="true">尾页</span></a>
+                                </li>
+                                <li id="sumCount"><span aria-hidden="true">共{{sumCount}}条</span></li>
+                                <li><a><span
+									aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<script>
+$(document).ready(function(){
+	$("#index").click(function() {
+		$("#indexMobileC").removeClass("in active");
+		$("#indexC").addClass("in active");
+		$(this).parent().addClass("active");
+		$("#indexMobile").parent().removeClass("active");
+	});
+	$("#indexMobile").click(function() {
+		$("#indexC").removeClass("in active");
+		$("#indexMobileC").addClass("in active");
+		$(this).parent().addClass("active");
+		$("#index").parent().removeClass("active");
+
+	});
+})
+</script>-->
+</div>

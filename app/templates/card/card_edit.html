@@ -1,0 +1,73 @@
+<div ng-cloak>
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 查看投资计划 -->
+    <div class="head_bt">
+        <h2>修改银行卡信息</h2>
+    </div>
+    <div>
+        <div class="touz-main" style=" overflow: hidden; min-height: 750px;">
+            <div class="touz-ma" style="width: 650px">
+                <form class="bs-example bs-example-form" role="form">
+
+                    <div class="input-group grous">
+                        <div class="input-group-addon">姓名</div>
+                        <input type="text" class="form-control" disabled  ng-model="plan.realName"/>
+                    </div>
+                    <!--<div class="input-group grous">-->
+                        <!--<div class="input-group-addon">银行代码</div>-->
+                        <!--<input type="text" class="form-control" ng-model="plan.bankCode"/>-->
+                    <!--</div>-->
+                    <div class="input-group grous">
+                        <div class="input-group-addon">卡号</div>
+                        <input type="text" class="form-control" ng-model="plan.cardNumber"/>
+                    </div>
+                    <div class="input-group grous">
+                        <div class="input-group-addon">银行</div>
+                        <select ng-model="plan.bankCode" class="form-control" >
+                            <option value=0801020000>工商银行</option>
+                            <option value=0801030000>农业银行</option>
+                            <option value=0801040000>中国银行</option>
+                            <option value=0801050000>建设银行</option>
+                            <option value=0801000000>邮政储蓄银行</option>
+                            <option value=0804100000>平安银行</option>
+                            <option value=0803050000>民生银行</option>
+                            <option value=0803030000>光大银行</option>
+                            <option value=0803060000>广发银行</option>
+                            <option value=0803020000>中信银行</option>
+                            <option value=0803090000>兴业银行</option>
+                            <option value=0803040000>华夏银行</option>
+                            <option value=0803080000>招商银行</option>
+                            <option value=0803100000>浦发银行</option>
+                            <option value=0803010000>交通银行</option>
+                            <option value=0804031000>北京银行</option>
+                            <option value=0804010000>上海银行</option>
+                        </select>
+                    </div>
+                    <div class="input-group grous">
+                        <div class="input-group-addon">省</div>
+                        <input type="text" class="form-control" ng-model="plan.province"/>
+                    </div>
+                    <div class="input-group grous">
+                        <div class="input-group-addon">市</div>
+                        <input type="text" class="form-control" ng-model="plan.city"/>
+                    </div>
+                    <div class="input-group grous">
+                        <div class="input-group-addon">区/县</div>
+                        <input type="text" class="form-control" ng-model="plan.district"/>
+                    </div>
+                    <div class="input-group grous">
+                        <div class="input-group-addon">支行</div>
+                        <input type="text" class="form-control" ng-model="plan.subbranch"/>
+                    </div>
+
+                    <div class="div-but" style="margin-left:270px;">
+                        <button type="button" class="btn btn-primary yya" ng-click="update()">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,223 @@
+<!--头部-->
+<!-- <div ng-include="'templates/layout/top.html'"></div> -->
+<!--头部结束-->
+<!--样式-->
+<style>
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+    background: url("resource/images/login-bg.jpg")no-repeat center center !important;
+    position: relative;
+    background-size: cover !important;
+}
+
+.addImage {
+    position: absolute;
+    width: 980px;
+    height: 485px;
+    /*margin-top:200px;*/
+    /* margin: 0 auto; */
+    /* background: url("resource/images/login-bj.png")no-repeat center center; */
+    top: 50%;
+    margin-top: -243px;
+    left: 50%;
+    margin-left: -490px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.addDiv {
+    height: 435px;
+    width: 918px;
+    /*border:1px solid #afa;*/
+    margin: 0 auto;
+    margin-top: -30px;
+    position: relative;
+
+    /*margin-left:50px;*/
+}
+
+.login_main {
+    width: 337px;
+    height: 435px;
+    background-size: 100%;
+    background: #fff;
+    margin: 0 auto;
+    position: absolute;
+    right: -2px;
+    box-shadow: 0px 0px 1px 0px #999;
+}
+
+.login_input {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    list-style: none;
+    margin: 60px auto;
+}
+
+.login_input li {
+    margin-bottom: 30px;
+    width: 243px;
+    font-family: "微软雅黑";
+    color: #333338;
+    text-align: center;
+    margin-left: 46px;
+}
+
+.login_input li input {
+    text-indent: 8px;
+    height: 50px;
+    width: 243px;
+    position: relative;
+    padding-left: 50px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #959595;
+    outline: none;
+    color: #454545;
+    font-size: 15px;
+    margin-top: -5px;
+}
+
+.login_input li img {
+    position: absolute;
+    margin-left: 10px;
+    /*z-index:1000;*/
+}
+
+.login_input button {
+    height: 40px;
+    width: 243px;
+    background: #df0909;
+    padding: 3px 10px 3px 10px;
+    /*font-family: "微软雅黑";*/
+    /*margin-top:30px;*/
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-text-fill-color: #999 !important;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    background-color: transparent;
+    background-image: none;
+    transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间  
+}
+
+.login-bg-left {
+    width: 490px;
+    float: left;
+}
+
+.login-form {
+    width: 490px;
+    float: left;
+}
+
+.login-logo img {
+    display: block;
+    margin: 53px auto 0px;
+}
+
+.login-ipt li {
+    list-style: none;
+    line-height: 55px;
+    position: relative;
+    padding-left: 35px;
+    width: 100%;
+    border-bottom: 1px solid #cccccc;
+}
+
+.login-ipt {
+    width: 355px;
+    margin: 50px auto 0px;
+}
+
+.login-ipt li img {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -15px;
+}
+
+.login-ipt li input {
+    outline: 0;
+    border: none;
+    width: 100%;
+    font-size: 18px;
+    color: #9a9898;
+}
+
+.login-entry {
+    width: 355px;
+    margin: 55px auto 0px;
+    line-height: 46px;
+    background: -webkit-linear-gradient(left, #ff9755, #fe6301);
+    font-size: 21px;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 30px;
+    display: block;
+    outline: 0;
+}
+</style>
+<!-- 新 -->
+<div class="addImage">
+    <!--<a class="tab tab-right" style="display:none;" id="borrower" type="button">后台登录入口</a>-->
+    <div class="login-bg-left">
+     <img src="resource/images/loginL.jpg" alt="">
+ </div>
+ <div class="login-form">
+     <div class="login-logo">
+         <img src="resource/images/login-logo.png" alt="">
+     </div>
+     <ul class="login-ipt">
+         <li style='margin-bottom: 20px'>
+             <input type="text" style="display: none;" autocomplete="off" />
+             <img src="resource/images/user1.png">
+             <input ng-model="user.name" type="text" required="" autocomplete="new-password" placeholder="请输入账号">
+         </li>
+         <li>
+             <img src="resource/images/password.png">
+             <input placeholder="请输入密码" ng-model="user.password" type="password" required="" autocomplete="new-password">
+         </li>
+     </ul>
+     <button  class="login-entry" ng-click="login()" >登&nbsp录</button>
+ </div> 
+    <!--  <div style="height: 30px;"></div>
+   <div class="addDiv">
+       <div class="login_main">
+           <div style="height:80px;width:100%;position:relative"><span style="position:absolute;font-size:15px;color:#454545;border-bottom:2px solid #df0909;margin-top:80px;margin-left:130px;">欢迎登录</span></div>
+           <ul class="login_input">
+               <li>
+                   <input type="text" style="display: none;" autocomplete="off" />
+                   <img src="resource/images/user1.png">
+                   <input ng-model="user.name" type="text" required="" autocomplete="new-password">
+               </li>
+               <li><img src="resource/images/password.png">
+                   <input ng-model="user.password" type="password" required="" autocomplete="new-password">
+               </li>
+               <li class="bouy">
+               <button ng-click="login()">登录</button>
+               </li>
+           </ul>
+       </div>
+   </div> -->
+</div>
+<!--尾部-->
+<!-- <div ng-include="'templates/layout/bottom.html'"></div> -->
+<!--尾部结束-->
+

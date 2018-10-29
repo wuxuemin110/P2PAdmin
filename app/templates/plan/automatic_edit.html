@@ -1,0 +1,50 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <script type="text/javascript">
+        angular.module('dateInputExample', [])
+                .controller('DateController', ['$scope', function ($scope) {
+                    $scope.value = new Date(2013, 9, 22);
+                }]);
+    </script>
+
+    <!-- 修改投资计划 -->
+    <div class="head_bt">
+        <p></p>
+        <p></p>
+        <h2>添加自动投资人</h2>
+    </div>
+
+    <div class="touz-main" >
+        <div class="touz-ma">
+            <form class="bs-example bs-example-form" role="form">
+                <div class="input-group grous" >
+                    <div class="input-group-addon"  >计划名称</div>
+                    <input type="hidden"   class="form-control" ng-model="plan_edit.id" />
+                    <input type="text" readonly  style="width: 220px" class="form-control"  ng-model="automatic.aname" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">投资人账号</div>
+                    <input type="text" style="width: 220px"  class="form-control"  ng-model="automatic.name" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">自动投资金额</div>
+                    <input type="text" style="width: 220px" class="form-control"  ng-model="automatic.money" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon">选择券</div>
+                    <select style="width: 220px"  ng-model="automatic.voucherId" ng-init="automatic.voucherId='0'" class="form-control">
+                        <option value="0">不使用券</option>
+                        <option ng-value="o.id" ng-repeat="o in voucherId">
+                            {{(o.type==0?(o.voucherValue/100)+"红包券":o.type==1?(o.voucherValue/100)+"体验券":o.type==2?(o.voucherValue/100)+"%加息券":"")}}
+                        </option>
+                    </select>
+                    <span>&nbsp;&nbsp;&nbsp;<button type="button" style="line-height:28px" ng-click="selectVoucherId(automatic.name,automatic.money)">获取账户券</button></span>
+                </div>
+                <!-- 操作按钮-->
+                <div class="div-but">
+                    <button type="button" class="btn btn-primary yya" ng-click="update()">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

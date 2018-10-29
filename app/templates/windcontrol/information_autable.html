@@ -1,0 +1,155 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 信息审核-列表页 -->
+    <nav class="navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">信息审核-列表</a>
+            </div>
+            <p class="navbar-text">---支持排序，支持条件过滤，输入框支持 用户ID、真实姓名、电话和账号搜索(支持模糊查询)</p>
+        </div>
+    </nav>
+    <!-- 搜索框 -->
+    <ul class="new-add ng-scope">
+        <li>
+            <select ng-model="riskData.loanAuditState" class="form-control">
+                <option value="">查询全部</option>
+                <option value="0">待资料齐全</option>
+                <option value="1">资料不全</option>
+                <option value="100">待资料审核</option>
+                <option value="200">待电话审核</option>
+                <option value="300">待信息调查</option>
+                <option value="400">待复审</option>
+                <!--<option value="500">待复审</option>-->
+                <option value="600">待面签</option>
+                <option value="700">审核通过</option>
+                <option value="710">审核不通过</option>
+            </select>
+        </li>
+        <li>
+            <select ng-model="riskData.userId" class="form-control">
+                <option value="asc">用户ID正序</option>
+                <option value="desc">用户ID倒序</option>
+            </select>
+        </li>
+        <li>
+            <select ng-model="riskData.loanMoney" class="form-control">
+                <option value="asc">借款金额正序</option>
+                <option value="desc">借款金额倒序</option>
+            </select>
+        </li>
+        <li>
+            <select ng-model="riskData.loanStaging" class="form-control">
+                <option value="asc">分期时间正序</option>
+                <option value="desc">分期时间倒序</option>
+            </select>
+        </li>
+        <!-- 搜索框 -->
+        <li>
+            <div class="input-group quer">
+                <input type="text" ng-model="riskData.keyword" class="form-control quer-ico"
+                       placeholder="支持用户ID、真实姓名、电话和账号搜索(支持模糊查询)"/>
+            <span class="input-group-btn">
+            </span>
+            </div>
+        </li>
+    </ul>
+    <div style="clear: both;margin-top: -16px">
+            <div class="input-group quer" style="width:200px;float: left;margin-bottom: 24px">
+                <input type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss"  class="form-control"  ng-model="riskData.showTime" />
+            </div>
+            <div class="input-group quer" style="width:200px;float: left;margin-left: 20px">
+                <input type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss" class="form-control"  ng-model="riskData.endTime" />
+            </div>
+            <div class="input-group quer" style="width:120px;float: left;margin-left: 20px">
+                <button class="btn btn-default" type="button" ng-click="selectPage(1)">
+                    搜索用户
+                </button>
+             </div>
+        <div  class="input-group quer" style="width:200px;float: left;margin-left: 20px">
+            <button class="button_d" ng-click="execl()">导出当前记录excel</button>
+        </div>
+    </div>
+    <div>
+        <table class="table table-bordered ta-bo">
+            <thead class="thead_table">
+            <tr class="thead_tr">
+                <th class="thead_th">账号</th>
+                <th class="thead_th">姓名</th>
+                <th class="thead_th">联系方式</th>
+                <th class="thead_th">标题</th>
+                <!--<th class="thead_th">用途</th>-->
+                <th class="thead_th">金额</th>
+                <th class="thead_th">期限</th>
+                <th class="thead_th">申请时间</th>
+                <th class="thead_th">类型</th>
+                <!--<th class="thead_th">学校</th>-->
+                <th class="thead_th">审核金额(元)</th>
+                <th class="thead_th">审核期限(月)</th>
+                <th class="thead_th">初审结果</th>
+                <th class="thead_th">复审结果</th>
+                <th class="thead_th">面签结果</th>
+                <th class="thead_th">当前步骤</th>
+                <th class="thead_th">操作</th>
+                <!--<th ng-show="role==400 || role==300 || role==800" class="thead_th">特殊操作</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in itemList">
+                <td>{{item.name}}</td>
+                <td>{{item.realName}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.title}}</td>
+                <!--<td>{{item.used}}</td>-->
+                <td>{{item.money | PointToYuan}}</td>
+                <td>{{item.staging}}</td>
+                <td>{{item.createdTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{item.type | LoanType}}</td>
+                <!--<td>{{item.school}}</td>-->
+                <td>{{item.auditMoney |PointToYuan}}</td>
+                <td>{{item.auditStaging}}</td>
+                <td>{{item.firstInstance | AuditState}}</td>
+                <td>{{item.reviewInstance | AuditState}}</td>
+                <td>{{item.interviewInstance | AuditState}}</td>
+                <td>
+                    {{item.loanAuditState | LoanAuditState}}
+                    <div ng-show="(item.loanAuditState == 0 && item.auditZeroInfo != '' && item.auditZeroInfo != undefined)"
+                         style="color: red">
+                        已提醒补齐
+                    </div>
+                </td>
+                <td class="ta-botd">
+                    <a type="button" class="btn btn-default qw"
+                       href="/manageSystem/#/windcontrol/information_audit/{{item.loanId}}">查看详情</a>
+                </td>
+                <!--<td ng-show="role==400 || role==300 || role==800" class="ta-botd">-->
+                    <!--<button ng-show="item.deptPoolId==undefined" ng-click="addPool(item.loanId,$index)" type="button"-->
+                            <!--class="btn btn-default qw">加入债权池-->
+                    <!--</button>-->
+                    <!--<button disabled ng-show="item.deptPoolId!=undefined" type="button" class="btn btn-default qw">已加入-->
+                    <!--</button>-->
+                <!--</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+        <nav>
+            <ul id="pagination" class="pagination pagination-sm" style="">
+                <li id="firstPage"><span ng-click="selectPage(1)"
+                                         aria-hidden="true">首页</span></li>
+                <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                        aria-hidden="true">«</span></li>
+                <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                    <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                        aria-hidden="true">»</span></a></li>
+                <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                        aria-hidden="true">尾页&nbsp;</span></a></li>
+                <li><a><span
+                        aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

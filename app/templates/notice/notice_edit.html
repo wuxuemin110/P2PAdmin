@@ -1,0 +1,170 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <style>
+    .yl ul {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .wid-15 {
+        width: 40%;
+    }
+
+    .tz-ul {
+        padding: 0;
+    }
+
+    .sjgs {
+        left: -156px;
+        top: -12px;
+    }
+
+    .file {
+        position: relative;
+        top: 0;
+        right: -10px;
+        cursor: pointer;
+        height: 24px;
+        filter: alpha(opacity:0);
+        opacity: 0;
+        width: 1px;
+    }
+
+    .md-dialog-backdrop {
+        z-index: 1001!important;
+    }
+
+    .md-dialog-container {
+        z-index: 1003!important;
+    }
+    </style>
+    <!--<link href="resource/js1/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">-->
+    <script type="text/javascript" charset="utf-8" src="resource/tt/utf8jsp/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="resource/tt/utf8jsp/ueditor.all.js"></script>
+    <!-- 修改新闻 -->
+    <div class="head_bt">
+        <h2>修改公告</h2>
+        <p class="zhusi">
+            <!--<input name="" type="button" onclick="javascript:window.location.href='/#/news/news_view'" value="取消" class="new-button1">-->
+            <div class="input-group quer" style="width:120px;float: left;margin: 0 0 0 20px">
+                <button class=" btn btn-danger btn-sm" type="button" onclick="javascript:window.location.href='/manageSystem/#/notice/notice_view'">
+                    <i style="padding-right:5px;line-height:20px;" class="glyphicon glyphicon-remove"></i> 取消
+                </button>
+            </div>
+            <!--<input name="" type="button" ng-click="edit()" value="保存" class="new-button">-->
+            <div class="input-group quer" style="width:120px;float: left;margin: 0 0 0 20px">
+                <button class="btn btn-primary btn-sm" type="button" ng-click="edit()">
+                    <i style="padding-right:5px;line-height:20px;" class="glyphicon glyphicon-saved"></i> 保存
+                </button>
+            </div>
+        </p>
+    </div>
+    <div class="new-bt" style="margin-top:70px;">
+        <!--<ul class="new-bt-ul">-->
+        <!--<li class="new-bj min-10 max-15">上级菜单：</li>-->
+        <!--<li class="new-text">-->
+        <!--<select id="supmemuSel" ng-model="news.supmemu">-->
+        <!--<option value="100">最新动态</option>-->
+        <!--</select>-->
+        <!--</li>    -->
+        <!--</ul>-->
+        <div class="input-group grous">
+            <div class="input-group-addon" style="width: 150px;">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题：</div>
+            <input type="text" class="form-control" ng-model="notice.title" />
+        </div>
+        <div class="input-group grous">
+            <div class="input-group-addon" style="width: 150px;">子标题：</div>
+            <input type="text" class="form-control" ng-model="notice.subtitle" />
+        </div>
+    </div>
+    <!--表格-->
+    <!--<div class="table">  -->
+    <!--<table class="table table-bordered back-wi">-->
+    <!--<thead class="thead_table">-->
+    <!--<tr class="thead_tr ">-->
+    <!--<th class="thead_th wid-15" colspan="2">封面上传：</th>-->
+    <!--<th class="thead_th"></th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tr>-->
+    <!--<td colspan="2">-->
+    <!--<ul class="tz-ul">-->
+    <!--<li class="preview">-->
+    <!--<div class="col-md-12">-->
+    <!--<img id="imghead" ng-src="{{news.coverImage}}" style="max-width:300px;max-height:300px;margin:0 auto;display:block;" class="img"/>-->
+    <!--</div>-->
+    <!--<li>-->
+    <!--<div ng-controller = "news_editCtrl">-->
+    <!--<input file-model="myFile" type="file" onchange="previewImage(this)" class="file">&lt;!&ndash; 选择图片按钮 &ndash;&gt;-->
+    <!--<input name="" type="button" class="button-tz" value="选择文件">  -->
+    <!--<input type="button" disabled="disabled" id="shangchuan" class="button-tz"  ng-click="uploadFile()" value="上传">-->
+    <!--<input type="hidden" id="imageName"  ng-model="news.coverImage" value="{{news.coverImage}}" miaosu="用于保存图片名称">-->
+    <!--<input type="hidden" id="imageId"  ng-model="imgnews.imgId"  miaosu="用于保存图片Id">-->
+    <!--</div>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--浏览-->
+    <!--<div class="yl">-->
+    <!--<ul>-->
+    <!--<li>-->
+    <div class="input-group grous">
+        <div class="input-group-addon" style="width: 150px;">排序：</div>
+        <input type="text" class="form-control " onkeyup="keyupInput(this)" ng-model="notice.level" />
+    </div>
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--日期-->
+    <!--<div class="yl">-->
+    <!--<ul>-->
+    <!--<li>-->
+    <div class="input-group grous">
+        <div class="input-group-addon" style="width: 150px;">署名：</div>
+        <input class="form-control" type="text" ng-model="notice.signature" />
+    </div>
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</td>-->
+    <!--</tr>    -->
+    <!--</table>-->
+    <!--富文本框(在线编辑器)-->
+    <div class="text-more">
+        <script type="text/plain" ng-model="notice.content" id="myEditor" style="width:100%;height:300px;">
+        </script>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+//富文本
+editorInit();
+//var um = UM.getEditor('myEditor');
+var um = UE.getEditor('myEditor');
+um.addListener('blur', function() {
+    $('#focush2').html('编辑器失去焦点了')
+});
+um.addListener('focus', function() {
+    $('#focush2').html('')
+});
+// 上传图片特效js -->
+function previewImage(file) {
+    var div = document.getElementsByClassName('preview');
+    div.innerHTML = '<img id=imghead>';
+    var img = $(file).closest("td").find("img")[0];
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+        img.src = evt.target.result;
+
+        $("#shangchuan").attr("disabled", false);
+    }
+    reader.readAsDataURL(file.files[0]);
+}
+
+function keyupInput(input) {
+    var tmptxt = $(input).val();
+    $(input).val(tmptxt.replace(/[^(\d|\.)]/g, ''));
+}
+</script>
+<script type="text/javascript" src="resource/tt/utf8jsp/lang/zh-cn/zh-cn.js"></script>

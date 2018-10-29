@@ -1,0 +1,107 @@
+<body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .body_bg {
+        padding: 16px;
+        background: #fff;
+    }
+
+    .plan_v ul {
+        margin: 0;
+    }
+
+    .plan_v ul li {
+        display: inline-block;
+        cursor: pointer;
+        text-align: center;
+        line-height: 40px;
+        width: 150px;
+        border: 1px solid #31c27c;
+        border-radius: 4px;
+    }
+
+    .plan_v ul li a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    p {
+        margin-top: 32px;
+        padding: 16px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-bottom: none;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    table {
+        width: 100%;
+        border: 1px #ddd solid;
+        border-collapse: collapse;
+    }
+
+    table tr, table tr td, table tr th {
+        border: 1px #ddd solid;
+        border-collapse: collapse;
+        padding: 8px;
+        text-align: center;
+    }
+
+    td {
+        vertical-align: middle !important;
+    }
+</style>
+<div class="body_bg">
+    <p>活动客户订单详细信息</p>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>流水号</th>
+            <th>快递单号</th>
+            <th>快递供应商</th>
+            <th>收货人姓名</th>
+            <th>收货人联系电话</th>
+            <th>发货人姓名</th>
+            <th>邮编</th>
+            <th>地址</th>
+            <th>备注</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in expressList">
+            <td>{{item.name}}</td>
+            <td>{{item.serialCode}}</td>
+            <td><input style="width: 80%" type="text" ng-model="item.trackingNumber"></td>
+            <td><input style="width: 80%" type="text" ng-model="item.expressType"></td>
+            <td>{{item.consignee}}</td>
+            <td>{{item.phone}}</td>
+            <td><input style="width: 80%" type="text" ng-model="item.consignor"></td>
+            <td>{{item.postCode}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.remark}}</td>
+            <td>
+                <select ng-model="item.state" style="width: 80%">
+                    <option ng-selected="item.state==0" value="0">未发货</option>
+                    <option ng-selected="item.state==1" value="1">发货中</option>
+                    <option ng-selected="item.state==2" value="2">正常签收</option>
+                    <option ng-selected="item.state==3" value="3">拒收</option>
+                    <option ng-selected="item.state==4" value="4">丢失</option>
+                </select>
+            </td>
+            <td>
+                <md-button class="md-raised md-primary" ng-click="saveExpress(item)">保存</md-button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>

@@ -1,0 +1,164 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <nav class="navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">活动管理</a>
+            </div>
+            <p class="navbar-text">---目前仅支持修改注册送体验金红包功能<span style="color: red;margin-left: 50px">页面类型接口地址：http://120.76.44.113:8080/activity/标识符</span></p>
+        </div>
+    </nav>
+
+    <div>
+        <div class="touz-main">
+
+            <div class="touz-ma">
+                <div style="width: 200px;height:200px;display: inline;float: left;">
+                    <table  width="500px" border="1">
+                        <thead>
+                        <tr style="background-color: #ddd;" >
+                            <th>ID</th>
+                            <th>设置类型</th>
+                            <th>
+                                <span ng-show="adStyle!=2">金额</span>
+                                <span ng-show="adStyle==2">推荐码</span>
+                            </th>
+                            <th>使用条件</th>
+                            <th ng-hide="adStyle=='2'">翻倍</th>
+                            <th ng-hide="adStyle==3||adStyle==2">需要推荐码</th>
+                            <th ng-hide="adStyle==3||adStyle==2">标识符</th>
+                            <th>删除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="conf in itemList">
+                            <td>{{conf.id}}</td>
+                            <td>
+                                <span ng-show="adStyle==0||adStyle==1">
+                                <span ng-show="conf.itemType==0">赠送红包券</span>
+                                <span ng-show="conf.itemType==1">赠送体验券</span>
+                                <span ng-show="conf.itemType==2">赠送加息券</span>
+                                </span>
+                                 <span ng-show="adStyle==2">
+                                     <span>内部单</span>
+                                 </span>
+                                <span ng-show="adStyle==3">邀请人注册赠送红包</span>
+                            </td>
+                            <td>
+                                <span ng-show="adStyle==0||adStyle==1||adStyle==3">{{conf.itemValue | PointToYuan}}</span>
+                                <span ng-show="adStyle==2">{{conf.itemInside}}</span>
+                            </td>
+                            <td>{{conf.itemCondition==null?"无使用条件":(conf.itemCondition | PointToYuan)}}</td>
+                            <td ng-hide="adStyle==2">{{conf.itemAmount}}</td>
+                            <td ng-hide="adStyle==3||adStyle==2">
+                                <span ng-show="conf.itemWhether==0">否</span>
+                                <span ng-show="conf.itemWhether==1">是</span>
+                            </td>
+                            <td ng-hide="adStyle==3||adStyle==2">
+                                {{conf.itemLocation==null?"无地址":conf.itemLocation}}
+                            </td>
+                            <td><button style="border: none" ng-click="deleteConf(conf.id)">删除</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div style="overflow: hidden;width: 500px;margin-top: 10px;text-align: center;">
+                        <nav>
+                            <ul id="pagination" class="pagination pagination-sm" style="">
+                                <li id="firstPage"><span ng-click="selectPage(1,adStyle)"
+                                                         aria-hidden="true">首页</span></li>
+                                <li id="Previous"><span ng-click="selectPage(nowPage-1,adStyle)"
+                                                        aria-hidden="true">«</span></li>
+                                <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                                    <a
+                                            ng-click="selectPage(page.showNumber,adStyle)">{{page.showNumber}}</a></li>
+                                <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6,adStyle)">……</a></li>
+                                <li id="Next"><a ng-click="selectPage(nowPage+1,adStyle)" aria-label="Next"><span
+                                        aria-hidden="true">»</span></a></li>
+                                <li id="lastPage"><a ng-click="selectPage(totalPages,adStyle)"><span
+                                        aria-hidden="true">尾页</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div style="width: 400px;height:300px;display: inline;float: left;margin-left: 390px">
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="input-group grous">
+                        <div class="input-group-addon">设置类型</div>
+                        <select class="form-control" ng-model="adStyle"  ng-click="selectPage(1,adStyle)" >
+                            <option value="0">注册赠送</option>
+                            <option value="1">页面赠送</option>
+                            <option value="2">内部单排除</option>
+                            <option value="3">邀请人赠送</option>
+                        </select>
+                    </div>
+                    <span ng-hide="adStyle=='2'">
+                    <div class="input-group grous">
+                        <div class="input-group-addon">券的类型</div>
+                        <select class="form-control" ng-model="activity.itemType"  ng-click="selectPage(1,adStyle)" ng-init="activity.itemType='0'" >
+                            <option value="0">赠送红包</option>
+                            <option value="1">赠送体验券</option>
+                            <option value="2">赠送加息券</option>
+                        </select>
+                    </div>
+                    <div class="input-group grous">
+                        <div class="input-group-addon">活动赠送金额</div>
+                        <input type="text" class="form-control"  ng-model="activity.itemValue" placeholder="请输入金额"/>
+                    </div>
+                    <div class="input-group grous" ng-show="adStyle=='1'">
+                        <div class="input-group-addon">活动标识符</div>
+                        <input type="text" class="form-control"  ng-model="activity.itemLocation" placeholder="接口+{标识符}"/>
+                    </div>
+                    <div class="input-group grous">
+                        <div class="input-group-addon">使用条件</div>
+                        <input type="text" class="form-control"  ng-model="activity.itemCondition" placeholder="请输入金额，100的整倍数"/>
+                    </div>
+                    <div class="input-group grous">
+                           <div class="input-group-addon" style="height: 10px" >使用限制</div>
+                        <select class="form-control" ng-model="activity.itemRestricta" ng-init="activity.itemRestricta='0'" ng-click="selectPage(1,adStyle)"  >
+                            <option value="0">无限制</option>
+                            <option value="1">限一月标</option>
+                            <option value="3">限三月标</option>
+                            <option value="6">限六月标</option>
+                            <option value="12">限十二月标</option>
+                        </select>
+                    </div>
+                        <div class="input-group grous" ng-show="adStyle!='2'">
+                        <div class="input-group-addon" style="height: 10px" >券 * 倍数</div>
+                        <select class="form-control" ng-model="activity.itemAmount"  ng-click="selectPage(1,adStyle)" ng-init="activity.itemAmount='1'" >
+                            <option value="1" >1倍</option>
+                            <option value="2">2倍</option>
+                            <option value="3">3倍</option>
+                            <option value="4">4倍</option>
+                            <option value="5">5倍</option>
+                        </select>
+                    </div>
+                    <div class="input-group grous" ng-hide="adStyle!='0'">
+                        <div class="input-group-addon">填写邀请码</div>
+                        <select class="form-control" ng-model="activity.itemWhether"  ng-click="selectPage(1,adStyle)" ng-init="activity.itemWhether='0'" >
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                        </select>
+                    </div>
+                    </span>
+                    <div class="input-group grous" ng-show="adStyle=='2'">
+                    <div class="input-group-addon" style="height: 10px" >排除内部单</div>
+                    <input type="text" class="form-control"  ng-model="activity.itemInside" placeholder="填写用户的ID"/>
+                    </div>
+                    <div class="input-group grous" ng-hide="adStyle=='2'">
+                        <div class="input-group-addon">活动开始时间</div>
+                        <input type="datetime-local" class="form-control"  ng-model="activity.beginTime"  title="" placeholder="yyyy-MM-ddTHH:mm:ss"/>
+                    </div>
+                    <div class="input-group grous" ng-hide="adStyle=='2'">
+                        <div class="input-group-addon">活动结束时间</div>
+                        <input type="datetime-local" class="form-control"  ng-model="activity.endTime"  title="" placeholder="yyyy-MM-ddTHH:mm:ss"/>
+                    </div>
+                    <!-- 操作按钮-->
+                    <div class="div-but">
+                        <button type="button" class="btn btn-primary yya" ng-click="updateActivity()">添加</button>
+                    </div>
+                </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

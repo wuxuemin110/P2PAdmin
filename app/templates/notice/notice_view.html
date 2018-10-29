@@ -1,0 +1,67 @@
+<div ng-cloak>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <!-- 查看新闻 -->
+        <div class="head_bt">
+            <h2>查看公告</h2>
+        </div>
+        <!-- 搜索框 -->
+        <!--<div class="input-group quer">-->
+        <!--<input type="text" id="queryContent" class="form-control quer-ico width-33" ng-model="keyword" placeholder="请输入信息标题。如果为空，则查找所有信息。" />-->
+        <!--<span class="input-group-btn">-->
+        <!--<button class="btn btn-default" ng-click="query()" type="button">搜索新闻</button>-->
+        <!--</span>-->
+        <!--</div>-->
+        <!-- 表格 -->
+        <div>
+            <table class="table table-bordered ta-bo">
+                <thead class="thead_table">
+                    <tr class="thead_tr">
+                        <!-- <th class="thead_th">ID</th>-->
+                        <th class="thead_th">新闻标题</th>
+                        <th class="thead_th">新闻子标题</th>
+                        <th class="thead_th">显示顺序</th>
+                        <th class="thead_th">创建时间</th>
+                        <!--<th class="thead_th">图片</th>-->
+                        <th class="thead_th">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="notice in itemList">
+                        <!--id={{news.id}}_td-->
+                        <!--<td  id="newId">{{news.id}}</td>-->
+                        <td>{{notice.title}}</td>
+                        <td>{{notice.subtitle}}</td>
+                        <td>{{notice.level}}</td>
+                        <td>{{notice.updatedTime |jsonDate}}</td>
+                        <!--<td><img ng-src="{{news.coverImage}}" style="max-width:300px;max-height:300px;margin:0 auto;display:block;" class="img"></td>-->
+                        <td class="ta-botd">
+                            <button type="button" class="btn btn-default qw" ng-click="gotoedit(notice.id)">修改</button>
+                            <button type="button" class="btn btn-default qw" ng-click="showConfirm(notice)">删除</button>
+                            <!--<a href="javascript:;" ng-click="showConfirm(notice)">删除</a> <a href="javascript:;" class="a-hei" ng-click="gotoedit(notice.id)">修改</a>-->
+                        </td>
+                    </tr>
+                    <tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+            <nav>
+                <ul id="pagination" class="pagination pagination-sm" style="">
+                    <li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+                    <li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+                    <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                        <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                    <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                    <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                    <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                    <li id="sumCount"><span aria-hidden="true">共{{sumCount}}条</span></li>
+                    <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

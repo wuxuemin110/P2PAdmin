@@ -1,0 +1,128 @@
+<head>
+	<style type="text/css">
+		#win{
+			padding: 10px;
+			
+		}
+		#win ul{
+			margin: 0;
+			list-style: none;
+			width: 320px;
+			margin: 0 auto;
+		}
+		#win li{
+			margin: 0 10px ;
+			/*margin-top: 0;*/
+			padding: 10px 20px
+			;
+			/*box-sizing: border-box;*/
+			border-bottom: 1px solid #F2F2F2;
+		}
+		#win li span{
+			margin-right: 10px;
+		}
+		.red{
+			color: #ff6970;
+			float: right;
+			min-width: 90px;
+			position: relative;
+		    text-align: right;
+            margin-right: 28px !important;
+		}
+		.red2{
+			color: #ff6970;
+			position: absolute;
+			left: 0;
+			/*float: right;*/
+		}
+		.shadow:hover{
+			background: #F2F2F2;
+		}
+		
+	</style>
+</head>
+<div >
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 信息审核-列表页 -->
+    <div class="head_bt">
+        <h2>每日投资金额走势图</h2>
+    </div>
+     <div>
+    <!--<div class="recordQuer">-->
+
+				<!--<div class="input-group" style="float: left;">-->
+                    <!--<span class="timeTip1">时间查询：</span>-->
+                 <!--&lt;!&ndash;<span class="timeTip1"><input type="text" class="timeTip1" placeholder="年/月/日 时：分：秒" value="" id="myTime" ng-model="cashData.startDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<span class="timeTip">开始时间：</span><input type="date" placeholder="yyyy-MM-dd" class="serch_new" ng-model="cashData.startDate" /><input type="time"  class="serch_new1" ng-model="cashData.startDate" />&ndash;&gt;-->
+                    <!--<span class="timeTip1"><input type="date" placeholder="yyyy-MM-dd" class="timeTip1" ng-model="cashData.startDate" /></span>-->
+				<!--</div>-->
+
+				<!--<div class="input-group" style="float: left;">-->
+                    <!--&lt;!&ndash;<span class="timeTip1">-&nbsp;&nbsp;<input type="text" class="timeTip1" value=""  placeholder="年/月/日 时：分：秒"  id="myTime1" ng-model="cashData.endDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>&ndash;&gt;-->
+                    <!--<span class="timeTip1">-&nbsp;&nbsp;<input type="date" placeholder="yyyy-MM-dd" class="timeTip1" ng-model="cashData.endDate" /></span>-->
+				<!--</div>              -->
+				<!--<div class="input-group" style="float: left;margin-left:30px;">-->
+                    <!--&lt;!&ndash;<i class="glyphicon glyphicon-search"></i>&ndash;&gt;-->
+					<!--<a class="search_buttun" ng-click="getStatic()">-->
+                        <!--<i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-search"></i>查询-->
+					<!--</a>-->
+				<!--</div>-->
+
+         <!---->
+			<!--</div>-->
+
+   
+</div>
+     <line id="line" legend="legend"  data="data" ng-if="data"></line>
+    <div>
+        <div style="margin-bottom:20px;margin-top:20px;"><img src="resource/images/static.jpg" ><span style="font-size:17px;margin-left:5px;position:absolute;margin-top:6px;">数据总揽</span></img></div>
+    <div class="staticDiv">
+        <P  class="staticText">数据中心</P>
+        <ul class="addWidth">
+            <li ng-model="static2.plan" >累计注册&nbsp;&nbsp;&nbsp;<span  >{{static2.allRegister}}</span>&nbsp;&nbsp;&nbsp;人</li>
+            <li>累计投资&nbsp;&nbsp;&nbsp;<span>{{static2.allInvestMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li>累计收益&nbsp;&nbsp;&nbsp;<span>{{static2.allProfitMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li>累计借款&nbsp;&nbsp;&nbsp;<span>{{static2.allPlan}}</span>&nbsp;&nbsp;&nbsp;笔</li>
+            <li>累计借款&nbsp;&nbsp;&nbsp;<span >{{static2.allPlanMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li>累计待还&nbsp;&nbsp;&nbsp;<span>{{static2.allRepayment}}</span>&nbsp;&nbsp;&nbsp;笔</li>
+            <li>累计待还&nbsp;&nbsp;&nbsp;<span>{{static2.allRepaymentMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li>累计提现&nbsp;&nbsp;&nbsp;<span>{{static2.allWithrawMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li>累计充值&nbsp;&nbsp;&nbsp;<span>{{static2.allRechargeMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+        </ul>
+    </div>
+    <div class="staticDiv" style="margin-left:20px;">
+        <P class="staticText" >今日数据</P>
+        <ul class="addWidth">
+            <li ng-model="static.plan">借款笔数&nbsp;&nbsp;&nbsp;<span>{{static.plan}}</span>&nbsp;&nbsp;&nbsp;笔</li>
+            <li>今日注册&nbsp;&nbsp;&nbsp;<span>{{static.register}}</span>&nbsp;&nbsp;&nbsp;人</li>
+            <li>今日发标&nbsp;&nbsp;&nbsp;<span >{{static.planMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li>今日提现&nbsp;&nbsp;&nbsp;<span >{{static.withdrawMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li>今日充值&nbsp;&nbsp;&nbsp;<span >{{static.rechargeMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li>今日投资&nbsp;&nbsp;&nbsp;<span >{{static.investMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+        </ul>
+    </div>
+    <div class="staticDiv" style="margin-left:20px;">
+        <P class="staticText">待处理</P>
+        <ul class="addWidth">
+            <li>待审核提现&nbsp;&nbsp;&nbsp;<span>{{static1.withdrawTodo}}</span>&nbsp;&nbsp;&nbsp;笔</li>
+            <li>今日待回款笔数&nbsp;&nbsp;&nbsp;<span>{{static1.repaymentsTodo}}</span>&nbsp;&nbsp;&nbsp;笔</li>
+            <li>今日待回款金额&nbsp;&nbsp;&nbsp;<span>{{static1.repaymentsMoney| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li>未来15天待回款笔数&nbsp;&nbsp;&nbsp;<span>{{static1.repaymentsTodoMore15?static1.repaymentsTodoMore15:0}}</span>&nbsp;&nbsp;&nbsp;笔</li>
+            <li>未来15天待回款金额&nbsp;&nbsp;&nbsp;<span>{{static1.repaymentsMoneyMore15| PointToYuan| currency:"":2}}</span>&nbsp;&nbsp;&nbsp;元</li>
+            <li><p ng-click='openwin(static1.repaymentsMoneyDetailsMore15)' style="color: skyblue;cursor: pointer;">未来15天待回款详情</p></li>
+        </ul>
+
+
+    </div>
+    <div id="win" style="display: none;">
+    	<ul>
+    		
+    	</ul>
+    </div>
+    <!--<div style="width:30%;height:300px;border:1px solid black;float:left;margin-left:30px;"></div>-->
+    <script type="text/javascript" src="resource/js/time.js"></script>
+    <!--<script src="resource/js/echarts.min.js"></script>-->
+
+</div>
+</div>

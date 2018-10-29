@@ -1,0 +1,94 @@
+<div ng-cloak>
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+	<!-- 查看投资计划 -->
+	<div class="head_bt">
+		<h2>投资人银行卡管理</h2>
+	</div>
+
+	<!--<div style="margin-bottom:55px;">-->
+
+		<!--<div class="input-group " style="float: left;">-->
+			<!--<input  style="width:270px;" type="text" ng-model="keyword" class="timeTip1" placeholder="投资人账号、姓名或手机号"/>-->
+		<!--</div>-->
+
+		<!--<div class="input-group " style="float: left;margin-left:30px;">-->
+			<!--<button class="search_buttun" type="button" ng-click="searchRecharge()">-->
+				<!--查询-->
+			<!--</button>-->
+		<!--</div>-->
+
+	<!--</div>-->
+
+	<div class="input-group quer" style="width: 480px">
+		<input type="text" class="form-control quer-ico" placeholder="投资人账号、姓名或手机号" ng-model="keyword"/>
+		<span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="searchRecharge()">
+             查询
+          </button>
+       </span>
+	</div>
+
+	<div>
+		<div>
+			<table class="table table-bordered ta-bo back-wi">
+				<thead class="thead_table">
+					<tr class="thead_tr ">
+						<th class="thead_th min-7 max-10">姓名</th>
+						<th class="thead_th min-7 max-10">手机号</th>
+						<th class="thead_th  min-7 max-10">银行代码</th>
+						<th class="thead_th min-7 max-20">卡号</th>
+						<th class="thead_th min-7">银行</th>
+						<th class="thead_th min-7 max-10">省</th>
+						<th class="thead_th min-7 max-10">市</th>
+						<th class="thead_th min-7 max-10">区/县</th>
+						<th class="thead_th min-7 max-10">支行</th>
+						<th ng-hide='role==500 || role==870 ' class="thead_th min-7 max-10">操作管理</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="plan in itemList">
+						<td>{{plan.realName}}</td>
+						<td>{{plan.phone}}</td>
+						<td>{{plan.bankCode}}</td>
+						<td>{{plan.cardNumber}}</td>
+						<td>{{plan.bankName}}</td>
+						<td>{{plan.province}}</td>
+						<td>{{plan.city}}</td>
+						<td>{{plan.district}}</td>
+						<td>{{plan.subbranch}}</td>
+						<td ng-hide='role==500 || role==870' class="ta-botd">
+							<button type="button" class="btn btn-default qw" ng-click="editCard(plan)">修改</button>
+							<!--<a href="javascript:;" class="a-hei" ng-click="editCard(plan)">修改</a>-->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+			<nav>
+				<ul id="pagination" class="pagination pagination-sm" style="">
+					<li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+					<li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+					<li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+						<a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a>
+					</li>
+					<li ng-show="isShowDot">
+						<a ng-click="selectPage(nowPage+6)">……</a>
+					</li>
+					<li id="Next">
+						<a ng-click="selectPage(nowPage+1)" aria-label="Next"><span aria-hidden="true">»</span></a>
+					</li>
+					<li id="lastPage">
+						<a ng-click="selectPage(totalPages)"><span aria-hidden="true">尾页</span></a>
+					</li>
+					<li id="sumCount"><span
+							aria-hidden="true">共{{sumCount}}条</span></li>
+					<li><a><span
+							aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+</div>

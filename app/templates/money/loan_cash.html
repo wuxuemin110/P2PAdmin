@@ -1,0 +1,184 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 信息审核-列表页 -->
+    <nav class="navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">查看借款人提现-列表</a>
+            </div>
+            <p class="navbar-text">---支持排序，支持条件过滤，输入框支持 用户ID、真实姓名、电话和账号搜索(支持模糊查询)</p>
+        </div>
+    </nav>
+    <ul class="new-add ng-scope">
+        <li>
+            <select ng-model="cashData.userId" class="form-control">
+                <option value="asc">用户ID正序</option>
+                <option value="desc">用户ID倒序</option>
+            </select>
+        </li>
+        <li>
+            <select ng-model="cashData.account" class="form-control">
+                <option value="asc">帐户余额正序</option>
+                <option value="desc">帐户余额倒序</option>
+            </select>
+        </li>
+        <li>
+            <select ng-model="cashData.cash" class="form-control">
+                <option value="asc">提现金额正序</option>
+                <option value="desc">提现金额倒序</option>
+            </select>
+        </li>
+        <li>
+            <select ng-model="cashData.createdTime" class="form-control">
+                <option value="asc">申请时间正序</option>
+                <option value="desc">申请时间倒序</option>
+            </select>
+        </li>
+        <!-- 搜索框 -->
+        <li>
+            <div class="input-group quer" style="width:380px;">
+                <input type="text" ng-model="cashData.keyword" class="form-control quer-ico"
+                       placeholder="支持用户ID、真实姓名、电话和账号搜索(支持模糊查询)"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="setVal(cashData.val)">
+                 搜索用户
+                </button>
+            </span>
+            </div>
+        </li>
+    </ul>
+    <!-- 搜索框 -->
+    <div class="input-group quer"></div>
+    <!-- tab标签 -->
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a id="homeq" type="button" ng-click="setVal(1)">未处理</a></li>
+        <li><a id="iosq" class="tahh" type="button" ng-click="setVal(0)">已处理</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <!-- 未处理表格 -->
+        <div class="tab-pane fade in active" id="home">
+            <div>
+                <table class="table table-bordered ta-bo">
+                    <thead class="thead_table">
+                    <tr class="thead_tr">
+                        <th class="thead_th">用户名</th>
+                        <th class="thead_th">真实姓名</th>
+                        <th class="thead_th">帐户余额</th>
+                        <th class="thead_th">提现金额</th>
+                        <th class="thead_th">申请时间</th>
+                        <th class="thead_th">电话</th>
+                        <th class="thead_th">银行卡号</th>
+                        <th class="thead_th">银行名称</th>
+                        <th class="thead_th">开户行</th>
+                        <th class="thead_th">状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in itemList">
+                        <td>{{x.name}}</td>
+                        <td>{{x.realName}}</td>
+                        <td>{{x.account | PointToYuan}}</td>
+                        <td>{{x.cash | PointToYuan}}</td>
+                        <td>{{x.createdTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{x.phone}}</td>
+                        <td>{{x.bankCard}}</td>
+                        <td>{{x.subbranch}}</td>
+                        <td>{{x.bankName}}</td>
+                        <td class="ta-botd">
+                            <select class="add-se" ng-model="x.state" ng-change="changeState(x.id,x.state)">
+                                <option ng-repeat="s in stateOptions" value="{{s.state}}">{{s.stateName}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a
+                                    ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- 已处理表格 -->
+        <div class="tab-pane fade" id="ios">
+            <div>
+                <table class="table table-bordered ta-bo">
+                    <thead class="thead_table">
+                    <tr class="thead_tr">
+                        <th class="thead_th">用户名</th>
+                        <th class="thead_th">真实姓名</th>
+                        <th class="thead_th">帐户余额</th>
+                        <th class="thead_th">提现金额</th>
+                        <th class="thead_th">申请时间</th>
+                        <th class="thead_th">电话</th>
+                        <th class="thead_th">银行卡号</th>
+                        <th class="thead_th">银行名称</th>
+                        <th class="thead_th">开户行</th>
+                        <th class="thead_th">状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in itemList">
+                        <td>{{x.name}}</td>
+                        <td>{{x.realName}}</td>
+                        <td>{{x.account}}</td>
+                        <td>{{x.cash}}</td>
+                        <td>{{x.createdTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{x.phone}}</td>
+                        <td>{{x.bankCard}}</td>
+                        <td>{{x.subbranch}}</td>
+                        <td>{{x.bankName}}</td>
+                        <td class="ta-botd">{{x.stateName}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a
+                                    ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $("#iosq").click(function () {
+        $("#home").removeClass("in active");
+        $("#ios").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#homeq").parent().removeClass("active");
+    });
+    $("#homeq").click(function () {
+        $("#ios").removeClass("in active");
+        $("#home").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#iosq").parent().removeClass("active");
+    });
+</script>

@@ -1,0 +1,172 @@
+<head>
+	<!--<link rel="stylesheet" type="text/css" href="resource/mui/mui.min.css"/>-->
+	<style type="text/css">
+		.select_style{
+			width: auto;
+		}
+		.input-group{
+			margin-bottom: 10px;
+		}
+	</style>
+	
+</head>
+<div ng-cloak>
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <div class="head_bt" style="margin-bottom:30px;">
+        <h2>首投记录</h2>
+    </div>
+    <div style="margin-bottom:55px;">
+        <div class="input-group " style="float: left;">
+            <!--<span class="timeTip1">日期范围：<input type="text" class="timeTip1" placeholder="年/月/日 时：分：秒" value="" id="myTime" ng-model="cashData.startTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+            <!--<span class="timeTip">开始时间：</span><input type="date" placeholder="yyyy-MM-dd "  class="serch_new"  ng-model="cashData.startDate" /><input type="time"  class="serch_new1" ng-model="cashData.startDate" />-->
+            <span class="timeTip1">投资日期：</span><input type="date" placeholder="yyyy-MM-dd "  class="timeTip1"  ng-model="cashData.startDate" />
+        </div>
+        <div class="input-group " style="float: left;">
+            <!--<span class="timeTip1">-&nbsp;&nbsp;<input type="text" class="timeTip1"  placeholder="年/月/日 时：分：秒" value="" id="myTime1" ng-model="cashData.endTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+            <!--<span class="timeTip">结束时间：</span> <input type="date" placeholder="yyyy-MM-dd " class="serch_new"  ng-model="cashData.endDate" /><input type="time"  class="serch_new1" ng-model="cashData.endDate" />-->
+            <span class="timeTip1">-&nbsp;&nbsp;</span><input type="date" placeholder="yyyy-MM-dd "  class="timeTip1"  ng-model="cashData.endDate" />
+        </div>
+
+        <div class="input-group " style="float: left;">
+           <span class="timeTip1">注册时间：</span><input type="date" placeholder="yyyy-MM-dd "  class="timeTip1"  ng-model="cashData.registerBegin" />
+        </div>
+        <div class="input-group " style="float: left;">
+            <span class="timeTip1">-&nbsp;&nbsp;</span><input type="date" placeholder="yyyy-MM-dd "  class="timeTip1"  ng-model="cashData.registerEnd" />
+        </div>
+                        <div class="input-group" style="float: left;margin-left:20px;">
+            <!--<select class="select_style" ng-model="cashData.startDateDesc" id="channelNum" style="padding-left:15px;">
+                <option value="1">升序</option>
+                <option value="0">降序</option>
+            </select>-->
+<input name="name" type="checkbox" data-size="small">  
+        </div>
+                <div class="input-group" style="float: left;margin-left:20px;">
+            <!--<select class="select_style" ng-model="cashData.registerDesc" id="channelNum" style="padding-left:15px;">
+                 <option value=1>升序</option>
+                <option value=0>降序</option>
+            </select>-->
+            <input name="desc" type="checkbox" data-size="small">  
+        </div>
+        <!--<div class="input-group " style="float: left;margin-left:10px;">-->
+            <!--<span class="timeTip1">投资金额：<input type="number" class="timeTip1" value="" id="myMoney" ng-model="cashData.smallMoney"  placeholder="请填写最小金额" /></span>-->
+        <!--</div>-->
+        <!--<div class="input-group " style="float: left;">-->
+            <!--<span class="timeTip1">-&nbsp;&nbsp;<input type="number" class="timeTip1" value="" id="myMoney1" ng-model="cashData.bigMoney"  placeholder="请填写最大金额" /></span>-->
+        <!--</div>-->
+<div style="clear: both;"></div>
+        <div class="input-group " style="float: left;margin-left:80px;">
+            <input  style="width:130px;" type="text" id="code" ng-model="cashData.recomCode" class="timeTip1" placeholder="推荐码"/>
+        </div>
+
+        <div class="input-group " style="float: left;margin-left:20px;">
+            <input  style="width:130px;" type="text" id="kws" ng-model="cashData.keyword" class="timeTip1" placeholder="投资人手机号码、投资人姓名、项目名称"/>
+        </div>
+
+        <div class="input-group" style="float: left;margin-left:20px;">
+            <select class="select_style" ng-model="cashData.channel" id="channelNum" style="padding-left:15px;">
+                <option value="">请选择渠道</option>
+                <option ng-repeat="x in roleOptions track by $index" value="{{x}}" >{{x}}</option>
+            </select>
+        </div>
+        <div class="input-group " style="float: left;margin-left:20px;">
+            <button class="search_buttun" type="button" ng-click="searchRecharge()">
+                <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-search"></i> 查询
+            </button>
+        </div>
+        <div class="input-group" style="float: left;margin-left:20px;">
+            <a class="search_buttun1 " target="_blank"  ng-click="gotoExport(cashData.status)">
+                <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-share-alt"></i>导出列表
+            </a>
+        </div>
+        <!--<div class="input-group" style="float: left;margin-left:50px;">-->
+            <!--<a class="search_buttun " target="_blank"  ng-click="gotoExport(cashData.status)">-->
+                <!--<i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-share-alt"></i>导出-->
+            <!--</a>-->
+        <!--</div>-->
+    </div>
+
+    <div>
+        <div>
+            <table class="table table-bordered ta-bo back-wi">
+                <thead class="thead_table">
+                <tr class="thead_tr ">
+                    <th class="thead_th min-17 max-20">注册时间</th>
+                    <th class="thead_th min-17 max-20">首投时间</th>
+                    <th class="thead_th min-5 max-10">手机号</th>
+                    <th class="thead_th min-5 max-10">姓名</th>
+                    <th class="thead_th min-5 max-10">项目名称</th>
+                    <th class="thead_th min-5 max-10">项目类型</th>
+                    <!--<th class="thead_th min-7 max-15">项目期限</th>-->
+                    <th class="thead_th min-5 max-10">项目利率</th>
+                    <!--<th class="thead_th min-5 max-10">投资路由</th>-->
+                    <th class="thead_th min-5 max-10">投资金额(元)</th>
+                    <th class="thead_th min-5 max-10">预期收益(元)</th>
+                    <th class="thead_th min-5 max-10 ">使用红包(元)</th>
+                    <th class="thead_th min-5 max-10">使用加息(元)</th>
+                    <th class="thead_th min-7 max-10">状态</th>
+                    <th class="thead_th min-17 max-10">注册渠道</th>
+ <th class="thead_th min-17 max-10">推荐人</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in itemList">
+                    <td >{{x.registerTime|jsonDate}}</td>
+                    <td >{{x.firstInvestTime|jsonDate}}</td>
+                    <td >{{x.phone}}</td>
+                    <td >{{x.realName }}</td>
+                    <td>{{x.name }} </td>
+                    <!--<td>{{x.type}} </td>-->
+                    <td >
+                        <span ng-show="x.type==0">投标宝</span>
+                        <span ng-show="x.type==1">新客专享</span>
+                        <span ng-show="x.type==2">产融宝</span>
+                    </td>
+                    <!--<td >{{x.staging}}
+                        <span ng-show="x.stagingUnit=='day'">天</span>
+                        <span ng-show="x.stagingUnit=='month'">月</span>
+                    </td>-->
+                    <td>{{x.annualizedRate/10}} </td>
+                    <td>{{x.money| PointToYuan| currency:"":2}}</td>
+                    <td>{{x.profitMoney| PointToYuan| currency:"":2}}</td>
+                    <td >{{x.pocketMoney| PointToYuan| currency:"":2}}</td>
+                    <td >{{x.raisingProfitMoney| PointToYuan| currency:"":2}}</td>
+                    <td >
+                        <span ng-show="x.status==1">还款中</span>
+                        <span ng-show="x.status==2">已还款</span>
+
+                    </td>
+                    <td >{{x.channel}}</td>
+                      <td >{{x.recommendUser?x.recommendUser:'无'}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+            <nav>
+                <ul id="pagination" class="pagination pagination-sm" style="">
+                    <li id="firstPage"><span ng-click="selectPage(1)"
+                                             aria-hidden="true">首页</span></li>
+                    <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                            aria-hidden="true">«</span></li>
+                    <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                        <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                    <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                    <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                            aria-hidden="true">»</span></a></li>
+                    <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                            aria-hidden="true">尾页&nbsp;</span></a></li>
+                    <li id="sumCount"><span
+                            aria-hidden="true">共{{sumCount}}条</span></li>
+                    <li><a><span
+                            aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="resource/js/time.js"></script>
+<script type="text/javascript">
+
+</script>
+</div>

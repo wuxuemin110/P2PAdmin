@@ -1,0 +1,191 @@
+<style>
+    .center_div{
+        border: 2px solid #d4d4d4;
+        cursor: pointer;
+        padding: 8px;
+    }
+    .commend{
+        width: 800px;
+        margin: 16px auto;
+    }
+    .commend p a{
+        display: inline-block;
+        width: 120px;
+        height: 30px;
+        border: 1px solid #4994d5;
+        text-align: center;
+        line-height: 30px;
+        margin: 4px;
+        cursor: pointer;
+    }
+    .color{
+        color: #f26d7d;
+    }
+
+     .file {
+         position: relative;
+         top: 0;
+         right: -10px;
+         cursor: pointer;
+         height: 24px;
+         filter: alpha(opacity:0);
+         opacity: 0;
+         width: 1px;
+     }
+
+    .my-md-group {
+    }
+
+    .my-md-group md-radio-button {
+        float: left;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        margin-right: 20px;
+    }
+    .submit{
+        width: 300px;
+        margin:0 auto ;
+    }
+    .submit_sub{
+        width: 120px;
+        display:block;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border: 1px solid #4994d5;
+        cursor: pointer;
+        margin: 0 auto;
+    }
+    .commend_left{
+        width: 100%;
+        padding: 16px;
+       box-sizing: border-box;
+    }
+    .commend_right{
+        width: 40%;
+        float: right;
+        border: 2px solid #000000;
+        box-sizing: border-box;
+    }
+    .commend_d{
+        float: left;
+        width: 190px;
+        height: 220px;
+        padding: 8px;
+    }
+
+    .clear-top::before{
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .clear::after{
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+</style>
+
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content center_div">
+        <div style="width:400px;height: 450px;margin: 0 auto;border: 1px solid #cecece;float: right;width: 30%">
+            <h3 style="text-align: center">添加客服</h3>
+            <div class="input-group grous"  ng-repeat="item in loanImgs"
+                 style="display:block;margin:0 auto;width: 170px;height: 200px">
+                <li style="height: 160px;background: none">
+                    <div style="width: 100%;height: 144px;background:#ececec ;">
+                        <img ng-src="{{item.base64}}" style="width: 170px;height: 144px">
+                        <input file-model="myFile" style="position: relative;top: 5px;width: 30px"
+                               class="file" type="file" fileread="item.file">
+                        <!-- 选择图片按钮 -->
+                    </div>
+                    <input ng-hide="true" ng-model="item.title" ng-init="item.title='图片'" style="width: 170px" type="text"/>
+                    <p>
+                        <input name="" type="button" class="button-tz" value="选择文件">
+                        <input type="button" class="button-tz IDCardUPLoad"
+                               ng-click="uploadPlanFile($index)" value="上传">
+                    </p>
+
+                </li>
+            </div>
+            <div class="input-group grous">
+                <div class="input-group-addon">客服名称：</div>
+                <input ng-model="custom.name" type="text" class="form-control"/>
+            </div>
+            <div class="input-group grous">
+                <div class="input-group-addon">客服宣言：</div>
+                <input ng-model="custom.declaration" type="text" maxlength="30" placeholder="限制30字(包含符号)" class="form-control"/>
+            </div>
+            <a ng-click="submit()" class="submit_sub">提交</a>
+        </div>
+
+
+    <!--左边-->
+    <div class="center_div clear" style="float: left;width: 70%">
+        <span ng-repeat="list in listCustomInfo" commend_left>
+             <a ng-click="liIdexCount(list.id)">
+             <div class="commend_d" style="border: 1px solid #d4d4d4;padding: 8px">
+                 <div>
+                     <img style="width: 50px;height: 50px" src="http://xxd-audit.oss-cn-shenzhen.aliyuncs.com/{{list.photo}}">
+                     <p>客服:{{list.name}}</p>
+                     <p>宣言:{{list.declaration}}</p>
+                     <p>人气:{{list.popularity}}</p>
+                 </div>
+                 <a ng-click="delete(list.id)" class="submit_sub">删除</a>
+             </div>
+             </a>
+            </span>
+        <div class="clear-top" style="width: 100%;padding: 30px 0;margin-top: 30px">
+            <div ng-show="true" style="width: 80%;margin: 0 auto;padding: 16px 0">
+                <p>服务态度：非常满意<span class="color">{{countCustom.degreeOne0}}</span>；满意<span class="color">{{countCustom.degreeOne1}}</span>；一般般<span class="color">{{countCustom.degreeOne2}}</span>；不满意<span class="color">{{countCustom.degreeOne3}}</span>。</p>
+                <p>沟通协调能力：非常满意<span class="color">{{countCustom.degreeTwo0}}</span>；满意<span class="color">{{countCustom.degreeTwo1}}</span>；一般般<span class="color">{{countCustom.degreeTwo2}}</span>；不满意<span class="color">{{countCustom.degreeTwo3}}</span>。</p>
+                <p>素质：非常满意<span class="color">{{countCustom.degreeThree0}}</span>；满意<span class="color">{{countCustom.degreeThree1}}</span>；一般般<span class="color">{{countCustom.degreeThree2}}</span>；不满意<span class="color">{{countCustom.degreeThree3}}</span>。</p>
+                <p>服务体验：非常满意<span class="color">{{countCustom.degreeFour0}}</span>；满意<span class="color">{{countCustom.degreeFour1}}</span>；一般般<span class="color">{{countCustom.degreeFour2}}</span>；不满意<span class="color">{{countCustom.degreeFour3}}</span>。</p>
+                <p>咨询是否及时回复：非常满意<span class="color">{{countCustom.degreeFive0}}</span>；满意<span class="color">{{countCustom.degreeFive1}}</span>；一般般<span class="color">{{countCustom.degreeFive2}}</span>；不满意<span class="color">{{countCustom.degreeFive3}}</span>。</p>
+                <p>是否提供有效解决方法：能<span class="color">{{countCustom.degreeSix0}}</span>；不能<span class="color">{{countCustom.degreeSix1}}</span></p>
+                <p>对客户处理结果：非常满意<span class="color">{{countCustom.degreeSeven0}}</span>；满意<span class="color">{{countCustom.degreeSeven1}}</span>；一般般<span class="color">{{countCustom.degreeSeven2}}</span>；不满意<span class="color">{{countCustom.degreeSeven3}}</span>。</p>
+                <p>希望使用哪些方式联系客服：qq<span class="color">{{countCustom.degreeEight0}}</span>；微信<span class="color">{{countCustom.degreeEight1}}</span>；电话<span class="color">{{countCustom.degreeEight2}}</span>；其他<span class="color">{{countCustom.degreeEight3}}</span>。</p>
+                <p>客户意见和建议：</p>
+                <div style="margin: 0 auto">
+                    <table class="table table-bordered ta-bo back-wi">
+                        <thead class="thead_table">
+                        <tr class="thead_tr ">
+                            <th class="thead_th">客户姓名/手机号</th>
+                            <th class="thead_th min-10 max-15">评价内容</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="list in itemList">
+                            <td>{{list.name}}</td>
+                            <td>{{list.remarks}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+                    <nav>
+                        <ul id="pagination" class="pagination pagination-sm" style="">
+                            <li id="firstPage"><span ng-click="selectPage(1)"
+                                                     aria-hidden="true">首页</span></li>
+                            <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                                    aria-hidden="true">«</span></li>
+                            <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                                <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                            <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                            <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                    aria-hidden="true">»</span></a></li>
+                            <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                    aria-hidden="true">尾页</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--右边-->
+
+</div>

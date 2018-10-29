@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="myApp" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title>金柚金服</title>
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- 新css -->
+    <link rel="stylesheet" href="resource/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="resource/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="resource/css/bootstrap-switch.min.css" />
+    <link rel="stylesheet" href="resource/css/ace.min.css" />
+    <link rel="stylesheet" href="resource/css/style.css" />
+    <link rel="stylesheet" href="resource/css/public.css">
+    <link rel="icon" href="resource/images/favicon.ico" mce_href="resource/images/favicon.ico" type="image/x-icon">
+    <script src="resource/upload/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+    <script src="resource/js1/jquery-2.0.3.min.js"></script>
+    <script src="resource/js/bootstrap-switch.min.js"></script>
+    <script src="resource/js1/bootstrap.min.js"></script>
+    <script src="resource/js/jquery.luara.0.0.1.min.js"></script>
+    <script src="resource/js/index.js"></script>
+    <script src="resource/js/layer/layer/layer.js"></script>
+    <script src="resource/js/area.min.js"></script>
+</head>
+
+<body>
+    <div ng-view id="someonetalk"></div>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <!--angular-material-->
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <link href="bower_components/angular-material/angular-material.min.css" rel="stylesheet">
+    <!--angular-animate-->
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <!--angular-aria-->
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="app.js?vision='1.0'"></script>
+    <script src="templates/filter/filter.js"></script>
+    <script src="templates/index/login.js?vision='1.0'"></script>
+    <script src="templates/index/index.js"></script>
+    <script src="templates/index/logout.js"></script>
+    <script src="templates/layout/layout.js?vision='1.0'"></script>
+    <script src="templates/user/userPassword.js"></script>
+    <script src="templates/windcontrol/repayment_table.js"></script>
+    <script src="templates/windcontrol/information_autable.js"></script>
+    <!--<script src="templates/windcontrol/information_audit.js"></script>-->
+    <script src="templates/news/news_add.js"></script>
+    <script src="templates/news/news_view.js"></script>
+    <script src="templates/news/news_edit.js"></script>
+    <!--<script src="templates/news/indeximg_add.js"></script>-->
+    <!--<script src="templates/news/indeximg_view.js"></script>-->
+    <!--<script src="templates/news/indeximg_edit.js"></script>-->
+    <script src="templates/money/loan_cash.js"></script>
+    <script src="templates/money/investor_cash.js"></script>
+    <script src="templates/money/investor_recharge.js"></script>
+    <script src="templates/money/investmentRecord.js?vision='1.0'"></script>
+    <script src="templates/money/loan_recharge.js"></script>
+    <script src="templates/user/userEdit.js"></script>
+    <script src="templates/plan/automatic_detail.js"></script>
+    <script src="templates/plan/automatic_edit.js"></script>
+    <script src="templates/user/userView.js"></script>
+    <script src="templates/user/userAdd.js"></script>
+    <script src="templates/plan/plan_add.js"></script>
+    <script src="templates/plan/loan_add.js"></script>
+    <script src="templates/plan/plan_detail.js"></script>
+    <script src="templates/plan/plan_edit.js"></script>
+    <script src="templates/plan/plan_ready.js"></script>
+    <script src="templates/plan/plan_view.js"></script>
+    <script src="templates/plan/loanView.js"></script>
+    <script src="templates/plan/loanDetail.js"></script>
+    <script src="templates/plan/loanEdit.js"></script>
+    <script src="templates/investor/activity.js"></script>
+    <script src="templates/investor/investor.js"></script>
+    <script src="templates/investor/investor_add.js"></script>
+    <script src="templates/investor/investor_edit.js"></script>
+    <script src="templates/investor/investor_potential.js"></script>
+    <script src="templates/investor/investor_view.js"></script>
+    <script src="templates/loan/loan_view.js"></script>
+    <!--<script src="templates/loan/loan_detail.js"></script>-->
+    <script src="templates/loan/loan_edit.js"></script>
+    <!--<script src="templates/loan/loan_peopledetail.js"></script>-->
+    <script src="templates/loan/loan_plan.js"></script>
+    <script src="templates/loan/loan_borrower.js"></script>
+    <!--<script src="templates/money/shuju.js"></script>-->
+    <script src="templates/money/query_order.js"></script>
+    <script src="templates/investor/express.js"></script>
+    <script src="templates/money/recharge_list.js"></script>
+    <script src="templates/money/search.js"></script>
+     <script src="templates/money/firstInvestmentRecord.js"></script>
+    <script src="templates/money/withdrawalExamine.js"></script>
+    <script src="templates/investor/activity_new.js"></script>
+    <script src="templates/money/search2016.js"></script>
+    <script src="templates/investor/commend.js"></script>
+    <script src="templates/card/card_list.js"></script>
+    <script src="templates/card/card_edit.js"></script>
+    <script src="templates/money/tradeRecord.js"></script>
+    <script src="templates/money/account_list.js"></script>
+    <script src="templates/investor/repay_list.js"></script>
+    <script src="templates/banner/banner_add.js"></script>
+    <script src="templates/banner/indexEdit.js"></script>
+    <script src="templates/banner/indexMobileEdit.js"></script>
+    <script src="templates/banner/banner_list.js"></script>
+    <script src="templates/notice/notice_view.js"></script>
+    <script src="templates/notice/notice_edit.js"></script>
+    <script src="templates/notice/notice_add.js"></script>
+    <script src="templates/help/help_view.js"></script>
+    <script src="templates/help/help_edit.js"></script>
+    <script src="templates/help/help_add.js"></script>
+    <script src="templates/borrower/borrower.js"></script>
+    <script src="templates/money/offline.js"></script>
+    <script src="templates/money/repayExamine.js"></script>
+    <script src="templates/money/statistics_list.js?vision='1.0'"></script>
+    <script src="templates/investor/pocket.js"></script>
+    <script src="templates/money/check_list.js"></script>
+    <script src="templates/money/personal_list.js"></script>
+    <!--<script src="templates/pocket/grant_list.js"></script>-->
+    <!--<script src="templates/pocket/regular.js"></script>-->
+    <!--<script src="templates/pocket/coupon.js"></script>-->
+    <script src="templates/pocket/couponRegular.js"></script>
+    <script src="templates/index/dataCenter.js"></script>
+    <script src="templates/pocket/couponRegular_add.js"></script>
+    <script src="templates/pocket/couponRegular_edit.js"></script>
+    <script src="resource/js/echarts.min.js"></script>
+    <script src="templates/pocket/grantPocket.js"></script>
+    <script src="templates/activity/activity_add.js"></script>
+    <script src="templates/activity/activity_list.js"></script>
+    <script src="templates/activity/activityEdit.js"></script>
+    <script src="templates/activity/activityMobileEdit.js"></script>
+    <script src="templates/pocket/voucherUser.js"></script>
+    <script src="templates/pocket/voucherCash.js"></script>
+    <script src="templates/investor/todayRepay.js"></script>
+    <script src="templates/activity/openScreen_list.js"></script>
+    <script src="templates/activity/openScreen_add.js"></script>
+    <script src="templates/activity/openScreenEdit.js"></script>
+    <script src="templates/activity/openScreenIosEdit.js"></script>
+    <script src="templates/activity/propel.js"></script>
+    <script src="templates/activity/propel_list.js"></script>
+    <script src="templates/activity/propelEdit.js"></script>
+    <script src="templates/money/todayRepayExamine.js"></script>
+    <script src="templates/activity/update_list.js"></script>
+    <script src="templates/activity/updateEdit.js"></script>
+    <script src="templates/activity/updateIosEdit.js"></script>
+    <script src="templates/activity/update_add.js"></script>
+    <script src="templates/activity/partners_list.js"></script>
+    <script src="templates/activity/partnersEdit.js"></script>
+    <script src="templates/activity/partners_add.js"></script>
+    <script type="text/javascript" src="resource/js/laydate/laydate.js"></script>
+    <script src="resource/tt/utf8jsp/js"></script>
+    <!--  百度富文本使用，404是正常的  -->
+   
+</body>
+
+</html>

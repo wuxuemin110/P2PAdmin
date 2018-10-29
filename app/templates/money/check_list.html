@@ -1,0 +1,85 @@
+<div ng-cloak>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <div class="head_bt" style="margin-bottom:30px;">
+            <h2>系统对账</h2>
+        </div>
+        <div style="margin-bottom:55px;">
+            <div class="input-group " style="float: right;margin-right:40px;">
+                <button class="search_buttun3" type="button" ng-click="check()">
+                    <i style="padding-right:5px;line-height:25px;outline:none;" class="glyphicon glyphicon-print"></i> 生成系统对账
+                </button>
+            </div>
+        </div>
+        <!--<div style="margin-top:50px;" class="search_table">-->
+        <!--<span ng-show="$root.userName!='adminuser'">-->
+        <!--<span class="tab-pane fade" id="ios">-->
+        <!--<table class="table table-bordered ta-bo">-->
+        <!--表格-->
+        <div>
+            <div>
+                <table class="table table-bordered ta-bo back-wi">
+                    <thead class="thead_table">
+                        <tr class="thead_tr ">
+                            <th class="thead_th min-5 max-7">对账时间</th>
+                            <th class="thead_th min-5 max-7">线下充值(元)</th>
+                            <th class="thead_th min-5 max-7">线上充值(元)</th>
+                            <th class="thead_th min-5 max-7">使用红包(元)</th>
+                            <th class="thead_th min-5 max-7">奖励金额(元)</th>
+                            <th class="thead_th min-10 max-7 ">推荐奖励(元)</th>
+                            <th class="thead_th min-5 max-7">已还本金(元)</th>
+                            <th class="thead_th min-7 max-7">已还利息(元)</th>
+                            <th class="thead_th min-17 max-7">已投资金额(元)</th>
+                            <th class="thead_th min-17 max-7">冻结金额(元)</th>
+                            <th class="thead_th min-5 max-7">申请提现金额(元)</th>
+                            <th class="thead_th min-7 max-7">提现成功金额(元)</th>
+                            <th class="thead_th min-17 max-7">提现失败金额(元)</th>
+                            <th class="thead_th min-17 max-7">用户余额(元)</th>
+                            <th class="thead_th min-5 max-7">计算余额(元)</th>
+                            <th class="thead_th min-7 max-80">对账结果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in itemList">
+                            <td>{{x.time|jsonDate}}</td>
+                            <td>{{x.offlineRecharge| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.onlineRecharge| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.voucher| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.coupons | PointToYuan| currency:"":2}} </td>
+                            <td>{{x.referrer| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.corpus| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.interest| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.invested| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.freezingMoney| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.applyWithdraw| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.withdrawSuccess| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.withdrawFailed| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.userBalance| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.calculateBalance| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.detail}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                            aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                            aria-hidden="true">尾页&nbsp;</span></a></li>
+                        <li id="sumCount"><span aria-hidden="true">共{{sumCount}}条</span></li>
+                        <li><a><span
+                            aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resource/js/time.js"></script>
+</div>

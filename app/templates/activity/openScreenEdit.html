@@ -1,0 +1,215 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <style>
+    .tz-ul {
+        padding: 0;
+    }
+
+    .file {
+        position: relative;
+        top: 0;
+        right: -10px;
+        cursor: pointer;
+        height: 24px;
+        filter: alpha(opacity:1);
+        opacity: 1;
+        width: 0px;
+    }
+
+    .yl ul {
+        width: 97%;
+        margin-bottom: 25px;
+    }
+
+    .wid-15 {
+        width: 40%;
+    }
+
+    .tz-ul {
+        padding: 0;
+    }
+
+    .sjgs {
+        left: -156px;
+        top: -12px;
+    }
+
+    .file {
+        position: absolute;
+        top: 5px;
+        right: 7px;
+        cursor: pointer;
+        height: 30px;
+        filter: alpha(opacity:0);
+        font-size: 0;
+        opacity: 0;
+        width: 65px;
+    }
+    </style>
+    <!-- 修改首页图片 -->
+    <div class="head_bt">
+        <h2>修改android开屏页</h2>
+    </div>
+    <div>
+        <div id="myTabContent" class="tab-content">
+            <!--pc端-->
+            <div id="indexC" class=" in active">
+                <div class="table">
+                    <table class="table table-bordered back-wi">
+                        <thead class="thead_table">
+                            <tr class="thead_tr ">
+                                <th class="thead_th wid-15" colspan="2">上传图片：</th>
+                                <th class="thead_th"></th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td colspan="2">
+                                <ul class="tz-ul">
+                                    <li class="preview"><img id="imghead" ng-src="{{tradeRecord.picture}}" class="img"></li>
+                                    <li>
+                                        <div ng-controller="openScreenEditCtrl">
+                                            <div style="display: inline-block; position: relative;">
+                                                <input file-model="myFile" type="file" onchange="previewImage(this)" class="file">
+                                                <!-- 选择图片按钮 -->
+                                                <input name="" type="button" class="button-tz" value="选择文件">
+                                            </div>
+                                            <input ng-click="uploadFile()" type="button" class="button-tz" value="上传">
+                                            <input type="hidden" id="imageName" ng-model="imgnews.imagename" miaosu="用于保存图片名称">
+                                            <input type="hidden" id="imageId" ng-model="imgnews.id" miaosu="用于保存图片Id">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <!--浏览-->
+                                <div class="yl">
+                                    <ul style=" margin-right:10%;">
+                                        <li>
+                                            <div class="input-group grous">
+                                                <div class="input-group-addon" style="width: 150px;height:35px;">请选择分辨率：</div>
+                                                <!--<input type="text" class="form-control" ng-model="tradeRecord.type"/>-->
+                                                <select class="form-control" ng-model="tradeRecord.type" style="height:35px;" id="type">
+                                                    <!--<option value="" style="display:none">请选择分辨率</option>-->
+                                                    <option value="101">720*1280</option>
+                                                    <option value="102">1080*1920</option>
+                                                </select>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <div class="input-group grous">
+                                                <div class="input-group-addon" style="width: 150px;">标题：</div>
+                                                <input type="text" class="form-control" ng-model="tradeRecord.title" />
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <div class="input-group grous">
+                                                <div class="input-group-addon" style="width: 150px;">点击访问地址：</div>
+                                                <input type="text" class="form-control" ng-model="tradeRecord.url" />
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <div class="input-group grous">
+                                                <div class="input-group-addon" style="width: 150px;">毫秒数：</div>
+                                                <input type="text" class="form-control" ng-model="tradeRecord.millisecond" />
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <div class="input-group">
+                                                <div class="input-group-addon" style="width: 150px;height:30px">开始时间</div>
+                                                <input style="width:750px;height:30px;padding-left:10px;" id="myTime" ng-model="tradeRecord.startTime" placeholder="年/月/日 时：分：秒" class="laydate-icon" onClick="laydate({elem:'#myTime',istime: true, format: 'YYYY/MM/DD hh:mm:ss'})">
+                                            </div>
+                                            <!--<div class="input-group grous">-->
+                                            <!--<div class="input-group-addon" style="width: 150px;">开始时间</div>-->
+                                            <!--<input type="text"  class="form-control"  placeholder="年/月/日 时：分：秒" value="" id="myTime" ng-model="tradeRecord.startTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/>-->
+                                            <!--</div>-->
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <div class="input-group">
+                                                <div class="input-group-addon" style="width: 150px;height:30px">结束时间</div>
+                                                <input style="width:750px;height:30px;padding-left:10px;" id="myTime1" ng-model="tradeRecord.endTime" placeholder="年/月/日 时：分：秒" class="laydate-icon" onClick="laydate({elem:'#myTime1',istime: true, format: 'YYYY/MM/DD hh:mm:ss'})">
+                                            </div>
+                                            <!--<div class="input-group grous" style="margin-bottom: 48px">-->
+                                            <!--<div class="input-group-addon" style="width: 150px;">结束时间</div>-->
+                                            <!--<input type="text"  class="form-control"  placeholder="年/月/日 时：分：秒" value="" id="myTime1" ng-model="tradeRecord.endTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/>-->
+                                            <!--</div>-->
+                                        </li>
+                                    </ul>
+                                      <ul>
+                                            <li>
+                                                <div class="input-group grous">
+                                                    <div class="input-group-addon" style="width: 150px;">排序</div>
+                                                    <input type="number" class="form-control" min="0" ng-model="tradeRecord.level">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    <!--<ul>-->
+                                    <!--<li>-->
+                                    <!--<div  class="input-group-addon"  style="width: 150px;height:30px;background:#fafafa">是否在新页面打开：</div>-->
+                                    <!--<div class="radioStyle">-->
+                                    <!--&lt;!&ndash;<input type="text" class="form-control" ng-model="imgnews.outSite"/>&ndash;&gt;-->
+                                    <!--是<input style="outline:none" type="radio" value="true" ng-model="tradeRecord.outSite" ng-checked="true"/>-->
+                                    <!--否<input  style="outline:none"  type="radio" value="false" ng-model="tradeRecord.outSite" />-->
+                                    <!--&lt;!&ndash; <span ng-repeat="item in orgTypes">{{item}}<input  style="outline:none"  type="radio" value="false" ng-checked="true" ng-model="tradeRecord.outSite" /></span>&ndash;&gt;-->
+                                    <!--</div>-->
+                                    <!--</li>-->
+                                    <!--</ul>-->
+                                </div>
+                                <!--日期-->
+                                <!--<div class="yl">-->
+                                <!--<ul>-->
+                                <!--<li>-->
+                                <!--<div >-->
+                                <!--<div style="width: 150px;height:30px;background:#fafafa" class="input-group-addon">状态：</div>-->
+                                <!--<div class="radioStyle">-->
+                                <!--&lt;!&ndash;<input class="form-control" type="text" id="exampleInput" name="input" ng-model="imgnews.status" />&ndash;&gt;-->
+                                <!--正常<input  style="outline:none"  type="radio"  value="0" class="exampleInput" name="input" ng-model="tradeRecord.status" />-->
+                                <!--下线<input  style="outline:none"  type="radio"  value="1" class="exampleInput" name="input" ng-model="tradeRecord.status" />-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</li>   -->
+                                <!--</ul>-->
+                                <!--&lt;!&ndash;<span class="sjgs">（当前时间为：2016-3-28 18:10:28注意不要改变格式。）</span>&ndash;&gt;-->
+                                <!--</div> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="clear:both;"></div>
+                <!--<div class="button-bc">-->
+                <!--<input name="" type="button" ng-click="edit()" value="保存" class="new-button">-->
+                <!--</div>-->
+                <div class="input-group quer" style="width:120px;float: left;margin: 0 0 0 20px">
+                    <button class="btn btn-primary btn-sm" type="button" ng-click="edit()">
+                        <i style="padding-right:5px;line-height:20px;" class="glyphicon glyphicon-saved"></i> 保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 上传图片特效js -->
+    <script type="text/javascript">
+    function previewImage(file) {
+        var div = document.getElementsByClassName('preview');
+        div.innerHTML = '<img id=imghead>';
+        var img = $(file).closest("td").find("img")[0];
+        var reader = new FileReader();
+        reader.onload = function(evt) { img.src = evt.target.result; }
+        reader.readAsDataURL(file.files[0]);
+    }
+    //时间下拉框的颜色
+    ! function() {
+        laydate.skin('molv'); //切换皮肤，请查看skins下面皮肤库
+        laydate({ elem: '#demo' }); //绑定元素
+    }();
+    </script>
+    <script type="text/javascript" src="resource/js/time.js"></script>

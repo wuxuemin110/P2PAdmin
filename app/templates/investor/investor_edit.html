@@ -1,0 +1,92 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 修改投资者信息 -->   
+      <div class="head_bt">
+        <h2>修改投资者信息</h2>
+        <!--<p class="zhusi">普通计划的期数单位为<span class="b-red">"月"</span>,体验计划的期数单位为<span class="b-red">"天"</span></p>-->
+      </div>
+     
+      <div class="touz-main">
+        <div class="touz-ma">
+        <form class="bs-example bs-example-form" ng-app="myApp" name="myForm" novalidate>
+           <!--<div class="input-group grous">-->
+              <!--<div class="input-group-addon">投资者账号</div>-->
+              <!--<input type="text" class="form-control" ng-model="investor.user.name" />-->
+           <!--</div>-->
+            <!--<div class="input-group grous">-->
+                <!--<div class="input-group-addon">投资者地址</div>-->
+                <!--<input type="text" class="form-control" ng-model="investor.userInfo.address" />-->
+            <!--</div>-->
+           <!--<div class="input-group grous">-->
+              <!--<div class="input-group-addon">投资者密码</div>-->
+              <!--<input type="password" class="form-control" ng-model="password"/>-->
+           <!--</div>-->
+           <!--<div class="input-group grous">-->
+              <!--<div class="input-group-addon">投资者昵称</div>-->
+              <!--<input type="text" class="form-control" ng-model="investor.userInfo.nickName" />-->
+           <!--</div>-->
+           <!--<div class="input-group grous">-->
+              <!--<div class="input-group-addon">投资者电话</div>-->
+              <!--<input type="text" class="form-control" ng-model="investor.userInfo.phone" />-->
+           <!--</div>-->
+           <!--<div class="input-group grous">-->
+              <!--<div class="input-group-addon">推荐码</div>-->
+              <!--<input type="text" class="form-control" ng-model="investor.userInfo.recommendCode" />-->
+           <!--</div>-->
+           <!--<div class="input-group grous">-->
+              <!--<div class="input-group-addon">投资者邮箱</div>-->
+              <!--<input class="form-control" type="email" name="email"  ng-model="investor.userInfo.email" required />-->
+              <!--<span ng-show="myForm.email.$dirty && myForm.email.$invalid">-->
+              <!--<span ng-show="myForm.email.$error.required">邮箱是必须的</span>-->
+              <!--<span ng-show="myForm.email.$error.email">非法的邮箱</span>-->
+              <!--</span>-->
+           <!--</div>-->
+           <div class="input-group grous">
+              <div class="input-group-addon">真实姓名</div>
+              <input type="text" class="form-control" ng-model="investor.realName" />
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">身份证号码</div>
+              <input type="text" class="form-control" ng-model="investor.idCard" />
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">电话号码</div>
+              <input type="text" class="form-control" ng-model="investor.phone" />
+           </div>
+           <!--<div class="input-group grous">-->
+              <!--<div class="input-group-addon">开户行</div>-->
+               <!--<select class="form-control" ng-model="investor.userCard.type">-->
+                   <!--<option value="1">中国工商银行</option>-->
+                   <!--<option value="2">中国农业银行</option>-->
+                   <!--<option value="3">中国建设银行</option>-->
+                   <!--<option value="4">民生银行</option>-->
+                   <!--<option value="5">中国银行</option>-->
+                   <!--<option value="6">兴业银行</option>-->
+                   <!--<option value="7">光大银行</option>-->
+                   <!--<option value="8">中信银行</option>-->
+                   <!--<option value="9">平安银行</option>-->
+                   <!--<option value="10">邮政银行</option>-->
+                   <!--<option value="11">交通银行</option>-->
+                   <!--<option value="12">广发银行</option>-->
+                   <!--<option value="13">浦发银行</option>-->
+                   <!--<option value="14">招商银行</option>-->
+                   <!--<option value="15">华夏银行</option>-->
+               <!--</select>-->
+           <!--</div>-->
+           <!--<div class="input-group grous">-->
+              <!--<div class="input-group-addon">银行名称</div>-->
+              <!--<input type="text" class="form-control" ng-model="investor.userCard.subbranch" />-->
+           <!--</div>-->
+       <!--    <div class="input-group grous">
+              <div class="input-group-addon">开户行地址</div>
+              <input type="text" class="form-control" />
+           </div>-->
+        <!-- 操作按钮-->
+        <div class="div-but">
+        <button type="button" class="btn btn-default yya" ng-click="cancle()">取消</button>
+        <button type="button" class="btn btn-primary yya" ng-click="saveInvestor()">提交</button>
+        </div>
+         </form>  
+        </div> 
+      </div>
+    </div>   

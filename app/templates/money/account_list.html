@@ -1,0 +1,109 @@
+<div ng-cloak>
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+	<!-- 查看投资计划 -->
+	<div class="head_bt">
+		<h2>投资人账户列表</h2>
+	</div>
+	<!-- 搜索框 -->
+	<!--<div class="input-group quer" style="width: 480px">-->
+		<!--<input type="text" class="form-control quer-ico" placeholder="支持真实姓名、联系方式、账号搜索" ng-model="keyword"/>-->
+		<!--<span class="input-group-btn">-->
+          <!--<button class="btn btn-default" type="button" ng-click="searchInvestor()">-->
+             <!--搜索用户-->
+          <!--</button>-->
+       <!--</span>-->
+	<!--</div>-->
+	<div class="input-group" style="float: left;">
+		<span class="timeTip1">注册时间：</span><input type="date" placeholder="yyyy-MM-dd "  class="timeTip1"  ng-model="cashData.startDate" />
+	</div>
+
+	<div class="input-group" style="float: left;">
+		<span class="timeTip1">&nbsp;-&nbsp;&nbsp;&nbsp;</span><input type="date" placeholder="yyyy-MM-dd " class="timeTip1"  ng-model="cashData.endDate" />
+	</div>
+	<div class="input-group " style="float: left;margin-left:50px;">
+		<input  style="width: 380px" type="text" id="kws" ng-model="keyword" class="timeTip1" placeholder="支持真实姓名、联系方式、账号搜索"/>
+	</div>
+
+	 <div class="input-group" style="float: left;margin:0 0 10px 30px;">
+		<span class="timeTip1">渠道：</span>
+		<select class="timeTip1" ng-model="cashData.channel" id="channelNum" style="padding-left:15px;">
+			<option value="">请选择渠道</option>
+			<option ng-repeat="x in roleOptions track by $index" value="{{x}}" >{{x}}</option>
+		</select>
+	</div> 
+
+	<div class="input-group " style="float: left;margin-left:30px;">
+		<button class="search_buttun" type="button" ng-click="searchInvestor()"> <i style="padding-right:5px;" class="glyphicon glyphicon-search"></i>搜索</button>
+	</div>
+	<div class="input-group" style="float: left;margin-left:30px;"  >
+		<a class="search_buttun1 " target="_blank"  ng-click="gotoExport(cashData.status)">
+			<i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-share-alt"></i>导出列表
+		</a>
+	</div>
+
+	<div>
+		<div>
+			<table class="table table-bordered ta-bo back-wi">
+				<thead class="thead_table">
+					<tr class="thead_tr ">
+						<th class="thead_th ">姓名</th>
+						<th class="thead_th ">手机</th>
+						<th class="thead_th ">账户余额(元)</th>
+						<th class="thead_th ">累计收益(元)</th>
+						<th class="thead_th">累计投资(元)</th>
+						<th class="thead_th ">使用红包(元)</th>
+						<th class="thead_th ">冻结金额(元)</th>
+						<th class="thead_th ">奖励金额(元)</th>
+						<th class="thead_th ">注册时间</th>
+						<th class="thead_th ">渠道</th> 
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="plan in itemList">
+						<td>{{plan.realName}}</td>
+						<td>{{plan.phone}}</td>
+						<td>{{plan.money| PointToYuan| currency:"":2}}</td>
+						<td>{{plan.profitMoney| PointToYuan|currency:"":2}}</td>
+						<td>{{plan.investedMoney| PointToYuan|currency:"":2}}</td>
+						<td>{{plan.usedPocketMoney| PointToYuan|currency:"":2}}</td>
+						<td>{{plan.freezingMoney| PointToYuan|currency:"":2}}</td>
+						<td>{{plan.rewardMoney| PointToYuan|currency:"":2}}</td>
+						<td>{{plan.registrationTime| jsonDate}}</td>
+						 <td>{{plan.channel}}</td> 
+						<!--<td class="ta-bo1">-->
+							<!--<a href="javascript:;" class="a-hei" ng-click="viewUI(plan)">查看</a>-->
+							<!--<a href="javascript:;" class="a-hei" ng-click="editUI(plan)">修改</a>-->
+							<!--<a href="javascript:;" class="a-hei" ng-click="deleteUI(plan)">删除</a>-->
+						<!--</td>-->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+			<nav>
+				<ul id="pagination" class="pagination pagination-sm" style="">
+					<li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+					<li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+					<li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+						<a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a>
+					</li>
+					<li ng-show="isShowDot">
+						<a ng-click="selectPage(nowPage+6)">……</a>
+					</li>
+					<li id="Next">
+						<a ng-click="selectPage(nowPage+1)" aria-label="Next"><span aria-hidden="true">»</span></a>
+					</li>
+					<li id="lastPage">
+						<a ng-click="selectPage(totalPages)"><span aria-hidden="true">尾页</span></a>
+					</li>
+					<li id="sumCount"><span
+							aria-hidden="true">共{{sumCount}}条</span></li>
+					<li><a><span
+							aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+</div>

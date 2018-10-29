@@ -1,0 +1,98 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 查看借款人还款计划 -->   
+      <div class="head_bt">
+        <h2>查看借款人还款计划</h2>
+      </div>
+      <!-- 搜索框 -->
+      <div class="input-group quer">
+       <input type="text" class="form-control quer-ico" placeholder="仅支持真实姓名、推荐码和账号搜索" ng-model="keyword"/>
+       <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="searchRepayment(keyword)">
+             搜索用户
+          </button>
+       </span>
+       </div>
+
+      <div>
+          <table class="table table-bordered ta-bo">
+            <thead class="thead_table">
+              <tr class="thead_tr">
+                <th class="thead_th">用户ID</th>
+                <th class="thead_th">用户名</th>
+                <th class="thead_th">真实姓名</th>
+                <th class="thead_th">性别</th>
+                <th class="thead_th">推荐码</th>
+                <th class="thead_th">电话</th>
+                <th class="thead_th">邮箱</th>
+                <th class="thead_th">QQ</th>
+                <th class="thead_th">省</th>
+                <th class="thead_th">市</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{borrower.id}}</td>
+                <td>{{borrower.name}}</td>
+                <td>{{borrower.realName}}</td>
+                <td>{{borrower.sexName}}</td>
+                <td>{{borrower.recommendCode}}</td>
+                <td>{{borrower.phone}}</td>
+                <td>{{borrower.email}}</td>
+                <td>{{borrower.qq}}</td>
+                <td>{{borrower.province}}</td>
+                <td class="ta-botd">{{borrower.city}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+<!-- 还款表格 -->
+   <div class="tab-pane fade in active">
+       <table class="table table-bordered ta-bo">
+            <thead class="thead_table">
+              <tr class="thead_tr">
+                <th class="thead_th">还款ID</th>
+                <th class="thead_th">期数</th>
+                <th class="thead_th">应还金额</th>
+                <th class="thead_th">已还金额</th>
+                <th class="thead_th">滞纳金</th>
+                <th class="thead_th">还款时间</th>
+                <th class="thead_th">到期时间(最后还款日)</th>
+                <th class="thead_th">还款状态</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="x in itemList">
+                <td>{{x.id}}</td>
+                <td>{{x.staging}}</td>
+                <td>{{x.amount/100}}</td>
+                <td>{{x.repaymentAmount/100}}</td>
+                <td>{{x.penalty}}</td>
+                <td>{{x.repayTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{x.expiryTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td class="ta-botd">{{x.stateName}}</td>
+              </tr>
+            </tbody>
+        </table>
+       <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a
+                                    ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+   </div>
+</div>   
+

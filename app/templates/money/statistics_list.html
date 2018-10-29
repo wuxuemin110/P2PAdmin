@@ -1,0 +1,197 @@
+<div ng-cloak>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <div class="head_bt">
+            <h2>渠道统计</h2>
+        </div>
+        <!--<div class="input-group" style="float: left;margin:0 0 10px 30px;">-->
+        <!--<span class="timeTip1"></span>-->
+        <!--<select class="timeTip1" ng-model="cashData.channel" id="channelNum" style="padding-left:15px;">-->
+        <!--<option value="">请选择渠道</option>-->
+        <!--<option ng-repeat="x in roleOptions track by $index" value="{{x}}" >{{x}}</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <div style="margin-bottom:55px;">
+            <div class="recordQuer">
+                <div class="input-group" style="float: left;">
+                    渠道：
+                    <select autocomplete="off" class="select_style" ng-model="cashData.channel" id="channelNum" style="padding-left:15px;">
+                        <option value="">请选择渠道</option>
+                        <option ng-repeat="x in roleOptions track by $index" value="{{x}}">{{x}}</option>
+                    </select>
+                </div>
+                <div class="input-group" style="float: left;">
+                    <span class="timeTip1">单日时间数据：</span>
+                    <input type="date" placeholder="yyyy-MM-dd " id="myTimes" class="timeTip1" ng-model="cashData.singleDate" />
+                    <!--<span class="timeTip1">单日时间数据：<input type="text"   placeholder="年/月/日 时：分：秒" value="" id="myTimes" ng-model="cashData.singleDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+                </div>
+                <div class="input-group" style="float: left;">
+                    <!--<span class="timeTip1">区间时间数据：<input type="text"  placeholder="年/月/日 时：分：秒" value="" id="myTime" ng-model="cashData.startDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>&nbsp;&nbsp;&nbsp;—-->
+                    <!--</div>-->
+                    <span class="timeTip1">日期范围：</span>
+                    <input type="date" placeholder="yyyy-MM-dd " class="timeTip1" ng-model="cashData.startDate" />
+                </div>
+                <!--<div class="input-group quer" style="float: left;">-->
+                <div class="input-group" style="float: left;">
+                    <!--<span class="timeTip1"><input type="text"  placeholder="年/月/日 时：分：秒" value="" id="myTime1" ng-model="cashData.endDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+                    <!--</div>-->
+                    <span class="timeTip1">—&nbsp;&nbsp;</span>
+                    <input type="date" placeholder="yyyy-MM-dd " class="timeTip1" ng-model="cashData.endDate" />
+                </div>
+                <!--<div class="input-group quer" style="width:250px;float: left;margin: 0 0 0 20px">-->
+                <!--<input  style="width:250px;" type="text" ng-model="keyword" class="serch_new"-->
+                <!--placeholder="时间或账号搜索，这里填写账户名"/>-->
+                <!--</div>-->
+                <!--<div class="input-group quer" style="width:200px;float: left;margin-left:50px;">-->
+                <!--<input type="datetime-local" placeholder="yyyy-MM-dd HH:mm:ss" class="serch_new"  ng-model="cashData.endDate" />-->
+                <div class="input-group" style="float: left;margin-left:60px;">
+                    <button class="search_buttun" type="button" ng-click="searchRecharge(cashData.channel)">
+                        <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-search"></i> 查询
+                    </button>
+                </div>
+                <!--<div class="input-group" style="float: left;margin-left:60px;">-->
+                <!--<a href="/#/money/offline">-->
+                <!--<button class="search_buttun" type="button" >-->
+                <!--&lt;!&ndash;<i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-search"></i> &ndash;&gt;-->
+                <!--线下充值-->
+                <!--</button>-->
+                <!--</a>-->
+                <!--</div>-->
+                <div class="input-group" style="float: left;margin-left:50px;" ng-hide="userId==139477">
+                    <a class="search_buttun1 " target="_blank" ng-click="gotoExport(cashData.status)">
+                    <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-share-alt"></i>导出列表
+                </a>
+                </div>
+            </div>
+            <div style="margin-top:20px;">
+                <div>
+                    <table class="table table-bordered ta-bo back-wi">
+                        <thead class="thead_table">
+                            <tr class="thead_tr ">
+                                <th class="thead_th">渠道</th>
+                                <th class="thead_th">单日注册用户数</th>
+                                <th class="thead_th">单日实名用户数</th>
+                                <th class="thead_th">单日绑卡用户数</th>
+                                <th class="thead_th">单日充值用户数</th>
+                                <th class="thead_th">单日交易用户数</th>
+                                <th class="thead_th">单日新增充值用户数</th>
+                                <th class="thead_th">单日新增充值金额</th>
+                                <th class="thead_th">单日新增交易金额</th>
+                                <th class="thead_th">单日提现用户数</th>
+                                <th class="thead_th">单日充值金额(元)</th>
+                                <th class="thead_th">单日交易金额(元)</th>
+                                <th class="thead_th">单日提现金额(元)</th>
+                                <th class="thead_th">待收金额(元)</th>
+                                <th class="thead_th">累计注册用户数</th>
+                                <th class="thead_th">累计实名用户数</th>
+                                <th class="thead_th">累计绑卡用户数</th>
+                                <th class="thead_th">累计充值用户数</th>
+                                <th class="thead_th">累计交易用户数</th>
+                                <th class="thead_th">累计充值金额(元)</th>
+                                <th class="thead_th">累计提现金额(元)</th>
+                                <th class="thead_th">累计交易金额(元)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="m  in  itemList">
+                                <td>{{m.channel}}</td>
+                                <td>{{m.singleDayUserCounts}}</td>
+                                <td>{{m.singleDayUserRealCounts}}</td>
+                                <td>{{m.singleDayUserBindCardCounts}}</td>
+                                <td>{{m.singleDayUserRechargeCounts}}</td>
+                                <td>{{m.singleDayUserInvestCounts}}</td>
+                                <td>{{m.dailyNewRechargeUsers}}</td>
+                                <td>{{m.dailyNewRechargeMoney| PointToYuan| currency:"":2}}</td>
+                                <td>{{m.dailyNewTradeMoney| PointToYuan| currency:"":2}}</td>
+                                <td>{{m.dailyWithdrawUsers}}</td>
+                                <td>{{m.singleDayRechargeMoney| PointToYuan| currency:"":2}}</td>
+                                <td>{{m.singleDayInvestMoney| PointToYuan| currency:"":2}}</td>
+                                <td>{{m.singleDayWithdrawMoney| PointToYuan| currency:"":2}}</td>
+                                <td>{{m.repayingMoney| PointToYuan| currency:"":2}}</td>
+                                <td>{{m.totalUserCounts}}</td>
+                                <td>{{m.totalUserRealCounts}}</td>
+                                <td>{{m.totalUserBindCardCounts}}</td>
+                                <td>{{m.totalUserRechargeCounts}}</td>
+                                <td>{{m.totalUserInvestCounts}}</td>
+                                <td>{{m.totalRechargeMoney| PointToYuan| currency:"":2}}</td>
+                                <td>{{m.totalWithdrawMoney| PointToYuan| currency:"":2}}</td>
+                                <td>{{m.totalInvestMoney| PointToYuan| currency:"":2}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                        <nav>
+                            <ul id="pagination" class="pagination pagination-sm" style="">
+                                <li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+                                <li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+                                <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                                    <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                                <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                                <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                            aria-hidden="true">»</span></a></li>
+                                <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                            aria-hidden="true">尾页&nbsp;</span></a></li>
+                                <li id="sumCount"><span aria-hidden="true">共{{sumCount}}条</span></li>
+                                <li><a><span
+                            aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="resource/js/time.js"></script>
+        <script>
+        //    $(document).ready(function () {
+        //        function fixHeight() {
+        //            var headerHeight = $("#switcher").height();
+        //            $("#iframe").attr("height", $(window).height()-54+ "px");
+        //        }
+        //        $(window).resize(function () {
+        //            fixHeight();
+        //        }).resize();
+        //
+        //        $('.icon-monitor').addClass('active');
+        //
+        //        $(".icon-mobile-3").click(function () {
+        //            $("#by").css("overflow-y", "auto");
+        //            $('#iframe-wrap').removeClass().addClass('mobile-width-3');
+        //            $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+        //            $(this).addClass('active');
+        //            return false;
+        //        });
+        //
+        //        $(".icon-mobile-2").click(function () {
+        //            $("#by").css("overflow-y", "auto");
+        //            $('#iframe-wrap').removeClass().addClass('mobile-width-2');
+        //            $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+        //            $(this).addClass('active');
+        //            return false;
+        //        });
+        //
+        //        $(".icon-mobile-1").click(function () {
+        //            $("#by").css("overflow-y", "auto");
+        //            $('#iframe-wrap').removeClass().addClass('mobile-width');
+        //            $('.icon-tablet,.icon-mobile,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+        //            $(this).addClass('active');
+        //            return false;
+        //        });
+        //
+        //        $(".icon-tablet").click(function () {
+        //            $("#by").css("overflow-y", "auto");
+        //            $('#iframe-wrap').removeClass().addClass('tablet-width');
+        //            $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+        //            $(this).addClass('active');
+        //            return false;
+        //        });
+        //
+        //        $(".icon-monitor").click(function () {
+        //            $("#by").css("overflow-y", "hidden");
+        //            $('#iframe-wrap').removeClass().addClass('full-width');
+        //            $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+        //            $(this).addClass('active');
+        //            return false;
+        //        });
+        //    });
+        </script>
+    </div>

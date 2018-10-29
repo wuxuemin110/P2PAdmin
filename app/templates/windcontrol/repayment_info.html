@@ -1,0 +1,70 @@
+<md-dialog aria-label="还款详情">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>还款详情</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="resource/images/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+        <table class="table table-bordered ta-bo">
+            <thead class="thead_table">
+            <tr class="thead_tr">
+                <th class="thead_th">还款ID</th>
+                <th class="thead_th">借款ID</th>
+                <th class="thead_th">借款人</th>
+                <th class="thead_th">第几期</th>
+                <th class="thead_th">待还金额</th>
+                <th class="thead_th">滞纳金</th>
+                <th class="thead_th">已还金额</th>
+                <th class="thead_th">还款状态</th>
+                <th class="thead_th">还款时间</th>
+                <th class="thead_th">最后还款日</th>
+                <th class="thead_th">逾期情况</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in repaymentInfos">
+                <td>{{item.id}}</td>
+                <td>{{item.loanId}}</td>
+                <td>{{showInfoUserName}}</td>
+                <td>{{item.staging}}</td>
+                <td>{{item.amount | PointToYuan | currency:'':2}}</td>
+                <td>{{item.penalty | PointToYuan | currency:'':2}}</td>
+                <td>{{item.repaymentAmount | PointToYuan | currency:'':2}}</td>
+                <td>{{item.state | RepaymentState}}</td>
+                <td>{{item.repayTime | date:'yyyy-MM-dd'}}</td>
+                <td>{{item.expiryTime | date:'yyyy-MM-dd'}}</td>
+                <!--逾期情况-->
+                <td ng-if="((item.repayTime != null)? item.repayTime - item.realExpiryTime : 0) <= 0 && (item.state == 100 || item.state == 300)">
+                    未逾期
+                </td>
+                <td ng-if="((item.repayTime != null)? item.repayTime - item.realExpiryTime : 0) > 0 && ((item.repayTime != null) ? item.repayTime - item.realExpiryTime : 0) < 30 * 86400000 || item.state == 200"
+                    style="color: #aa7700">已逾期
+                </td>
+                <td ng-if="((item.repayTime != null)? item.repayTime - item.realExpiryTime : 0) > 30 * 86400000 || item.state == 210"
+                    style="color: red">已严重逾期
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    待还总金额
+                </td>
+                <td colspan="4">
+                    {{repaymentSum.repaymentSum | PointToYuan | currency:'':2}} 元
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    一次性还款金额
+                </td>
+                <td colspan="4">
+                    {{repaymentSum.oneTimePaySum | PointToYuan | currency:'':2}} 元
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </md-dialog-content>
+</md-dialog>

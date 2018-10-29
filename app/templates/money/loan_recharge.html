@@ -1,0 +1,97 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+<!-- 信息审核-列表页 -->
+<nav class="navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">查看借款人充值-列表</a>
+        </div>
+        <p class="navbar-text">---支持排序，支持条件过滤，输入框支持 用户ID、真实姓名、电话和账号搜索(支持模糊查询)</p>
+    </div>
+</nav>
+<ul id="someonesade" class="new-add ng-scope">
+    <li>
+        <select ng-model="rechargeData.name" class="form-control">
+            <option value="asc">用户账号正序</option>
+            <option value="desc">用户账号倒序</option>
+        </select>
+    </li>
+    <li>
+        <select ng-model="rechargeData.account" class="form-control">
+            <option value="asc">帐户余额正序</option>
+            <option value="desc">帐户余额倒序</option>
+        </select>
+    </li>
+    <li>
+        <select ng-model="rechargeData.pocketMoneyNum" class="form-control">
+            <option value="asc">红包卷数目正序</option>
+            <option value="desc">红包卷数目倒序</option>
+        </select>
+    </li>
+    <li>
+        <select ng-model="rechargeData.expMoneyNum" class="form-control">
+            <option value="asc">体验卷数目正序</option>
+            <option value="desc">体验卷数目倒序</option>
+        </select>
+    </li>
+    <li>
+        <select ng-model="rechargeData.raisingRatesNum" class="form-control">
+            <option value="asc">加息卷数目正序</option>
+            <option value="desc">加息卷数目倒序</option>
+        </select>
+    </li>
+    <!-- 搜索框 -->
+    <li>
+        <div class="input-group quer" style="width: 350px">
+            <input type="text" ng-model="rechargeData.keyword" class="form-control quer-ico"
+                   placeholder="用户ID、真实姓名、电话和账号搜索(支持模糊查询)"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="selectPage(1)">
+                 搜索用户
+                </button>
+            </span>
+        </div>
+    </li>
+</ul>
+ <!-- 搜索框 -->
+<div class="input-group quer"></div>
+ <div>      
+  <table class="table table-bordered ta-bo">
+        <thead class="thead_table">
+              <tr class="thead_tr">
+                <th class="thead_th">借款人用户名</th>
+                <th class="thead_th">现金</th>
+                <th class="thead_th">充值类型</th>
+                <th class="thead_th">金额</th>
+                <th class="thead_th"></th>
+              </tr>
+        </thead>
+        <tbody>
+              <tr ng-repeat="x in itemList">
+                <td>{{x.name}}</td>
+                <td>{{x.account | PointToYuan}}</td>
+                <td>充值现金</td>
+               <td><input type="number" class="srk1" ng-model="money" /></td>
+               <td class="ta-botd"><a type="button" ng-click="recharge(money,x.id)">充值</a></td>
+            </tr>
+        </tbody>
+    </table>  
+   </div>
+   <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a
+                                    ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                    </ul>
+                </nav>
+</div> </div> 

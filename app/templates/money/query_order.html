@@ -1,0 +1,47 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+
+<div class="main-content main-he" style="padding-top: 50px">
+    <div class="input-group quer" style="width:200px;float: left;margin: 0 0 0 20px">
+        <input type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss"  class="serch_new"  ng-model="nodejs.beginTime" />
+    </div>
+    <div class="input-group quer" style="width:200px;float: left;margin: 0 0 0 20px">
+        <input type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss" class="serch_new"  ng-model="nodejs.endTime" />
+    </div>
+    <div class="input-group quer" style="width:200px;float: left;margin: 0 0 0 20px">
+        <input type="text" ng-model="nodejs.orderNumber" class="serch_new"
+               placeholder="订单号"/>
+    </div>
+    <div class="input-group quer" style="width:120px;float: left;margin: 0 0 0 20px">
+        <button class="search_buttun" type="button" ng-click="selectPage(1)">
+            搜索订单
+        </button>
+    </div>
+
+    <div class="search_table">
+        <table class="search_in" cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <td>交易订单号</td>
+                <td>订单金额</td>
+                <td>订单交易时间</td>
+                <td>订单状态</td>
+                <td>勾兑状态</td>
+                <td>退款状态</td>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="m in queryOrderList">
+                <td>{{m.orderNumber}}</td>
+                <td>{{m.orderAmount}}</td>
+                <td>{{m.orderDate | date:"yyyy-MM-dd HH:mm":"UTC"}}</td>
+                <td>{{m.orderStatus==1?"交易成功":""}}</td>
+                <td>{{m.gouduiStatus==1?"已勾兑":""}}</td>
+                <td>{{m.refundStatus==1?"已退款":""}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

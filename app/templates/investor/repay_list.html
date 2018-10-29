@@ -1,0 +1,137 @@
+<div ng-cloak>
+    <script type="text/javascript" src="resource/js/time.js"></script>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <div class="head_bt">
+            <h2>还款列表</h2>
+        </div>
+        <div style="margin-bottom:55px;">
+            <div class="input-group quer" style="width:245px;float: left;margin: 0;position:relative">
+                <!--<span class="timeTip1">开始时间：<input type="text" class="timeTip1" placeholder="年/月/日 时：分：秒" value="" id="myTime" ng-model="cashData.startDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+                <!--<span class="timeTip">开始时间：</span><input type="datetime-local" placeholder="yyyy-MM-dd HH:mm:ss" style="width:200px;" class="serch_new"  ng-model="cashData.startDate" />-->
+                <span class="timeTip1">日期范围：</span>
+                <input type="date" placeholder="yyyy-MM-dd " class="timeTip1" ng-model="cashData.startDate" />
+            </div>
+            <div class="input-group quer" style="width:210px;float: left;margin: 0;position:relative ">
+                <!--<span class="timeTip1">结束时间：<input type="text" class="timeTip1" placeholder="年/月/日 时：分：秒" value="" id="myTime1" ng-model="cashData.endDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+                <!--<span class="timeTip">结束时间：</span><input type="datetime-local" style="width:200px;" placeholder="yyyy-MM-dd HH:mm:ss" class="serch_new"  ng-model="cashData.endDate" />-->
+                <span class="timeTip1">--&nbsp;&nbsp;&nbsp;</span>
+                <input type="date" placeholder="yyyy-MM-dd " class="timeTip1" ng-model="cashData.endDate" />
+            </div>
+            <div class="input-group quer" style="width:170px;float: left;margin: 0 0 0 10px">
+                <input style="width:170px;" type="text" ng-model="planName" id="ipt" class="timeTip1" placeholder="请输入计划名称" />
+            </div>
+            <div class="input-group quer" style="width:210px;float: left;margin: 0 0 0 40px">
+                <input style="width:210px;" type="text" ng-model="keyword" class="timeTip1" placeholder="请输入姓名、账号或联系方式" />
+            </div>
+            <div class="input-group quer" style="width:125px;float: left;margin: 0 0 0 40px">
+                <!--<input type="datetime-local" placeholder="yyyy-MM-dd HH:mm:ss" class="serch_new"  ng-model="cashData.endDate" />-->
+                <select ng-model="cashData.status" class="timeTip1">
+                    <option value="" disabled selected style="display:none">请选择还款状态</option>
+                    <option value="">请选择还款状态</option>
+                    <option value="1">还款中</option>
+                    <option value="2">已还款</option>
+                </select>
+            </div>
+            <div class="input-group" style="float: left;margin:0 0 0 20px">
+                <select class="select_style" ng-model="cashData.channel" id="channelNum" style="padding-left:15px;">
+                    <option value="">请选择渠道</option>
+                    <option ng-repeat="x in roleOptions track by $index" value="{{x}}">{{x}}</option>
+                </select>
+            </div>
+            <div class="input-group quer" style="width:50px;float: left;margin: 0 0 0 40px">
+                <button class="search_buttun" type="button" ng-click="searchRecharge()">
+                    <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-search"></i> 查询
+                </button>
+            </div>
+            <div class="input-group" style="float: left;margin: 0 0 0 30px;">
+                <a class="search_buttun1 " target="_blank" ng-click="gotoExport(cashData.status)">
+                <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-share-alt"></i>导出列表
+            </a>
+            </div>
+        </div>
+        <!--<div style="margin-top:50px;" class="search_table">-->
+        <!--<span ng-show="$root.userName!='adminuser'"></span>-->
+        <!--<span class="tab-pane fade" id="ios">-->
+        <!--<table class="table table-bordered ta-bo back-wi">-->
+        <!--<thead class="thead_table">-->
+        <!--表格-->
+        <div style="margin-top:45px;">
+            <div>
+                <table class="table table-bordered ta-bo back-wi">
+                    <thead class="thead_table">
+                        <tr class="thead_tr ">
+                            <!--计划名称/name 用户名/userName 真实姓名/realName 本金（元）/corpus 利息（元）/interest 加息（元）/raisingInterest 总额/total 还款日/repayDay  状态/status 操作-->
+                            <th class="thead_th ">计划名称</th>
+                            <th class="thead_th ">利率</th>
+                            <th class="thead_th">加息利率</th>
+                            <th class="thead_th ">本期/期总</th>
+                            <th class="thead_th">用户名</th>
+                            <th class="thead_th ">真实姓名</th>
+                            <th class="thead_th">本金（元）</th>
+                            <th class="thead_th ">利息(元)</th>
+                            <th class="thead_th ">加息（元）</th>
+                            <th class="thead_th ">总额（元）</th>
+                            <th class="thead_th ">投资天数</th>
+                            <th class="thead_th ">投资日期</th>
+                            <th class="thead_th ">回款日期</th>
+                            <th class="thead_th">实回日期</th>
+                            <th class="thead_th ">渠道</th>
+                            <th class="thead_th ">状态</th>
+                            <th ng-hide='role==870 || role==880' class="thead_th ">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in itemList">
+                            <td>{{x.name}}</td>
+                            <td>{{x.rate/10+"%"}}</td>
+                            <td>{{x.rasingRate/10+"%"}}</td>
+                            <!--加息利率-->
+                            <td>{{x.period+"/"+x.length}}</td>
+                            <td>{{x.userName}}</td>
+                            <td>{{x.realName}}</td>
+                            <td>{{x.corpus| PointToYuan| currency:"":2}}</td>
+                            <!--| PointToYuan-->
+                            <td>{{x.interest| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.raisingInterest| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.corpus+x.interest+x.raisingInterest| PointToYuan| currency:"":2}}</td>
+                            <td>{{x.days}}</td>
+                            <!--投资天数-->
+                            <td>{{x.beginTime|jsonDate}}</td>
+                            <td>{{x.repayDay|jsonDate}}</td>
+                            <td>{{x.time|jsonDate}}</td>
+                            <td>{{x.channel}}</td>
+                            <td>
+                                <span ng-show="x.status==1">还款中</span>
+                                <span ng-show="x.status==2">已还款</span>
+                            </td>
+                            <td ng-show="x.status=='wait_verify'">待审核</td>
+                            <td ng-show="x.status=='success'">提现成功</td>
+                            <td ng-show="x.status=='verify_fail'">提现失败</td>
+                            <td ng-hide='role==870 || role==880'><a href="javascript:;" ng-click="repayExamine(x)">审核</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--</div>-->
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                            aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                            aria-hidden="true">尾页&nbsp;</span></a></li>
+                        <li id="sumCount"><span aria-hidden="true">共{{sumCount}}条</span></li>
+                        <li><a><span
+                            aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

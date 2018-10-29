@@ -1,0 +1,84 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 修改借款人信息 -->   
+      <div class="head_bt">
+        <h2>修改借款人信息</h2>
+        <p class="zhusi">普通计划的期数单位为<span class="b-red">"月"</span>,体验计划的期数单位为<span class="b-red">"天"</span></p>
+      </div>
+     
+      <div class="touz-main">
+        <div class="touz-ma">
+         <form class="bs-example bs-example-form" role="form" name="myForm">
+            <div class="input-group grous">
+              <div class="input-group-addon">借款人账号</div>
+               <input type="text" class="form-control" ng-model="borrower.user.name"/>
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">借款人密码</div>
+              <input type="text" class="form-control" ng-model="password"/>
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">借款人昵称</div>
+              <input type="text" class="form-control" ng-model="borrower.userInfo.nickName"/>
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">借款人电话</div>
+              <input type="text" class="form-control" ng-model="borrower.userInfo.phone"/>
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">推荐码</div>
+              <input type="text" class="form-control"  ng-model="borrower.userInfo.recommendCode"/>
+           </div>
+             <div class="input-group grous">
+              <div class="input-group-addon">借款人邮箱</div>
+              <input type="text" class="form-control" ng-model="borrower.userInfo.email"/>
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">真实姓名</div>
+              <input type="text" class="form-control" ng-model="borrower.userInfo.realName"/>
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">身份证号码</div>  
+              <input type="text" id="" class="form-control" ng-model="borrower.userInfo.idCard"/>
+           </div>
+             <div class="input-group grous">
+              <div class="input-group-addon">银行卡号</div>  
+              <input type="text" id="" class="form-control" ng-model="borrower.userCard.cardNumber"/>
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">开户行</div>
+               <select class="form-control" ng-model="borrower.userCard.type">
+                   <option value="1">中国工商银行</option>
+                   <option value="2">中国农业银行</option>
+                   <option value="3">中国建设银行</option>
+                   <option value="4">民生银行</option>
+                   <option value="5">中国银行</option>
+                   <option value="6">兴业银行</option>
+                   <option value="7">光大银行</option>
+                   <option value="8">中信银行</option>
+                   <option value="9">平安银行</option>
+                   <option value="10">邮政银行</option>
+                   <option value="11">交通银行</option>
+                   <option value="12">广发银行</option>
+                   <option value="13">浦发银行</option>
+                   <option value="14">招商银行</option>
+                   <option value="15">华夏银行</option>
+               </select>
+           </div>
+           <div class="input-group grous">
+              <div class="input-group-addon">银行名称</div>
+              <input type="text" id="showTime" class="form-control" ng-model="borrower.userCard.subbranch" />
+           </div>
+        <!--   <div class="input-group grous">
+              <div class="input-group-addon">开户行地址</div>
+              <input type="text" id="showTime" class="form-control" />
+           </div>-->
+        <!-- 操作按钮-->
+        <div class="div-but">
+        <button type="button" class="btn btn-primary yya"  ng-click="saveBorrower()">提交</button>
+        </div>
+         </form>  
+        </div> 
+      </div>
+</div>   
+

@@ -1,0 +1,31 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+ <!-- 添加用户 -->   
+      <div class="head_bt">
+        <h2>添加用户</h2>
+      </div>
+     <!--<button type="button" class="btn btn-primary" ng-click="saveRegister()">保存</button>-->
+     <!--<div style="height:15px;"></div>-->
+      <div class="touz-main">
+         <form class="bs-example bs-example-form" role="form" style="position: relative; left: 30% ;top:50%;">
+              <select class="add-se" ng-model="user.role">
+                  <option value="">选择用户身份</option>
+                  <option ng-repeat="x in roleOptions" value="{{x.roleId}}">{{x.roleName}}</option>
+              </select>
+
+              <div class="up-addo">账号</div>
+              <input type="text" class="form-control inp-add" ng-model="user.name"/>
+          
+              <div class="up-addo">姓名</div>
+              <input type="text" class="form-control inp-add" ng-model="user.realName"/>
+
+              <div class="up-addo">密码</div>
+              <input type="text" class="form-control inp-add" ng-model="user.password"/>
+             <div class="up-addo">身份证号/营业执照号码</div>
+             <input type="text" class="form-control inp-add" ng-model="user.idCard"/>
+             <div class="up-addo">手机号</div>
+             <input type="text" class="form-control inp-add" ng-model="user.phone"/>
+         </form>
+          <div style="margin: 20px auto; text-align: center;"><button type="button" class="btn btn-primary" ng-click="saveRegister()">保存</button></div>
+      </div>
+</div>

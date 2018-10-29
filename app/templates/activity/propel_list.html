@@ -1,0 +1,152 @@
+<div ng-cloak>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <!-- 查询借款列表 -->
+        <div class="head_bt">
+            <h2>查看推送列表</h2>
+        </div>
+        <ul class="new-add" style="margin-bottom:55px;">
+            <!-- 搜索框 -->
+            <li>
+                <div class="input-group" style="float: left;margin:0 0 10px 30px;">
+                    <span class="timeTip1">是否注册：</span>
+                    <select class="timeTip1" ng-model="cashData.registered" id="registered" style="top:0;border-radius: 5px;width: 180px;">
+                        <option value="">请选择是否注册</option>
+                        <option value="all">全部</option>
+                        <option value="no">否</option>
+                        <option value="yes">是</option>
+                    </select>
+                </div>
+                <div class="input-group" style="float: left;margin:0 0 10px 30px;">
+                    <span class="timeTip1">是否实名：</span>
+                    <select class="timeTip1" ng-model="cashData.realname" id="realname" style="top:0;border-radius: 5px;width: 150px;">
+                        <option value="">请选择是否实名</option>
+                        <option value="all">全部</option>
+                        <option value="no">否</option>
+                        <option value="yes">是</option>
+                    </select>
+                </div>
+                <div class="input-group" style="float: left;margin:0 0 10px 30px;">
+                    <span class="timeTip1">是否投资：</span>
+                    <select class="timeTip1" ng-model="cashData.investment" id="investment" style="top:0;border-radius: 5px;width: 150px;">
+                        <option value="">请选择是否投资</option>
+                        <option value="all">全部</option>
+                        <option value="no">否</option>
+                        <option value="yes">是</option>
+                    </select>
+                </div>
+                <div class="input-group" style="float: left;margin:0 0 10px 30px;">
+                    <span class="timeTip1">透传类型：</span>
+                    <select class="timeTip1" ng-model="cashData.type" id="type" style="top:0;border-radius: 5px;width: 150px;">
+                        <option value="">请输入透传类型</option>
+                        <option value="h5page">h5页面</option>
+                        <option value="home">主页</option>
+                        <option value="investment">投资</option>
+                        <option value="discover">发现 </option>
+                        <option value="me">关于我</option>
+                    </select>
+                </div>
+                <!--<div class="input-group" style="float: left;">-->
+                <!--<span class="timeTip1">日期范围：</span><input type="date" placeholder="yyyy-MM-dd "  class="timeTip1"  ng-model="cashData.startDate" />-->
+                <!--</div>-->
+                <!--<div class="input-group" style="float: left;">-->
+                <!--<span class="timeTip1">&nbsp;-&nbsp;&nbsp;&nbsp;</span><input type="date" placeholder="yyyy-MM-dd " class="timeTip1"  ng-model="cashData.endDate" />-->
+                <!--</div>-->
+                <!--<div class="input-group" style="width:250px;float: left;margin-left:40px;">-->
+                <!--<input  style="width:250px;" type="text" ng-model="cashData.keyword" id="keyword" class="timeTip1" placeholder="仅支持借款标题模糊搜索"/>-->
+                <!--</div>-->
+                <div class="input-group " style="float: left;margin-left:40px;">
+                    <button class="search_buttun" type="button" ng-click="selectPage(1)">
+                        <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-search"></i> 查询
+                    </button>
+                </div>
+            </li>
+        </ul>
+        <!-- 表格-->
+        <div>
+            <div>
+                <table class="table table-bordered ta-bo back-wi">
+                    <thead class="thead_table">
+                        <tr class="thead_tr ">
+                            <th class="thead_th ">标题</th>
+                            <th class="thead_th  ">内容</th>
+                            <th class="thead_th">透传类型</th>
+                            <th class="thead_th ">透传链接</th>
+                            <th class="thead_th ">是否注册</th>
+                            <th class="thead_th ">是否实名</th>
+                            <th class="thead_th ">是否投资</th>
+                            <!--<th class="thead_th ">是否全部用户</th>-->
+                            <th class="thead_th ">推送结果</th>
+                            <th class="thead_th ">预定时间</th>
+                            <th class="thead_th ">还款开始日期</th>
+                            <th class="thead_th ">还款截止日期</th>
+                            <!--<th class="thead_th ">个人用户</th>-->
+                            <th class="thead_th ">操作管理</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="loan in itemList">
+                            <td>{{loan.title}}</td>
+                            <td>{{loan.content}}</td>
+                            <td>
+                                <span ng-if="loan.type=='h5page'">h5页面</span>
+                                <span ng-if="loan.type=='home'">主页</span>
+                                <span ng-if="loan.type=='investment'">投资</span>
+                                <span ng-if="loan.type=='discover'">发现</span>
+                                <span ng-if="loan.type=='me'">关于我</span>
+                            </td>
+                            <td>{{loan.url}}</td>
+                            <td>
+                                <span ng-if="loan.registered=='all'">全部</span>
+                                <span ng-if="loan.registered=='yes'">是</span>
+                                <span ng-if="loan.registered=='no'">否</span>
+                            </td>
+                            <td>
+                                <span ng-if="loan.realname=='all'">全部</span>
+                                <span ng-if="loan.realname=='yes'">是</span>
+                                <span ng-if="loan.realname=='no'">否</span>
+                            </td>
+                            <td>
+                                <span ng-if="loan.investment=='all'">全部</span>
+                                <span ng-if="loan.investment=='yes'">是</span>
+                                <span ng-if="loan.investment=='no'">否</span>
+                            </td>
+                            <!--<td>-->
+                            <!--&lt;!&ndash;<span ng-if="loan.alluser=='all'">全部</span>&ndash;&gt;-->
+                            <!--<span ng-if="loan.alluser=='yes'">是</span>-->
+                            <!--<span ng-if="loan.alluser=='no'">否</span>-->
+                            <!--</td>-->
+                            <td>{{loan.result}}</td>
+                            <td>{{loan.scheduledTime |jsonDate}}</td>
+                            <td>{{loan.repaymentTime1 |jsonDate}}</td>
+                            <td>{{loan.repaymentTime2 |jsonDate}}</td>
+                            <!--<td>{{loan.personalInfo |bracket}}</td>-->
+                            <td class="ta-bo1">
+                                <button type="button" class="btn btn-default qw" ng-click="editUI(loan)">修改</button>
+                                <button type="button" class="btn btn-default qw" ng-click="showConfirm(loan)">删除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                            aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                            aria-hidden="true">尾页</span></a></li>
+                        <li id="sumCount"><span aria-hidden="true">共{{sumCount}}条</span></li>
+                        <li><a><span
+                            aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

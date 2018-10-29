@@ -1,0 +1,125 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+<style>
+  .file{position:relative; top:0; right:-10px; cursor: pointer; height:24px; filter:alpha(opacity:0);opacity: 0;width:1px;}
+</style>
+<!-- 准备投资计划 -->   
+      <div class="head_bt">
+        <h2>准备投资计划</h2>
+      </div>
+      <div >  
+        <div > 
+          <table class="table table-bordered ta-bo back-wi">
+            <thead class="thead_table">
+                <tr class="thead_tr ">
+                <th class="thead_th min-6 max-8">姓名</th>
+                <th class="thead_th  min-10">学校名称</th>
+                <th class="thead_th">身份证(未处理)</th>
+                <th class="thead_th min-7">学生证(未处理)</th>
+                <th class="thead_th min-15">身份证(已处理)</th>
+                <th class="thead_th min-15">学生证(已处理)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="x in itemList">
+                <td class="tz-td" style="display:none;">{{x.userId}}</td>
+                <td class="tz-td">{{x.realName}}</td>
+                <td class="tz-td">{{x.school}}</td>
+                <td>
+                <ul class="tz-ul">
+                    <li><img ng-src="{{x.idcardUrl}}" class="img"></li>
+               </ul>
+                </td>
+                 <td>
+                <ul class="tz-ul">
+                    <li><img ng-src="{{x.studentUrl}}" class="img"></li>
+                </ul>
+                </td>
+                 <td>
+                <ul class="tz-ul">
+                    <li class="idcard"><img ng-src="{{x.mosaicIdcardUrl}}" class="img"></li>
+                <li>  
+                <div ng-controller = "plan_readyCtrl">
+                <input file-model="myFile" class="file" type="file" onchange="previewIDCardIMG(this)" ><!-- 选择图片按钮 -->
+                <input name="" type="button" class="button-tz" value="选择文件">
+                <input type="button" disabled="disabled"  class="button-tz IDCardUPLoad"  ng-click="uploadIDCardFile(x.userId)" value="上传">
+                </div>
+                </li>
+                </ul>
+                </td>
+                 <td class="ta-botd">
+                <ul class="tz-ul">
+                    <li class="StudentIDCard"><img ng-src="{{x.mosaicStudentUrl}}" class="img"></li>
+                <li>  
+                <div ng-controller = "plan_readyCtrl">
+                <input file-model="myFile" class="file"  type="file" onchange="previewStudentIDCardIMG(this)" ><!-- 选择图片按钮 -->
+                 <input name="" type="button" class="button-tz" value="选择文件">
+                <input type="button" disabled="disabled" class="button-tz StudentUPLoad"  ng-click="uploadStudentFile(x.userId)" value="上传">
+                </div>
+               </li>
+                </ul>
+                </td>
+              </tr>               
+            </tbody>
+          </table>
+        </div>
+      </div>
+       <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+    </div>
+      <!--身份证 上传图片特效js -->
+<script type="text/javascript">
+
+    //身份证
+    function previewIDCardIMG(file) {
+        var div = document.getElementsByClassName('idcard');
+        div.innerHTML = '<img id=imghead>';
+        var img = $(file).closest("td").find("img")[0];
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            img.src = evt.target.result;
+
+            $(".IDCardUPLoad").attr("disabled", false);
+        }
+        reader.readAsDataURL(file.files[0]);
+    }
+
+    //学生证
+    function previewStudentIDCardIMG(file) {
+        var div = document.getElementsByClassName('StudentIDCard');
+        div.innerHTML = '<img id=imghead>';
+        var img = $(file).closest("td").find("img")[0];
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            img.src = evt.target.result;
+
+            $(".StudentUPLoad").attr("disabled", false);
+        }
+        reader.readAsDataURL(file.files[0]);
+    }
+
+    function keyupInput(input) {
+        var tmptxt = $(input).val();
+        $(input).val(tmptxt.replace(/[^(\d|\.)]/g, ''));
+    }
+
+
+</script>
+

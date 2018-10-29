@@ -1,0 +1,77 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 学子优选理财计划-20160321期期计划 -->
+    <div class="head_bt">
+        <h2>{{planName}}</h2>
+    </div>
+    <div>
+        <div>
+            <table class="table table-bordered ta-bo back-wi">
+                <thead class="thead_table">
+                <tr class="thead_tr ">
+                    <th class="thead_th">序号</th>
+                    <th class="thead_th min-10 max-15">投资人用户名</th>
+                    <th class="thead_th  min-7">真实姓名</th>
+                    <th class="thead_th">备注</th>
+                    <th class="thead_th">购买金额</th>
+                    <th class="thead_th">购买时间</th>
+                    <th class="thead_th min-7">累计收益</th>
+                    <!--<th class="thead_th min-15">已发放盈利总额</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="detail in itemList">
+                    <td>{{detail.indexXH}}</td>
+                    <td>{{detail.account}}</td>
+                    <td>{{detail.realName}}</td>
+                    <td>
+                        <span ng-show="detail.wamila!=null&&detail.wamila!=''">WM</span>
+                        <span ng-show="detail.hxy!=null&&detail.hxy!=''">HX</span>
+                        <span ng-show="detail.fubaba!=null&&detail.fubaba!=''">FB</span>
+                    </td>
+                    <td>{{detail.money | PointToYuan | currency:"":2}}元
+                        <span ng-show="detail.pocketMoney!='0.00'&&detail.pocketMoney!=0">+{{detail.pocketMoney | PointToYuan | currency:"":2}}红包</span></td>
+                    <td>{{detail.createdTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                    <td>{{detail.profitMoney | PointToYuan | currency:"":2}}</td>
+                    <!--<td class="ta-bo1">{{detail.totalMoney | PointToYuan| currency:"":2}}</td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-bordered ta-bo back-wi">
+                <thead class="thead_table">
+                <tr class="thead_tr ">
+                    <th class="thead_th">计划总额</th>
+                    <th class="thead_th min-10 max-15">当前页投资总额</th>
+                    <th class="thead_th  min-7">投资人数</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{amount | PointToYuan}}</td>
+                    <td>{{itemList[0].suMMoney | PointToYuan}}元</td>
+                    <td>{{itemList[0].suMCount}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+            <nav>
+                <ul id="pagination" class="pagination pagination-sm" style="">
+                    <li id="firstPage"><span ng-click="selectPage(1)"
+                                             aria-hidden="true">首页</span></li>
+                    <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                            aria-hidden="true">«</span></li>
+                    <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                        <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                    <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                    <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                            aria-hidden="true">»</span></a></li>
+                    <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                            aria-hidden="true">尾页</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div ng-cloak>
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 查看投资人 -->   
+      <div class="head_bt">
+        <h2>查看借款人</h2>
+      </div>
+      <!-- 搜索框 -->
+      <div class="input-group quer" style="width: 480px">
+       <input type="text" class="form-control quer-ico" placeholder="支持真实姓名、推荐码、手机和账号搜索" ng-model="keyword"/>
+       <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="searchInvestor()">
+             搜索用户
+          </button>
+       </span>
+       </div>
+      <div>
+          <table class="table table-bordered ta-bo">
+            <thead class="thead_table">
+              <tr class="thead_tr">
+                  <th class="thead_th">用户ID</th>
+                  <th class="thead_th">真实姓名</th>
+                  <th class="thead_th">用户账户</th>
+                  <th class="thead_th">推荐码</th>
+                <th class="thead_th">手机</th>
+
+                <th class="thead_th">金额(元)</th>
+
+                  <!--<th class="thead_th">电子邮箱</th>-->
+
+                <th class="thead_th">投资金额(元)</th>
+                <!--<th class="thead_th">当前账户余额(元)</th>-->
+                <!--<th class="thead_th">已投资金额(元)</th>-->
+                <!--<th class="thead_th">操作</th>-->
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="x in itemList">
+                  <td>{{x.id}}</td>
+                  <td>{{x.realName}}</td>
+                  <td>{{x.name}}</td>
+                  <td>{{x.recommendCode}}</td>
+                <td>{{x.phone}}</td>
+
+                  <td>{{x.money|PointToYuan| currency:"":2}}</td>
+                  <!--<td>-->
+                      <!--<span ng-show="x.wamila!=null&&x.wamila!=''">WM</span>-->
+                      <!--<span ng-show="x.hxy!=null&&x.hxy!=''">HX</span>-->
+                      <!--<span ng-show="x.fubaba!=null&&x.fubaba!=''">FB</span>-->
+                  <!--</td>-->
+                  <!--<td>{{x.email}}</td>-->
+
+                <td>{{x.investedMoney|PointToYuan| currency:"":2}}</td>
+                <!--<td class="ta-botd">-->
+                 <!--<button type="button" class="btn btn-default qw" ng-click="viewDetail(x)">查看详情</button>-->
+                 <!--<button type="button" class="btn btn-default qw" ng-click="editDetail(x)">修改资料</button>-->
+                <!--</td>-->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a
+                                    ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                        <li id="sumCount"><span
+                                aria-hidden="true">共{{sumCount}}条</span></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+ </div>
+</div>

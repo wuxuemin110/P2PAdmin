@@ -1,0 +1,267 @@
+<div ng-cloak>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <style>
+        .yl ul {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .wid-15 {
+            width: 40%;
+        }
+
+        .tz-ul {
+            padding: 0;
+        }
+
+        .sjgs {
+            left: -156px;
+            top: -12px;
+        }
+        /*.file {*/
+        /*position: absolute;*/
+        /*top: 5px;*/
+        /*right: 7px;*/
+        /*cursor: pointer;*/
+        /*height: 30px;*/
+        /*filter: alpha(opacity:0);*/
+        /*font-size: 0;*/
+        /*opacity: 0;*/
+        /*width: 65px;*/
+        /*}*/
+        </style>
+        <!-- 添加首页图片 -->
+        <div class="head_bt">
+            <h2>添加android/ios版本</h2>
+        </div>
+        <div>
+            <ul id="myTab" class="nav nav-tabs" style="border: 0px;">
+                <li ng-class="{active: isActive}" ng-click="[isActive=true,setType('android')]" style="outline: none;">
+                    <a id="index">Android</a>
+                </li>
+                <li ng-click="[isActive=false,setType('iOS')]" ng-class="{active: !isActive}" style="outline: none;">
+                    <a id="indexMobile" class="tahh">ios</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <!--pc端-->
+                <div id="indexC" ng-show="isActive==true">
+                    <div class="table">
+                        <table class="table table-bordered back-wi">
+                            <tr>
+                                <!--<td colspan="2">-->
+                                <!--<ul class="tz-ul">-->
+                                <!--<li class="preview"><img id="imghead" ng-src="{{tradeRecord.picture}}" class="img"></li>-->
+                                <!--<li>-->
+                                <!--<div ng-controller = "openScreenEditCtrl">-->
+                                <!--<div style="display: inline-block; position: relative;">-->
+                                <!--<input file-model="myFile" type="file" onchange="previewImage(this)" class="file">&lt;!&ndash; 选择图片按钮 &ndash;&gt;-->
+                                <!--<input name="" type="button" class="button-tz" value="选择文件">-->
+                                <!--</div>-->
+                                <!--<input ng-click="uploadFile()" type="button" class="button-tz" value="上传">-->
+                                <!--<input type="hidden" id="imageName"  ng-model="imgnews.imagename"  miaosu="用于保存图片名称">-->
+                                <!--<input type="hidden" id="imageId"  ng-model="imgnews.id"  miaosu="用于保存图片Id">-->
+                                <!--</div>-->
+                                <!--</li>-->
+                                <!--</ul>-->
+                                <!--</td>-->
+                                <td>
+                                    <!--浏览-->
+                                    <div class="yl">
+                                        <ul style="width: 95%;">
+                                            <li>
+                                                <div class="input-group " style="width:50%;margin-left:300px;">
+                                                    <div class="input-group-addon" style="width: 150px;height:35px;">
+                                                        更新的版本：
+                                                    </div>
+                                                    <input type="text" class="form-control" ng-model="imgnews.version" />
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <!--<ul style="width: 95%;">-->
+                                        <!--<li>-->
+                                        <!--<div class="input-group " style="width:50%;margin-left:300px;">-->
+                                        <!--<div class="input-group-addon" style="width: 150px;">下载地址：</div>-->
+                                        <!--<input type="text" class="form-control" ng-model="imgnews.url"/>-->
+                                        <!--</div>-->
+                                        <!--</li>-->
+                                        <!--</ul>-->
+                                        <!--<ul style="width: 95%;">-->
+                                        <!--<li>-->
+                                        <div class="input-group " style="width:50%;margin-left:325px;">
+                                            <div class="input-group-addon" style="width: 150px;">更新详情：</div>
+                                            <textarea class="form-control" ng-model="imgnews.detail" cols="83" rows="3" style="width:94%;height:40px;" type="text" placeholder="请输入更新详情"></textarea>
+                                            <!--<input type="text" class="form-control" ng-model="imgnews.detail"/>-->
+                                        </div>
+                                        <!--</li>-->
+                                        <!--</ul>-->
+                                        <ul style="width: 95%;">
+                                            <li>
+                                                <div class="input-group" style="margin-left:300px;margin-top:10px;">
+                                                    <div class="input-group-addon" style="width: 150px;height:30px">
+                                                        更新时间:
+                                                    </div>
+                                                    <input style="width:590px;height:32px;padding-left:10px;" id="myTime" ng-model="imgnews.updatedTime" placeholder="年/月/日 时：分：秒" class="laydate-icon" onClick="laydate({elem: '#myTime',istime: true, format: 'YYYY/MM/DD hh:mm:ss'})">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul style="width: 95%;">
+                                            <li>
+                                                <div class="input-group " style="width:50%;margin-left:300px;">
+                                                    <div class="input-group-addon" style="width: 150px;">
+                                                        需要强制更新的版本号，以英文逗号隔开:
+                                                    </div>
+                                                    <input type="text" class="form-control" ng-model="imgnews.forceUpdate" />
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div style="margin-top:20px;">
+                                            <ul class="tz-ul">
+                                                <li>
+                                                    <div>
+                                                        <div style="display: inline-block; position: relative;margin-left: -578px;font-size: 18px;">
+                                                            <input file-model="myFile" type="file" class="file" id="fileUpload">
+                                                            <!-- 选择图片按钮 -->
+                                                            <input ng-click="uploadFile()" type="button" class="button-tz" style="width:70px;margin-left:-30px;" value="上传">
+                                                            <input type="hidden" id="imageName" miaosu="用于保存文件路径">
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <!--<div >-->
+                                <!--<ul class="tz-ul">-->
+                                <!--<li>-->
+                                <!--</li>-->
+                                <!--</ul>-->
+                                <!--</div>-->
+                            </tr>
+                        </table>
+                    </div>
+                    <!--</div>-->
+                    <div style="clear:both;"></div>
+                    <!--<div class="button-bc">-->
+                    <!--<input name="" type="button" ng-click="saveImgnews()" value="保存" class="new-button">-->
+                    <!--</div>-->
+                    <div class="input-group quer" style="width:120px;float: left;margin: 0 0 0 20px">
+                        <button class="btn btn-primary btn-sm" type="button" ng-click="saveImgnews()">
+                            <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-saved"></i> 保存
+                        </button>
+                    </div>
+                </div>
+                <!--手机端-->
+                <div id="indexMobileC" ng-show="isActive==false">
+                    <div class="table">
+                        <table class="table table-bordered back-wi">
+                            <tr>
+                                <td>
+                                    <!--浏览-->
+                                    <div class="yl">
+                                        <ul style="width: 95%;">
+                                            <li>
+                                                <div class="input-group " style="width:50%;margin-left:300px;">
+                                                    <div class="input-group-addon" style="width: 150px;height:35px;">
+                                                        更新的版本：
+                                                    </div>
+                                                    <input type="text" class="form-control" ng-model="imgnews.version" />
+                                                    <!--<select class="form-control" ng-model="imgnews.type" style="height:35px;" id="selectVal">-->
+                                                    <!--<option value="" style="display:none">请选择分辨率</option>-->
+                                                    <!--<option value="101">720*1280</option>-->
+                                                    <!--<option value="102">1080*1920</option>-->
+                                                    <!--</select>-->
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul style="width: 95%;">
+                                            <li>
+                                                <div class="input-group " style="width:50%;margin-left:300px;">
+                                                    <div class="input-group-addon" style="width: 150px;">下载地址：</div>
+                                                    <input type="text" class="form-control" ng-model="imgnews.url" />
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <!--<ul style="width: 95%;">-->
+                                        <!--<li>-->
+                                        <div class="input-group " style="width:50%;margin-left:325px;">
+                                            <div class="input-group-addon" style="width: 150px;">更新详情：</div>
+                                            <textarea class="form-control" ng-model="imgnews.detail" cols="83" rows="3" style="width:94%;height:40px;" type="text" placeholder="请输入更新详情"></textarea>
+                                            <!--<input type="text" class="form-control" ng-model="imgnews.detail"/>-->
+                                        </div>
+                                        <!--</li>-->
+                                        <!--</ul>-->
+                                        <ul style="width: 95%;">
+                                            <li>
+                                                <div class="input-group" style="margin-left:300px;margin-top:10px;">
+                                                    <div class="input-group-addon" style="width: 150px;height:30px">
+                                                        更新时间
+                                                    </div>
+                                                    <input style="width:590px;height:32px;padding-left:10px;" id="myTime1" ng-model="imgnews.updatedTime" placeholder="年/月/日 时：分：秒" class="laydate-icon" onClick="laydate({elem: '#myTime1',istime: true, format: 'YYYY/MM/DD hh:mm:ss'})">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul style="width: 95%;">
+                                            <li>
+                                                <div class="input-group " style="width:50%;margin-left:300px;">
+                                                    <div class="input-group-addon" style="width: 150px;">
+                                                        需要强制更新的版本号，以英文逗号隔开:
+                                                    </div>
+                                                    <input type="text" class="form-control" ng-model="imgnews.forceUpdate" />
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--</div>-->
+                    <div style="clear:both;"></div>
+                    <div class="input-group quer" style="width:120px;float: left;margin: 0 0 0 20px">
+                        <!--class="search_buttun"-->
+                        <button class="btn btn-primary btn-sm" type="button" ng-click="saveImgnews1()">
+                            <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-saved"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resource/js/time.js"></script>
+    <!-- 上传图片特效js -->
+    <script type="text/javascript">
+    function previewImage(file) {
+        var div = document.getElementsByClassName('preview');
+        div.innerHTML = '<img id=imghead>';
+        var img = $(file).closest("td").find("img")[0];
+        var reader = new FileReader();
+        reader.onload = function(evt) {
+            img.src = evt.target.result;
+        }
+        reader.readAsDataURL(file.files[0]);
+    }
+
+    //
+    //$("#index").click(function () {
+    //  $("#indexMobileC").removeClass("in active");
+    //  $("#indexC").addClass("in active");
+    //  $(this).parent().addClass("active");
+    //  $("#indexMobile").parent().removeClass("active");
+    //});
+    //$("#indexMobile").click(function () {
+    //  $("#indexC").removeClass("in active");
+    //  $("#indexMobileC").addClass("in active");
+    //  $(this).parent().addClass("active");
+    //  $("#index").parent().removeClass("active");
+    //
+    //});
+
+    //时间下拉框的颜色
+    ! function() {
+        laydate.skin('molv'); //切换皮肤，请查看skins下面皮肤库
+        laydate({ elem: '#demo' }); //绑定元素
+    }();
+    </script>
+</div>

@@ -1,0 +1,112 @@
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <style>
+    .yl ul {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .wid-15 {
+        width: 40%;
+    }
+
+    .tz-ul {
+        padding: 0;
+    }
+
+    .sjgs {
+        left: -156px;
+        top: -12px;
+    }
+
+    .file {
+        position: relative;
+        top: 0;
+        right: -10px;
+        cursor: pointer;
+        height: 24px;
+        filter: alpha(opacity:0);
+        opacity: 0;
+        width: 1px;
+    }
+
+    .md-dialog-backdrop {
+        z-index: 1001!important;
+    }
+
+    .md-dialog-container {
+        z-index: 1003!important;
+    }
+    </style>
+    <!--<link href="resource/js1/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">-->
+    <script type="text/javascript" charset="utf-8" src="resource/tt/utf8jsp/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="resource/tt/utf8jsp/ueditor.all.js"></script>
+    <!-- 修改新闻 -->
+    <div class="head_bt">
+        <h2>修改问题</h2>
+    </div>
+    <div class="touz-main" style="height: 700px;position:relative">
+        <div class="touz-ma" style="width: 640px">
+            <form class="bs-example bs-example-form" role="form">
+                <div class="input-group grous">
+                    <div class="input-group-addon" style="width: 150px;">标题：</div>
+                    <input type="text" class="form-control" ng-model="notice.title" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon" style="width: 150px;">子标题：</div>
+                    <input type="text" id="subT" class="form-control" ng-model="notice.subtitle" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon" style="width: 150px;">排序：</div>
+                    <input type="text" id="levelId" class="form-control " onkeyup="keyupInput(this)" ng-model="notice.level" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon" style="width: 150px;">关键词：</div>
+                    <input class="form-control" type="text" ng-model="notice.keywords" />
+                </div>
+                <div class="input-group grous">
+                    <div class="input-group-addon" style="width: 150px;">内容：</div>
+                    <textarea class="form-control" ng-model="notice.content" rows="3"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="div-but" style="width: 200px;padding: 0;margin-top: 20px;">
+            <button class="btn btn-primary btn-sm" type="button" ng-click="edit()">
+                <i style="padding-right:5px;line-height:20px;" class="glyphicon glyphicon-saved"></i> 保存
+            </button>
+            <button class=" btn btn-danger btn-sm" type="button" onclick="javascript:window.location.href='/manageSystem/#/help/help_view'">
+                <i style="padding-right:5px;line-height:20px;" class="glyphicon glyphicon-remove"></i> 取消
+            </button>
+        </div>
+    </div>
+    <script type="text/javascript">
+    //富文本
+    editorInit();
+    //var um = UM.getEditor('myEditor');
+    var um = UE.getEditor('myEditor');
+    um.addListener('blur', function() {
+        $('#focush2').html('编辑器失去焦点了')
+    });
+    um.addListener('focus', function() {
+        $('#focush2').html('')
+    });
+    // 上传图片特效js -->
+    function previewImage(file) {
+        var div = document.getElementsByClassName('preview');
+        div.innerHTML = '<img id=imghead>';
+        var img = $(file).closest("td").find("img")[0];
+        var reader = new FileReader();
+        reader.onload = function(evt) {
+            img.src = evt.target.result;
+
+            $("#shangchuan").attr("disabled", false);
+        }
+        reader.readAsDataURL(file.files[0]);
+    }
+
+    function keyupInput(input) {
+        var tmptxt = $(input).val();
+        $(input).val(tmptxt.replace(/[^(\d|\.)]/g, ''));
+    }
+    </script>
+    <script type="text/javascript" src="resource/tt/utf8jsp/lang/zh-cn/zh-cn.js"></script>

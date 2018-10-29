@@ -1,0 +1,129 @@
+<style>
+    .search_table p span{
+        display: inline-block;
+        width: 120px;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+        line-height: 50px;
+        border: 1px solid #ffa752;
+        margin-left: 20px;
+    }
+</style>
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!--<div class="input-group quer" style="width:200px;float: left;margin: 0 0 0 20px">-->
+    <!--<input type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss"  class="serch_new"  ng-model="nodejs.createdTime" />-->
+    <!--</div>-->
+    <!--<div class="input-group quer" style="width:200px;float: left;margin: 0 0 0 20px">-->
+    <!--<input type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss" class="serch_new"  ng-model="nodejs.endTime" />-->
+    <!--</div>-->
+    <div class="input-group quer" style="width:200px;float: left;margin: 0 0 0 20px">
+        <input type="text" ng-model="cashData.key" class="serch_new"
+               placeholder="时间或账号搜索，这里填写账户名"/>
+    </div>
+    <div class="input-group quer" style="width:120px;float: left;margin: 0 0 0 20px">
+        <button class="search_buttun" type="button" ng-click="selectPage(1,type)">
+            搜索用户
+        </button>
+    </div>
+
+    <div class="search_table">
+        <p><span ng-click="liIdex=1;selectPage(1,'investor')">查看投资人</span><span ng-click="liIdex=2;selectPage(1,'a')">查看借款人</span> <div ng-show="liIdex==1" class="input-group quer" style="width:200px;float: left;margin-left: 20px">
+        <a href="http://120.76.44.113:8081/excels/investment"><button class="button_d" >导出投资人当前记录excel</button></a>
+    </div>
+        <div ng-show="liIdex==2" class="input-group quer" style="width:200px;float: left;margin-left: 20px">
+            <a href="http://120.76.44.113:8081/excels/borrower"><button class="button_d" >导出借款人当前记录excel</button></a>
+        </div></p>
+        <table class="search_in" cellpadding="0" cellspacing="0" ng-show="liIdex==1">
+            <thead>
+            <tr>
+                <td>投资用户名</td>
+                <td>所投标的</td>
+                <td>投资金额</td>
+                <td>投资时间</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="a in itemList">
+                <td>{{a.name}}</td>
+                <td>{{a.planName}}</td>
+                <td>{{a.money}}</td>
+                <td>{{a.created_time |date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="search_in" cellpadding="0" cellspacing="0" ng-show="liIdex==2">
+            <thead>
+            <tr>
+                <td>借款姓名</td>
+                <td>借款标的</td>
+                <td>车辆型号</td>
+                <td>借款金额</td>
+                <td>借款时间</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="a in itemList">
+                <td>{{a.name}}</td>
+                <td>{{a.planName}}</td>
+                <td>{{a.frame}}</td>
+                <td>{{a.add_money}}</td>
+                <td>{{a.created_time |date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <table ng-show="liIdex==1" class="table table-bordered ta-bo back-wi" style="margin: 16px 20px">
+                <thead class="thead_table">
+                <tr class="thead_tr ">
+                    <th class="thead_th">投资总额</th>
+                    <th class="thead_th min-10 max-15">收益总额</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr >
+
+                    <td>{{money[0].suMMoney }}元</td>
+                    <td>{{money[0].suMProfitMoney }}元</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table ng-show="liIdex==2" class="table table-bordered ta-bo back-wi" style="margin: 16px 20px">
+                <thead class="thead_table">
+                <tr class="thead_tr ">
+                    <th class="thead_th">借款总额</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr >
+                    <td>{{money[0].suMMoney }}元</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;">
+            <nav>
+                <ul id="pagination" class="pagination pagination-sm" style="">
+                    <li id="firstPage"><span ng-click="selectPage(1,type)"
+                                             aria-hidden="true">首页</span></li>
+                    <li id="Previous"><span ng-click="selectPage(nowPage-1,type)"
+                                            aria-hidden="true">«</span></li>
+                    <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                        <a ng-click="selectPage(page.showNumber,type)">{{page.showNumber}}</a></li>
+                    <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6,type)">……</a></li>
+                    <li id="Next"><a ng-click="selectPage(nowPage+1,type)" aria-label="Next"><span
+                            aria-hidden="true">»</span></a></li>
+                    <li id="lastPage"><a ng-click="selectPage(totalPages,type)"><span
+                            aria-hidden="true">尾页&nbsp;</span></a></li>
+                    <li><a><span
+                            aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz,type)">跳转</span></span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>

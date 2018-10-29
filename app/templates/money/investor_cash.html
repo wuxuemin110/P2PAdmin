@@ -1,0 +1,364 @@
+<div ng-cloak>
+<div ng-include="'templates/layout/layout.html'"></div>
+<div class="main-content main-he">
+    <!-- 信息审核-列表页 -->
+    <div class="head_bt">
+        <h2>查看投资人提现-列表</h2>
+    </div>
+    <div style="margin-bottom:55px;">
+    <div class="recordQuer">
+
+				<div class="input-group" style="float: left;">
+                    <span class="timeTip1">申请时间：</span>
+                 <!--<span class="timeTip1"><input type="text" class="timeTip1" placeholder="年/月/日 时：分：秒" value="" id="myTime" ng-model="cashData.startDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+                    <!--<span class="timeTip">开始时间：</span><input type="date" placeholder="yyyy-MM-dd" class="serch_new" ng-model="cashData.startDate" /><input type="time"  class="serch_new1" ng-model="cashData.startDate" />-->
+                    <span class="timeTip1"><input type="date" placeholder="yyyy-MM-dd" class="timeTip1" ng-model="cashData.startDate" /></span>
+				</div>
+
+				<div class="input-group" style="float: left;">
+                    <!--<span class="timeTip1">-&nbsp;&nbsp;<input type="text" class="timeTip1" value=""  placeholder="年/月/日 时：分：秒"  id="myTime1" ng-model="cashData.endDate"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+                    <span class="timeTip1">-&nbsp;&nbsp;<input type="date" placeholder="yyyy-MM-dd" class="timeTip1" ng-model="cashData.endDate" /></span>
+				</div>
+
+                <div class="input-group" style="float: left; margin-left:20px;">
+                    <span class="timeTip1">审核时间：</span>
+                    <!--<span class="timeTip1"><input type="text" class="timeTip1" placeholder="年/月/日 时：分：秒" value="" id="Time" ng-model="cashData.checkStartTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+                    <!--<span class="timeTip">开始时间：</span><input type="date" placeholder="yyyy-MM-dd" class="serch_new" ng-model="cashData.startDate" /><input type="time"  class="serch_new1" ng-model="cashData.startDate" />-->
+                    <span class="timeTip1"><input type="date" placeholder="yyyy-MM-dd" class="timeTip1" ng-model="cashData.checkStartTime" /></span>
+                </div>
+                <div class="input-group" style="float: left;">
+                    <!--<span class="timeTip1">-&nbsp;&nbsp;<input type="text" class="timeTip1" value=""  placeholder="年/月/日 时：分：秒"  id="Time1" ng-model="cashData.checkEndTime"  onclick="SelectDate(this,'yyyy/MM/dd hh:mm:ss')"/></span>-->
+                    <span class="timeTip1">-&nbsp;&nbsp;<input type="date" placeholder="yyyy-MM-dd" class="timeTip1" ng-model="cashData.checkEndTime" /></span>
+                </div>
+
+                <div class="input-group " style="float: left;margin-left:30px;">
+                    <input  style="width:220px;" type="text"  ng-model="cashData.keyword" class="timeTip1" placeholder="投资人的账号、姓名或手机号码"/>
+                </div>
+
+				<div class="input-group" style="float: left;margin-left:30px;">
+                    <!--<i class="glyphicon glyphicon-search"></i>-->
+					<a class="search_buttun" ng-click="setVal(cashData.status)">
+                        <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-search"></i>查询
+					</a>
+				</div>
+
+          <div class="input-group" style="float: left;margin-left:30px;">
+            <a class="search_buttun1 " target="_blank"  ng-click="gotoExport(cashData.status)">
+                <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-share-alt"></i>导出列表
+            </a>
+        </div>
+			</div>
+
+     <!--<ul class="new-add ng-scope">
+       <li>
+            <select ng-model="cashData.userId" class="form-control">
+                <option value="asc">用户ID正序</option>
+                <option value="desc">用户ID倒序</option>
+            </select>
+        </li>
+        <li>
+            <select ng-model="cashData.account" class="form-control">
+                <option value="asc">帐户余额正序</option>
+                <option value="desc">帐户余额倒序</option>
+            </select>
+        </li>
+        <li>
+            <select ng-model="cashData.cash" class="form-control">
+                <option value="asc">提现金额正序</option>
+                <option value="desc">提现金额倒序</option>
+            </select>
+        </li>
+        <li>
+            <select ng-model="cashData.createdTime" class="form-control">
+                <option value="asc">申请时间正序</option>
+                <option value="desc">申请时间倒序</option>
+            </select>
+        </li>
+      
+        <li>
+            <div class="input-group quer" style="width: 400px;">
+                <input type="text" ng-model="cashData.keyword" class="form-control quer-ico"
+                       placeholder="支持用户ID、真实姓名、电话和账号搜索"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="setVal(cashData.val)">
+                 搜索用户
+                </button>
+            </span>
+            </div>
+        </li>
+    </ul>-->
+    <!-- 搜索框 -->
+   <!-- <div class="input-group quer"></div>-->
+    <!-- tab标签 -->
+    <ul id="myTab" class="nav nav-tabs" style="border: 0px;">
+        <li class="active"><a id="homee" type="button" ng-click="setVal('wait_verify')">待审核</a></li>
+        <li><a id="successs" class="tahh" type="button" ng-click="setVal('success')">提现成功</a></li>
+        <li><a id="verifyFaill" class="tahh" type="button" ng-click="setVal('verify_fail')">提现失败</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <!-- 待审核 -->
+        <div class="tab-pane fade in active" id="home">
+            <div>
+                <table class="table table-bordered ta-bo">
+                    <thead class="thead_table">
+                    <tr class="thead_tr"> 
+                        <th class="thead_th">真实姓名</th>
+                        <th class="thead_th">手机号码</th>
+                        <th class="thead_th">金额(元)</th>
+                         <th class="thead_th">手续费(元)</th>
+                        <th class="thead_th">省</th>
+                        <th class="thead_th">市</th>
+                        <th class="thead_th">区/县</th>
+                        <!--<th class="thead_th">银行名称</th>-->
+                        <th class="thead_th">提现银行</th>
+                        <th class="thead_th">银行卡号</th>
+                        <th class="thead_th">订单号</th>
+                        <th class="thead_th">支行</th>
+                        <th class="thead_th">申请时间</th>
+                        <th class="thead_th">状态</th>
+                        <th ng-hide='role==870 || role==880' class="thead_th">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--<tr ng-repeat="item in itemList">
+                        <td>{{item.name}}</td>
+                        <td>{{item.realName}}</td>
+                        <td>{{item.account | PointToYuan | currency:"":2}}</td>
+                        <td>{{item.cash |PointToYuan | currency:"":2}}</td>
+                        <td>{{item.createdTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.bankCard}}</td>
+                        <td>{{item.subbranch}}</td>
+                        <td>{{item.bankName}}</td>
+                        <td class="ta-botd">
+                            <select class="add-se" ng-model="item.state" ng-change="changeState(item.id,item.state)">
+                                <option ng-repeat="s in stateOptions" value="{{s.state}}">{{s.stateName}}</option>
+                            </select>
+                        </td>
+                    </tr>-->
+                    <tr ng-repeat="item in itemList"> 
+                        <td>{{item.realName}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.money | PointToYuan | currency:"":2}}</td>
+                        <td>{{item.fee |PointToYuan | currency:"":2}}</td>
+                        <td>{{item.province}}</td>
+                        <td>{{item.city}}</td>
+                        <td>{{item.district}}</td>
+                        <!--<td>{{item.bankName}}</td>-->
+                        <td>{{item.newBankName}}</td>
+                        <td>{{item.cardNumber}}</td>
+                        <td>{{item.id}}</td>
+                        <td>{{item.subbranch}}</td>
+                        <td>{{item.time | jsonDate}}</td>
+                        <td ng-show="item.status=='wait_verify'">待审核</td>
+						<td ng-show="item.status=='success'">提现成功</td>
+						<td ng-show="item.status=='verify_fail'">提现失败</td>
+                        <td ng-hide='role==870 || role==880'><a href="javascript:;" ng-click="withdrawalExamine(item)">审核</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)"
+                                                 aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)"
+                                                aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a
+                                    ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a></li>
+                        <li ng-show="isShowDot"><a ng-click="selectPage(nowPage+6)">……</a></li>
+                        <li id="Next"><a ng-click="selectPage(nowPage+1)" aria-label="Next"><span
+                                aria-hidden="true">»</span></a></li>
+                        <li id="lastPage"><a ng-click="selectPage(totalPages)"><span
+                                aria-hidden="true">尾页</span></a></li>
+                        <li id="sumCount"><span
+                                aria-hidden="true">共{{sumCount}}条</span></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- 提现成功 -->
+        <div class="tab-pane fade" id="success">
+            <div>
+                <table class="table table-bordered ta-bo">
+                    <thead class="thead_table">
+                    <tr class="thead_tr"> 
+                        <th class="thead_th">真实姓名</th>
+                        <th class="thead_th">手机号码</th>
+                        <th class="thead_th">金额(元)</th>
+                         <th class="thead_th">手续费</th>
+                        <th class="thead_th">省</th>
+                        <th class="thead_th">市</th>
+                        <th class="thead_th">区/县</th>
+                        <!--<th class="thead_th">银行名称</th>-->
+                        <th class="thead_th">提现银行</th>
+                        <th class="thead_th">银行卡号</th>
+                        <th class="thead_th">订单号</th>
+                        <th class="thead_th">支行</th>
+                        <th class="thead_th">申请时间</th>
+                        <th class="thead_th">审核时间</th>
+                        <th class="thead_th">状态</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in itemList"> 
+                        <td>{{item.realName}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.money | PointToYuan | currency:"":2}}</td>
+                        <td>{{item.fee |PointToYuan | currency:"":2}}</td>
+                        <td>{{item.province}}</td>
+                        <td>{{item.city}}</td>
+                        <td>{{item.district}}</td>
+                        <!--<td>{{item.bankName}}</td>-->
+                        <td>{{item.newBankName}}</td>
+                        <td>{{item.cardNumber}}</td>
+                        <td>{{item.id}}</td>
+                        <td>{{item.subbranch}}</td>
+                        <td>{{item.time |jsonDate}}</td>
+                        <td>{{item.recheckTime | jsonDate}}</td>
+                        <td ng-show="item.status=='wait_verify'">待审核</td>
+						<td ng-show="item.status=='success'">提现成功</td>
+						<td ng-show="item.status=='verify_fail'">提现失败</td>
+                       <!-- <td>{{item.status}}</td>-->
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0">
+                <nav>
+                    <ul id="pagination" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a>
+                        </li>
+                        <li ng-show="isShowDot">
+                            <a ng-click="selectPage(nowPage+6)">……</a>
+                        </li>
+                        <li id="Next">
+                            <a ng-click="selectPage(nowPage+1)" aria-label="Next"><span aria-hidden="true">»</span></a>
+                        </li>
+                        <li id="lastPage">
+                            <a ng-click="selectPage(totalPages)"><span aria-hidden="true">尾页</span></a>
+                        </li>
+                        <li id="sumCount"><span
+                                aria-hidden="true">共{{sumCount}}条</span></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- 提现失败 -->
+        <div class="tab-pane fade" id="verifyFail">
+            <div>
+                <table class="table table-bordered ta-bo">
+                    <thead class="thead_table">
+                    <tr class="thead_tr"> 
+                        <th class="thead_th">真实姓名</th>
+                        <th class="thead_th">手机号码</th>
+                        <th class="thead_th">金额(元)</th>
+                         <th class="thead_th">手续费</th>
+                        <th class="thead_th">省</th>
+                        <th class="thead_th">市</th>
+                        <th class="thead_th">区/县</th>
+                        <!--<th class="thead_th">银行名称</th>-->
+                        <th class="thead_th">提现银行</th>
+                        <th class="thead_th">银行卡号</th>
+                        <th class="thead_th">订单号</th>
+                        <th class="thead_th">支行</th>
+                        <th class="thead_th">申请时间</th>
+                        <th class="thead_th">审核时间</th>
+                        <th class="thead_th">状态</th>
+                       
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in itemList"> 
+                        <td>{{item.realName}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.money | PointToYuan | currency:"":2}}</td>
+                        <td>{{item.fee |PointToYuan | currency:"":2}}</td>
+                        <td>{{item.province}}</td>
+                        <td>{{item.city}}</td>
+                        <td>{{item.district}}</td>
+                        <!--<td>{{item.bankName}}</td>-->
+                        <td>{{item.newBankName}}</td>
+                        <td>{{item.cardNumber}}</td>
+                        <td>{{item.id}}</td>
+                        <td>{{item.subbranch}}</td>
+                        <td>{{item.time | jsonDate}}</td>
+                        <td>{{item.recheckTime | jsonDate}}</td>
+                        <td ng-show="item.status=='wait_verify'">待审核</td>
+						<td ng-show="item.status=='success'">提现成功</td>
+						<td ng-show="item.status=='verify_fail'">提现失败</td>
+                       <!-- <td>{{item.status}}</td>-->
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="overflow: hidden;margin-top: 10px; margin: auto; text-align: center;" ng-show="totalPages>0" >
+                <nav>
+                    <ul id="pagination1" class="pagination pagination-sm" style="">
+                        <li id="firstPage"><span ng-click="selectPage(1)" aria-hidden="true">首页</span></li>
+                        <li id="Previous"><span ng-click="selectPage(nowPage-1)" aria-hidden="true">«</span></li>
+                        <li ng-repeat="page in pages" ng-class="{true:'active'}[page.showNumber==nowPage]">
+                            <a ng-click="selectPage(page.showNumber)">{{page.showNumber}}</a>
+                        </li>
+                        <li ng-show="isShowDot">
+                            <a ng-click="selectPage(nowPage+6)">……</a>
+                        </li>
+                        <li id="Next">
+                            <a ng-click="selectPage(nowPage+1)" aria-label="Next"><span aria-hidden="true">»</span></a>
+                        </li>
+                        <li id="lastPage">
+                            <a ng-click="selectPage(totalPages)"><span aria-hidden="true">尾页</span></a>
+                        </li>
+                        <li id="sumCount"><span
+                                aria-hidden="true">共{{sumCount}}条</span></li>
+                        <li><a><span
+                                aria-hidden="true"><input style="width: 30px;height: 16px" type="text"  ng-model="tiaoz">&nbsp;&nbsp;<span  ng-click="selectPage(tiaoz)">跳转</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript" src="resource/js/time.js"></script>
+<script>
+    $("#successs").click(function () {
+        $("#home").removeClass("in active");
+        $("#verifyFail").removeClass("in active");
+        $("#success").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#homee").parent().removeClass("active");
+        $("#verifyFaill").parent().removeClass("active");
+    });
+    $("#homee").click(function () {
+        $("#success").removeClass("in active");
+        $("#verifyFail").removeClass("in active");
+        $("#home").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#successs").parent().removeClass("active");
+        $("#verifyFaill").parent().removeClass("active");
+    });
+    
+    $("#verifyFaill").click(function () {
+    	$("#home").removeClass("in active");
+        $("#success").removeClass("in active");
+        $("#verifyFail").addClass("in active");
+        $(this).parent().addClass("active");
+        $("#homee").parent().removeClass("active");
+        $("#successs").parent().removeClass("active");
+    });
+
+   
+</script>
+</div>

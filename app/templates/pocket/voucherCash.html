@@ -1,0 +1,108 @@
+<div ng-cloak>
+    <div ng-include="'templates/layout/layout.html'"></div>
+    <div class="main-content main-he">
+        <style>
+        .yl ul {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .wid-15 {
+            width: 40%;
+        }
+
+        .tz-ul {
+            padding: 0;
+        }
+
+        .sjgs {
+            left: -156px;
+            top: -12px;
+        }
+
+        .file {
+            position: absolute;
+            top: 5px;
+            right: 7px;
+            cursor: pointer;
+            height: 30px;
+            filter: alpha(opacity:0);
+            font-size: 0;
+            opacity: 0;
+            width: 65px;
+        }
+        </style>
+        <!-- 添加首页图片 -->
+        <div class="head_bt">
+            <h2>发放券到用户账户</h2>
+        </div>
+        <div>
+            <div id="myTabContent" class="tab-content">
+                <!--pc端-->
+                <div id="indexC" ng-show="isActive==true">
+                    <div class="table">
+                        <table class="table table-bordered back-wi">
+                            <tr>
+                                <td>
+                                    <!--浏览-->
+                                    <div class="yl" style="width:100%;height:200px;margin:0 auto;margin-left:300px;margin-top:60px;">
+                                        <ul style="width: 55%;">
+                                            <li>
+                                                <div class="input-group grous">
+                                                    <div class="input-group-addon" style="width: 150px;">真实姓名：</div>
+                                                    <input type="text" class="form-control" ng-model="imgnews.realName" />
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul style="width: 55%;">
+                                            <li>
+                                                <div class="input-group grous">
+                                                    <div class="input-group-addon" style="width: 150px;">手机号码：</div>
+                                                    <input type="text" class="form-control" ng-model="imgnews.phone" style="height:40px;">
+                                                    <!--<option value="" >请选择红包类型</option>-->
+                                                    <!--<option value="10">新手红包</option>-->
+                                                    <!--<option value="11">邀请红包</option>-->
+                                                    <!--<option value="12">加息券</option>-->
+                                                    <!--</select>-->
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul style="width: 55%;">
+                                            <li>
+                                                <div class="input-group grous">
+                                                    <div class="input-group-addon" style="width: 150px;">金额：</div>
+                                                    <input type="text" class="form-control" ng-model="imgnews.money" />
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <!--<div class="button-bc">-->
+                    <!--<input name="" type="button" ng-click="saveImgnews()" value="保存" class="new-button">-->
+                    <!--</div>-->
+                    <div class="input-group quer" style="width:120px;float: left;margin: 0 0 0 20px">
+                        <button class="btn btn-primary btn-sm" type="button" ng-click="saveImgnews()">
+                            <i style="padding-right:5px;line-height:30px;" class="glyphicon glyphicon-saved"></i> 发放
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resource/js/time.js"></script>
+    <!-- 上传图片特效js -->
+    <script type="text/javascript">
+    function previewImage(file) {
+        var div = document.getElementsByClassName('preview');
+        div.innerHTML = '<img id=imghead>';
+        var img = $(file).closest("td").find("img")[0];
+        var reader = new FileReader();
+        reader.onload = function(evt) { img.src = evt.target.result; };
+        reader.readAsDataURL(file.files[0]);
+    }
+    </script>
+</div>
